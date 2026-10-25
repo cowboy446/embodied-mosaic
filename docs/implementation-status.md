@@ -62,3 +62,11 @@ The generated app-server schema supports explicit base instructions, ephemeral s
 Next transport gates: a minimal filesystem allowlist; no inherited project/user instructions or plugins; explicit tool inventory verification; out-of-sandbox canary rejection; a live ego-image to skill-JSON call using gpt-6.1-sol at low reasoning. Authentication must stay outside model-visible context and all credential material stays out of Git and episode logs.
 
 References inspected: https://github.com/openai/codex/blob/main/codex-rs/core/src/tools/spec_plan.rs and https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json.
+
+### Offline CLI audit 009
+
+An actual request emitted by installed CLI 0.140.0 was captured by a dummy localhost Responses provider. No live model was called; request headers and authentication were not logged. The first connection attempt was inadvertently routed through a host proxy; removing proxy variables for the localhost-only audit fixed it.
+
+Changing model transport metadata to direct tool mode and disabled multi-agent mode removed code execution and collaboration tools. A bubblewrap allowlist mounted system runtime directories plus the temporary request directory, excluding host home, project directories and NAS. Disabling automatic skills and permission instruction blocks produced a request containing only the CLI environment context and the explicit audit prompt. This verifies the captured context boundary for this offline configuration, not the live authenticated transport.
+
+Two tools remain registered: update_plan and view_image. Consequently strict no-tool acceptance remains open. Host authentication was deliberately not mounted during this test. Next: enforce an episode-only image surface, test outside-path rejection, and establish authenticated image/JSON transport without exposing credentials through tools.

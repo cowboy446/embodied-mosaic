@@ -1,0 +1,13 @@
+{
+  "scope": "offline_transport_request_only",
+  "model_called": false,
+  "request_count": 1,
+  "returncode": 1,
+  "tools": [
+    "update_plan",
+    "view_image"
+  ],
+  "skills_block_present": false,
+  "live_auth_tested": false,
+  "strict_no_tools_passed": false
+}
