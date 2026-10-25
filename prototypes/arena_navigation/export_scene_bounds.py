@@ -2,7 +2,7 @@
 from pxr import Usd,UsdGeom,UsdPhysics
 from pathlib import Path
 import json,sys
-p=Path(sys.argv[1]);s=Usd.Stage.Open(str(p/'background.usda'));cache=UsdGeom.BBoxCache(Usd.TimeCode.Default(),['default','render','proxy']);rows=[]
+p=Path(sys.argv[1]);s=Usd.Stage.Open(str(p/'background.usda'));cache=UsdGeom.BBoxCache(Usd.TimeCode.Default(),['default','render','proxy','guide'],False,True);rows=[]
 for prim in Usd.PrimRange(s.GetDefaultPrim(),Usd.TraverseInstanceProxies()):
  if prim.HasAPI(UsdPhysics.CollisionAPI):
   b=cache.ComputeWorldBound(prim).ComputeAlignedRange()

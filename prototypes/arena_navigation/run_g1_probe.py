@@ -1,7 +1,7 @@
 """Arena task-level G1/SONIC integration probe, not batch/navigation acceptance."""
 import argparse,json,sys,traceback,time,hashlib
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
+p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
 started_monotonic=time.monotonic();started_unix=time.time()
 (out/'run-config.json').write_text(json.dumps(vars(a),indent=2))
 import site
@@ -14,7 +14,7 @@ try:
  from PIL import Image
  carb.settings.get_settings().set_bool('/isaaclab/cameras_enabled',True)
  carb.settings.get_settings().set_bool('/isaaclab/render/offscreen',True)
- from pxr import Usd,Sdf
+ from pxr import Usd,Sdf,UsdGeom,UsdPhysics
  carb.settings.get_settings().set('/persistent/isaac/asset_root/cloud','https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1')
  root=Path('/mnt/nas/zhangrong/isaac-rigidtrack-20261023');sonic_root=root/'sonic-g1-20261024';sys.path.insert(0,str(sonic_root/'scripts'));sys.path.insert(0,'/local_nvme/zhangrong/isaac-rigidtrack-20261023/sonic-site')
  import sonic_control as sonic
@@ -28,6 +28,19 @@ try:
  for path in ['/World/Actors','/World/physicsScene','/World/PhysicsScene']:
   prim=bg.GetPrimAtPath(path)
   if prim:prim.SetActive(False)
+ if a.native_scene_collision:
+  authored=[]
+  for path in ['/World/SceneCollision','/World/PhysicsFloor','/World/Environment/GroundPlane']:
+   prim=bg.GetPrimAtPath(path)
+   if prim:prim.SetActive(False)
+  for prim in Usd.PrimRange(bg.GetPrimAtPath('/World/Environment'),Usd.TraverseInstanceProxies()):
+   if not prim.IsA(UsdGeom.Mesh):continue
+   if prim.IsInstanceProxy():raise RuntimeError('native scene collider authoring requires non-instance mesh')
+   UsdPhysics.CollisionAPI.Apply(prim).CreateCollisionEnabledAttr(True)
+   UsdPhysics.MeshCollisionAPI.Apply(prim).CreateApproximationAttr('none')
+   authored.append(str(prim.GetPath()))
+  if not authored:raise RuntimeError('no native environment meshes')
+  (out/'scene-collision-authoring.json').write_text(json.dumps({'mode':'native_static_triangle_meshes','enabled_meshes':authored,'disabled_legacy_proxies':['/World/SceneCollision','/World/PhysicsFloor','/World/Environment/GroundPlane'],'scope':'full environment mesh collision authoring, runtime coverage still needs validation'},indent=2))
  bg.GetRootLayer().Save()
  asset=root/'campaign20/assets/Assets/Isaac/5.1/Isaac/Robots/Unitree/G1/g1.usd'
  rs=Usd.Stage.CreateNew(str(out/'robot.usda'));rp=rs.DefinePrim('/Robot','Xform');rp.GetReferences().AddReference(str(asset));rs.SetDefaultPrim(rp)
@@ -45,6 +58,20 @@ try:
  args=argparse.Namespace(mimic=False,device=f'cuda:{a.gpu}',num_envs=1,disable_fabric=False)
  env,cfg=SingleEpisodeBuilder(descriptor,args).make_registered_and_return_cfg();report['arena_environment_constructed']=True
  obs,_=env.reset();robot=env.scene['robot'];ids,_=robot.find_joints(sonic.NAMES,preserve_order=True);ctrl=sonic.Controller();states=[]
+ from body_envelope import BodyEnvelopeAudit
+ body_audit=BodyEnvelopeAudit(env.sim.stage,'/World/envs/env_0/Robot',robot.body_names)
+ initial_envelope=body_audit.sample(0.,robot.data.body_link_pos_w[0].cpu().numpy(),robot.data.body_link_quat_w[0].cpu().numpy(),robot.data.root_pos_w[0,:2].cpu().numpy())
+ (out/'initial-body-envelope.json').write_text(json.dumps({'envelope':initial_envelope,'root_position':robot.data.root_pos_w[0].cpu().tolist(),'body_names':robot.body_names,'body_positions':robot.data.body_link_pos_w[0].cpu().tolist(),'body_quaternions':robot.data.body_link_quat_w[0].cpu().tolist()},indent=2))
+ if a.align_spawn_floor:
+  # Placement-time correction only; never teleport the root during the rollout.
+  lift=max(0.,.005-initial_envelope['geometry_min_z_m'])
+  if lift>.15:raise RuntimeError('spawn alignment exceeds placement budget')
+  pose=robot.data.root_state_w[:,:7].clone();pose[:,2]+=lift
+  robot.write_root_pose_to_sim(pose)
+  env.sim.forward();robot.update(env.physics_dt)
+  aligned=body_audit.sample(0.,robot.data.body_link_pos_w[0].cpu().numpy(),robot.data.body_link_quat_w[0].cpu().numpy(),robot.data.root_pos_w[0,:2].cpu().numpy())
+  (out/'spawn-alignment.json').write_text(json.dumps({'flat_floor_z_m':0.,'clearance_m':.005,'lift_m':lift,'before':initial_envelope,'after':aligned},indent=2))
+  if aligned['geometry_min_z_m']<0.:raise RuntimeError('spawn alignment did not clear floor')
  camera=env.scene['ego_camera'];capture=[]
  for _ in range(8):env.sim.render()
  camera.update(0.,force_recompute=True)
@@ -100,6 +127,9 @@ try:
   if float(robot.data.root_pos_w[0,2])<.45:raise RuntimeError('fall detected')
   if route_policy and (step+1)%5==0:
    pos=robot.data.root_pos_w[0].cpu().numpy()
+   envelope_sample=body_audit.sample((step+1)/150,robot.data.body_link_pos_w[0].cpu().numpy(),robot.data.body_link_quat_w[0].cpu().numpy(),pos[:2],robot.data.root_quat_w[0].cpu().numpy())
+   if max(envelope_sample['max_abs_xy_from_root_m'])>np.hypot(.55,.55) or envelope_sample['max_z_m']>1.7:raise RuntimeError('authored robot collision bounds exceed planned envelope')
+   if envelope_sample['geometry_min_z_m']<-.03:raise RuntimeError('authored robot collision geometry extends below flat floor tolerance')
    if not support_guard.supported(pos[:2]):raise RuntimeError('robot left sampled ground support')
    if guard.blocked(pos[:2],0.,turning=True):raise RuntimeError('robot left conservative free corridor')
   if bool(terminated.any()|truncated.any()):
@@ -117,5 +147,6 @@ except BaseException:
  if 'planner_logs' in locals():(out/'planner-log.json').write_text(json.dumps(planner_logs))
  if 'env' in locals():env.close()
 finally:
+ if 'body_audit' in locals():(out/'body-envelope.json').write_text(json.dumps(body_audit.summary(),indent=2))
  report.update(wall_seconds=time.monotonic()-started_monotonic,started_unix=started_unix,seed=a.seed,gpu=a.gpu)
  (out/'report.json').write_text(json.dumps(report,indent=2));print('REPORT',report['status'],flush=True);app.close()

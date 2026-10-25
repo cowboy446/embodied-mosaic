@@ -1,0 +1,2749 @@
+{
+  "run-config.json": {
+    "output": "/mnt/nas/zhangrong/embodied-mosaic/runs/arena-g1-025",
+    "gpu": 3,
+    "route": true,
+    "native_scene_collision": true,
+    "align_spawn_floor": true,
+    "seed": 44,
+    "spawn_xy": [
+      -9.1,
+      29.05
+    ],
+    "yaw_deg": 0.0,
+    "seconds": 30.0
+  },
+  "spawn-alignment.json": {
+    "flat_floor_z_m": 0.0,
+    "clearance_m": 0.005,
+    "lift_m": 0.03841959499702256,
+    "before": {
+      "time_s": 0.0,
+      "max_abs_xy_from_root_m": [
+        0.416150460602541,
+        0.179452131884279
+      ],
+      "min_z_m": -0.033507250355483076,
+      "max_z_m": 1.2923814229209014,
+      "geometry_min_z_m": -0.033419594997022566,
+      "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+    },
+    "after": {
+      "time_s": 0.0,
+      "max_abs_xy_from_root_m": [
+        0.416150460602541,
+        0.179452131884279
+      ],
+      "min_z_m": 0.004912417275904635,
+      "max_z_m": 1.330801027222354,
+      "geometry_min_z_m": 0.005000072634365144,
+      "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+    }
+  },
+  "body-envelope.json": {
+    "shape_count": 31,
+    "collider_paths": [
+      "/World/envs/env_0/Robot/left_hand/left_hand_index_0_link/collisions/left_hand_index_0_link/mesh",
+      "/World/envs/env_0/Robot/left_hand/left_hand_index_1_link/collisions/left_hand_index_1_link/mesh",
+      "/World/envs/env_0/Robot/left_hand/left_hand_middle_0_link/collisions/left_hand_middle_0_link/mesh",
+      "/World/envs/env_0/Robot/left_hand/left_hand_middle_1_link/collisions/left_hand_middle_1_link/mesh",
+      "/World/envs/env_0/Robot/left_hand/left_hand_thumb_0_link/collisions/left_hand_thumb_0_link/mesh",
+      "/World/envs/env_0/Robot/left_hand/left_hand_thumb_1_link/collisions/mesh_0/box",
+      "/World/envs/env_0/Robot/left_hand/left_hand_thumb_2_link/collisions/left_hand_thumb_2_link/mesh",
+      "/World/envs/env_0/Robot/left_hand/left_hand_palm_link/collisions/left_hand_palm_link/mesh",
+      "/World/envs/env_0/Robot/pelvis/collisions/pelvis_contour_link/mesh",
+      "/World/envs/env_0/Robot/left_knee_link/collisions/left_knee_link/mesh",
+      "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_05",
+      "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04",
+      "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07",
+      "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_06",
+      "/World/envs/env_0/Robot/right_knee_link/collisions/right_knee_link/mesh",
+      "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05",
+      "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04",
+      "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07",
+      "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06",
+      "/World/envs/env_0/Robot/torso_link/collisions/torso_link_rev_1_0/mesh",
+      "/World/envs/env_0/Robot/torso_link/collisions/head_link/mesh",
+      "/World/envs/env_0/Robot/left_wrist_yaw_link/collisions/left_wrist_yaw_link/mesh",
+      "/World/envs/env_0/Robot/right_wrist_yaw_link/collisions/right_wrist_yaw_link/mesh",
+      "/World/envs/env_0/Robot/right_hand/right_hand_index_0_link/collisions/right_hand_index_0_link/mesh",
+      "/World/envs/env_0/Robot/right_hand/right_hand_index_1_link/collisions/right_hand_index_1_link/mesh",
+      "/World/envs/env_0/Robot/right_hand/right_hand_middle_0_link/collisions/right_hand_middle_0_link/mesh",
+      "/World/envs/env_0/Robot/right_hand/right_hand_middle_1_link/collisions/right_hand_middle_1_link/mesh",
+      "/World/envs/env_0/Robot/right_hand/right_hand_thumb_0_link/collisions/right_hand_thumb_0_link/mesh",
+      "/World/envs/env_0/Robot/right_hand/right_hand_thumb_1_link/collisions/mesh_0/box",
+      "/World/envs/env_0/Robot/right_hand/right_hand_thumb_2_link/collisions/right_hand_thumb_2_link/mesh",
+      "/World/envs/env_0/Robot/right_hand/right_hand_palm_link/collisions/right_hand_palm_link/mesh"
+    ],
+    "samples": [
+      {
+        "time_s": 0.0,
+        "max_abs_xy_from_root_m": [
+          0.416150460602541,
+          0.179452131884279
+        ],
+        "min_z_m": -0.033507250355483076,
+        "max_z_m": 1.2923814229209014,
+        "geometry_min_z_m": -0.033419594997022566,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 0.0,
+        "max_abs_xy_from_root_m": [
+          0.416150460602541,
+          0.179452131884279
+        ],
+        "min_z_m": 0.004912417275904635,
+        "max_z_m": 1.330801027222354,
+        "geometry_min_z_m": 0.005000072634365144,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 0.03333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.42055629497385105,
+          0.18186017259638376
+        ],
+        "min_z_m": -8.586979927643207e-05,
+        "max_z_m": 1.323816389991979,
+        "geometry_min_z_m": -1.3434454849022698e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 0.06666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.4258045993355939,
+          0.1851612824087816
+        ],
+        "min_z_m": -3.5882754817265217e-06,
+        "max_z_m": 1.3201012606107774,
+        "geometry_min_z_m": -3.5347461644769096e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 0.1,
+        "max_abs_xy_from_root_m": [
+          0.4250042816128232,
+          0.18645000593339134
+        ],
+        "min_z_m": -5.332525702186897e-07,
+        "max_z_m": 1.3190666314843036,
+        "geometry_min_z_m": -5.104003425104517e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 0.13333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.4229591720513106,
+          0.1855397316003895
+        ],
+        "min_z_m": -8.942763705041545e-07,
+        "max_z_m": 1.3198562237495532,
+        "geometry_min_z_m": -8.183179886394124e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 0.16666666666666666,
+        "max_abs_xy_from_root_m": [
+          0.4225715874875213,
+          0.18356673695675596
+        ],
+        "min_z_m": -1.8566457980762063e-06,
+        "max_z_m": 1.3213711562153918,
+        "geometry_min_z_m": -1.816678527079979e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 0.2,
+        "max_abs_xy_from_root_m": [
+          0.4237443476247833,
+          0.18080902892187112
+        ],
+        "min_z_m": -1.3436736318594988e-06,
+        "max_z_m": 1.322637602138792,
+        "geometry_min_z_m": -1.30617653145218e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 0.23333333333333334,
+        "max_abs_xy_from_root_m": [
+          0.4244589956159075,
+          0.1785207342628432
+        ],
+        "min_z_m": -9.598447310091296e-07,
+        "max_z_m": 1.3235056891471055,
+        "geometry_min_z_m": -9.270624322160401e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 0.26666666666666666,
+        "max_abs_xy_from_root_m": [
+          0.4253223874088654,
+          0.17728091274352664
+        ],
+        "min_z_m": -8.192435742224169e-07,
+        "max_z_m": 1.3238142603093879,
+        "geometry_min_z_m": -7.7972240248355e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 0.3,
+        "max_abs_xy_from_root_m": [
+          0.42551063021950064,
+          0.1764398434887795
+        ],
+        "min_z_m": -8.81826815901654e-07,
+        "max_z_m": 1.324006475085263,
+        "geometry_min_z_m": -8.510254286969721e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 0.3333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.42461073135059735,
+          0.17555404827118082
+        ],
+        "min_z_m": -1.0537282785563762e-06,
+        "max_z_m": 1.324085218333633,
+        "geometry_min_z_m": -1.0173842888818244e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 0.36666666666666664,
+        "max_abs_xy_from_root_m": [
+          0.42300312628247205,
+          0.17390220545451385
+        ],
+        "min_z_m": -1.2565450165716308e-06,
+        "max_z_m": 1.323788254250502,
+        "geometry_min_z_m": -1.2235518095024545e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 0.4,
+        "max_abs_xy_from_root_m": [
+          0.4209923874423094,
+          0.17133817827329167
+        ],
+        "min_z_m": -1.6739862531915672e-05,
+        "max_z_m": 1.3230764642554087,
+        "geometry_min_z_m": -1.1606680976631797e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 0.43333333333333335,
+        "max_abs_xy_from_root_m": [
+          0.41900405722863354,
+          0.17273277513045215
+        ],
+        "min_z_m": -4.5346957209951855e-06,
+        "max_z_m": 1.3215089265795865,
+        "geometry_min_z_m": -1.5732040878754447e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 0.4666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.4178116488657668,
+          0.17470684236361578
+        ],
+        "min_z_m": -2.4546769556314796e-05,
+        "max_z_m": 1.3193056781400063,
+        "geometry_min_z_m": -3.927104196929654e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 0.5,
+        "max_abs_xy_from_root_m": [
+          0.4176358332437182,
+          0.175596707914913
+        ],
+        "min_z_m": -0.000296027178699948,
+        "max_z_m": 1.3182943203668211,
+        "geometry_min_z_m": -1.186861802497663e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 0.5333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.418205318957412,
+          0.17768117177317322
+        ],
+        "min_z_m": -0.0008047738282762895,
+        "max_z_m": 1.3189004995055658,
+        "geometry_min_z_m": -1.4530191779583979e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 0.5666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.418861090214401,
+          0.1787655291538428
+        ],
+        "min_z_m": -5.163947301295435e-07,
+        "max_z_m": 1.3197429255804778,
+        "geometry_min_z_m": -4.4489319946279526e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 0.6,
+        "max_abs_xy_from_root_m": [
+          0.42244571104768447,
+          0.17881331865757488
+        ],
+        "min_z_m": 1.937984765373879e-07,
+        "max_z_m": 1.3200564387158187,
+        "geometry_min_z_m": 2.265934445598583e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 0.6333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.4257140450349173,
+          0.17814505251687507
+        ],
+        "min_z_m": -5.072460982774585e-07,
+        "max_z_m": 1.320292927322623,
+        "geometry_min_z_m": -4.1540475654959497e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 0.6666666666666666,
+        "max_abs_xy_from_root_m": [
+          0.4256761379340741,
+          0.17532032497140548
+        ],
+        "min_z_m": 1.6275309352997702e-07,
+        "max_z_m": 1.320173113765952,
+        "geometry_min_z_m": 1.7973371510115327e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 0.7,
+        "max_abs_xy_from_root_m": [
+          0.4246928301889614,
+          0.17285245884316325
+        ],
+        "min_z_m": -1.0189885783565278e-06,
+        "max_z_m": 1.319091643145002,
+        "geometry_min_z_m": -9.697885183937785e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 0.7333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.42400248634030113,
+          0.16980909781219822
+        ],
+        "min_z_m": -2.6624962642871064e-06,
+        "max_z_m": 1.3163436692331574,
+        "geometry_min_z_m": -2.582461278422682e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 0.7666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.4224563628602169,
+          0.16605813593690755
+        ],
+        "min_z_m": -4.55465389825882e-06,
+        "max_z_m": 1.311621228903244,
+        "geometry_min_z_m": -4.422011826585304e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 0.8,
+        "max_abs_xy_from_root_m": [
+          0.4195456418161658,
+          0.16706899451183332
+        ],
+        "min_z_m": -0.0006930128451762552,
+        "max_z_m": 1.3056076676541322,
+        "geometry_min_z_m": -8.36845120108596e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 0.8333333333333334,
+        "max_abs_xy_from_root_m": [
+          0.41750903607301026,
+          0.17537017177846081
+        ],
+        "min_z_m": -0.0005718135303176691,
+        "max_z_m": 1.3019546260733996,
+        "geometry_min_z_m": -6.503032740870496e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 0.8666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.41681258731604665,
+          0.18323736360288478
+        ],
+        "min_z_m": -0.0004624617795079139,
+        "max_z_m": 1.299884440804227,
+        "geometry_min_z_m": -5.390860202528214e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 0.9,
+        "max_abs_xy_from_root_m": [
+          0.41649210323772756,
+          0.190344511547071
+        ],
+        "min_z_m": -0.0007003067439594335,
+        "max_z_m": 1.2993125047254528,
+        "geometry_min_z_m": -9.647567691228008e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 0.9333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.4157325073005982,
+          0.19758518147208193
+        ],
+        "min_z_m": -0.0012601137972230586,
+        "max_z_m": 1.2994686479358784,
+        "geometry_min_z_m": -1.2844905721219081e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 0.9666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.4139855329162394,
+          0.20407565488415358
+        ],
+        "min_z_m": -0.0018348426531291512,
+        "max_z_m": 1.3009393473862119,
+        "geometry_min_z_m": -3.0562508520444107e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 1.0,
+        "max_abs_xy_from_root_m": [
+          0.4119217912412658,
+          0.2084591696252147
+        ],
+        "min_z_m": -3.8067018325246837e-06,
+        "max_z_m": 1.303392016715645,
+        "geometry_min_z_m": -3.7082096084372143e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 1.0333333333333334,
+        "max_abs_xy_from_root_m": [
+          0.40986398233293286,
+          0.2203696974735081
+        ],
+        "min_z_m": -3.193591772553128e-06,
+        "max_z_m": 1.306298049910087,
+        "geometry_min_z_m": -3.1235534537201945e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 1.0666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.40915603107636045,
+          0.22962624434018508
+        ],
+        "min_z_m": -1.9465968697646163e-06,
+        "max_z_m": 1.30866857129613,
+        "geometry_min_z_m": -1.933082608478187e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.1,
+        "max_abs_xy_from_root_m": [
+          0.4103691941866252,
+          0.23451806967788968
+        ],
+        "min_z_m": -1.6978987448235117e-06,
+        "max_z_m": 1.310548114088384,
+        "geometry_min_z_m": -1.6378339997256963e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.1333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.4131473157625525,
+          0.23434348396432014
+        ],
+        "min_z_m": -1.4451393346090469e-06,
+        "max_z_m": 1.3135913883444683,
+        "geometry_min_z_m": -1.3622561582868342e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.1666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.41674854538362993,
+          0.2296642537572069
+        ],
+        "min_z_m": -1.5303432301175257e-06,
+        "max_z_m": 1.3163556620192396,
+        "geometry_min_z_m": -1.4200880743275857e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.2,
+        "max_abs_xy_from_root_m": [
+          0.4193731788137214,
+          0.22194723930028104
+        ],
+        "min_z_m": -1.279527409407677e-06,
+        "max_z_m": 1.3181265091378274,
+        "geometry_min_z_m": -1.0621857067134866e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.2333333333333334,
+        "max_abs_xy_from_root_m": [
+          0.4223255770592811,
+          0.2121359085950374
+        ],
+        "min_z_m": -1.8461597450225575e-06,
+        "max_z_m": 1.3191588290879588,
+        "geometry_min_z_m": -1.7020388419705657e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.2666666666666666,
+        "max_abs_xy_from_root_m": [
+          0.4239306078825553,
+          0.20269690541740104
+        ],
+        "min_z_m": -2.147368326897714e-06,
+        "max_z_m": 1.319236332681542,
+        "geometry_min_z_m": -2.015385855655763e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.3,
+        "max_abs_xy_from_root_m": [
+          0.4232028789871336,
+          0.19514309882579894
+        ],
+        "min_z_m": -2.8812374238129657e-06,
+        "max_z_m": 1.3181869262602761,
+        "geometry_min_z_m": -2.726819120502967e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.3333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.4197562169472988,
+          0.1872496922432596
+        ],
+        "min_z_m": -3.3920595872913295e-06,
+        "max_z_m": 1.3154876393720714,
+        "geometry_min_z_m": -2.7385454961061442e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.3666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.41468362433583117,
+          0.18163796287746337
+        ],
+        "min_z_m": -0.0006168180423480191,
+        "max_z_m": 1.3106406386278329,
+        "geometry_min_z_m": -8.20599928670531e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.4,
+        "max_abs_xy_from_root_m": [
+          0.41047948900619424,
+          0.18154310866069423
+        ],
+        "min_z_m": -0.0004955311525728437,
+        "max_z_m": 1.3065317243886767,
+        "geometry_min_z_m": -6.548781749653176e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 1.4333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.4085361308797104,
+          0.1791685924162998
+        ],
+        "min_z_m": -0.0004632181521014786,
+        "max_z_m": 1.3052701441722891,
+        "geometry_min_z_m": -1.3965201895136357e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 1.4666666666666666,
+        "max_abs_xy_from_root_m": [
+          0.4065623060717858,
+          0.17531354169498314
+        ],
+        "min_z_m": -0.0010535464147093665,
+        "max_z_m": 1.305492620420722,
+        "geometry_min_z_m": -1.808780030744528e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 1.5,
+        "max_abs_xy_from_root_m": [
+          0.4041920655101503,
+          0.17169267555529188
+        ],
+        "min_z_m": -0.0017267131194496355,
+        "max_z_m": 1.3055176674755333,
+        "geometry_min_z_m": -1.5459724421031627e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 1.5333333333333334,
+        "max_abs_xy_from_root_m": [
+          0.4047694363287011,
+          0.1697023178809438
+        ],
+        "min_z_m": -7.17177906265909e-05,
+        "max_z_m": 1.3056109349492904,
+        "geometry_min_z_m": -1.5054062201752885e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 1.5666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.4049561973351672,
+          0.1745326676380543
+        ],
+        "min_z_m": -2.613971878576149e-06,
+        "max_z_m": 1.3059535443062233,
+        "geometry_min_z_m": -2.5453160875108308e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 1.6,
+        "max_abs_xy_from_root_m": [
+          0.40323615799327506,
+          0.17926428836252484
+        ],
+        "min_z_m": -1.8247413071173502e-06,
+        "max_z_m": 1.3073308625819229,
+        "geometry_min_z_m": -1.7627541980648823e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 1.6333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.402796246704785,
+          0.18236713759228707
+        ],
+        "min_z_m": -1.5033332175298786e-06,
+        "max_z_m": 1.3090619256752982,
+        "geometry_min_z_m": -1.47138225954635e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 1.6666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.40375284364564656,
+          0.18151026544335735
+        ],
+        "min_z_m": -1.2061198901708314e-06,
+        "max_z_m": 1.3107776875041257,
+        "geometry_min_z_m": -1.1603259241254119e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.7,
+        "max_abs_xy_from_root_m": [
+          0.40546861520440025,
+          0.1769263587960026
+        ],
+        "min_z_m": -1.8735703108535562e-06,
+        "max_z_m": 1.3122528906544833,
+        "geometry_min_z_m": -1.8236077512813476e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.7333333333333334,
+        "max_abs_xy_from_root_m": [
+          0.40767976603138756,
+          0.17160006826011553
+        ],
+        "min_z_m": -2.5244803844304275e-06,
+        "max_z_m": 1.312904811930657,
+        "geometry_min_z_m": -2.4149234544969603e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.7666666666666666,
+        "max_abs_xy_from_root_m": [
+          0.40878912668528145,
+          0.16489396196014283
+        ],
+        "min_z_m": -3.298060430159677e-06,
+        "max_z_m": 1.3122923848611374,
+        "geometry_min_z_m": -2.6638866398821445e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.8,
+        "max_abs_xy_from_root_m": [
+          0.4078056372878631,
+          0.15342568405514712
+        ],
+        "min_z_m": -5.987196412017559e-06,
+        "max_z_m": 1.3106956787179598,
+        "geometry_min_z_m": -5.7391039573855e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 1.8333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.40467427052488425,
+          0.15627452017160337
+        ],
+        "min_z_m": -1.261156751656417e-05,
+        "max_z_m": 1.3076117717458298,
+        "geometry_min_z_m": -8.245818840478536e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 1.8666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.3997560666647475,
+          0.16134750093565842
+        ],
+        "min_z_m": -0.0005611122917882627,
+        "max_z_m": 1.3024954292514193,
+        "geometry_min_z_m": -1.402033700135391e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 1.9,
+        "max_abs_xy_from_root_m": [
+          0.3899347812009957,
+          0.16968682166909588
+        ],
+        "min_z_m": -0.0004724421424909392,
+        "max_z_m": 1.301389342482223,
+        "geometry_min_z_m": -1.15111018552062e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 1.9333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.3731897901020593,
+          0.18958434063355512
+        ],
+        "min_z_m": -0.0009571979037538564,
+        "max_z_m": 1.3012256039035512,
+        "geometry_min_z_m": -2.0470842579112247e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 1.9666666666666666,
+        "max_abs_xy_from_root_m": [
+          0.35977264970633005,
+          0.21165933736260456
+        ],
+        "min_z_m": -0.0014947837834962951,
+        "max_z_m": 1.3019243062170918,
+        "geometry_min_z_m": -9.505181553584596e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 2.0,
+        "max_abs_xy_from_root_m": [
+          0.3461307929510751,
+          0.23682376912011804
+        ],
+        "min_z_m": -7.532469976166689e-06,
+        "max_z_m": 1.3032413289223121,
+        "geometry_min_z_m": -7.2682270195285545e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 2.033333333333333,
+        "max_abs_xy_from_root_m": [
+          0.3319223693522346,
+          0.260649765335792
+        ],
+        "min_z_m": -7.153787136310319e-06,
+        "max_z_m": 1.30501148283775,
+        "geometry_min_z_m": -6.859891450744504e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 2.066666666666667,
+        "max_abs_xy_from_root_m": [
+          0.3165215201380134,
+          0.27670488764172774
+        ],
+        "min_z_m": -4.777975653298683e-06,
+        "max_z_m": 1.307628867031713,
+        "geometry_min_z_m": -4.364658560172298e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.1,
+        "max_abs_xy_from_root_m": [
+          0.30176513569186536,
+          0.28518199070288475
+        ],
+        "min_z_m": -2.397689746726217e-06,
+        "max_z_m": 1.3094461315989463,
+        "geometry_min_z_m": -2.29993018842356e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.1333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.286574832402259,
+          0.294916837434517
+        ],
+        "min_z_m": -1.5754128432493575e-06,
+        "max_z_m": 1.3105075381905071,
+        "geometry_min_z_m": -1.4346016305351317e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.1666666666666665,
+        "max_abs_xy_from_root_m": [
+          0.26837207324993084,
+          0.31228990137851653
+        ],
+        "min_z_m": 1.7292136212515574e-07,
+        "max_z_m": 1.311420851698582,
+        "geometry_min_z_m": 2.50337295868569e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 2.2,
+        "max_abs_xy_from_root_m": [
+          0.2505642254625169,
+          0.3279458873318255
+        ],
+        "min_z_m": -2.0326991673896844e-06,
+        "max_z_m": 1.3117182594272712,
+        "geometry_min_z_m": -1.8723612663562247e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 2.2333333333333334,
+        "max_abs_xy_from_root_m": [
+          0.23823655825539536,
+          0.33851140684307524
+        ],
+        "min_z_m": -5.557563199504179e-07,
+        "max_z_m": 1.3108654417587269,
+        "geometry_min_z_m": 4.637430429249578e-08,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.2666666666666666,
+        "max_abs_xy_from_root_m": [
+          0.22744354332337657,
+          0.3449030069547341
+        ],
+        "min_z_m": -2.4576055784666928e-05,
+        "max_z_m": 1.30886444173096,
+        "geometry_min_z_m": -2.068869322823831e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.3,
+        "max_abs_xy_from_root_m": [
+          0.22146667165164136,
+          0.34719435208512905
+        ],
+        "min_z_m": -0.00010157475226908047,
+        "max_z_m": 1.306876734719718,
+        "geometry_min_z_m": -2.658939720734388e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.3333333333333335,
+        "max_abs_xy_from_root_m": [
+          0.21803046596715614,
+          0.3459748607027464
+        ],
+        "min_z_m": -0.00046038774070968763,
+        "max_z_m": 1.304750679303435,
+        "geometry_min_z_m": -8.835657498415528e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.3666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.21633528003212987,
+          0.3407701365186462
+        ],
+        "min_z_m": -0.0008681719130341492,
+        "max_z_m": 1.3054625804242854,
+        "geometry_min_z_m": -1.8807594689614418e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.4,
+        "max_abs_xy_from_root_m": [
+          0.2229628674267543,
+          0.33358188734563043
+        ],
+        "min_z_m": -0.0017931055404090679,
+        "max_z_m": 1.3080994760379683,
+        "geometry_min_z_m": -1.9083320270854576e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.433333333333333,
+        "max_abs_xy_from_root_m": [
+          0.24298955346346407,
+          0.32762324005960863
+        ],
+        "min_z_m": -0.002653895017516436,
+        "max_z_m": 1.3108419479060722,
+        "geometry_min_z_m": -1.0987302722005945e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.466666666666667,
+        "max_abs_xy_from_root_m": [
+          0.25570308053173374,
+          0.3225876733182993
+        ],
+        "min_z_m": -0.0021122744141785638,
+        "max_z_m": 1.3122767773905126,
+        "geometry_min_z_m": -2.039288943925764e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 2.5,
+        "max_abs_xy_from_root_m": [
+          0.2615371232407897,
+          0.31814227247124904
+        ],
+        "min_z_m": -2.1949191570481974e-05,
+        "max_z_m": 1.3123050854097642,
+        "geometry_min_z_m": -1.4276076870205212e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 2.533333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2618962476378792,
+          0.31205906011171436
+        ],
+        "min_z_m": -6.490551139465284e-07,
+        "max_z_m": 1.312134621291558,
+        "geometry_min_z_m": -5.796614232196975e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 2.566666666666667,
+        "max_abs_xy_from_root_m": [
+          0.2569399087885085,
+          0.307253222911104
+        ],
+        "min_z_m": -1.0780219612746555e-06,
+        "max_z_m": 1.3119699013907071,
+        "geometry_min_z_m": -1.0074294414363222e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 2.6,
+        "max_abs_xy_from_root_m": [
+          0.24934599354778708,
+          0.3060224263968365
+        ],
+        "min_z_m": -5.326864351215543e-07,
+        "max_z_m": 1.312351593592915,
+        "geometry_min_z_m": -4.903350398401812e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 2.6333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2397239376599396,
+          0.3045914995826493
+        ],
+        "min_z_m": -9.674533298920096e-07,
+        "max_z_m": 1.312503807319407,
+        "geometry_min_z_m": -9.159475077647264e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 2.6666666666666665,
+        "max_abs_xy_from_root_m": [
+          0.22862973582362311,
+          0.30208931212895607
+        ],
+        "min_z_m": -1.5385790341285177e-06,
+        "max_z_m": 1.3121986405390735,
+        "geometry_min_z_m": -1.4879674091437811e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 2.7,
+        "max_abs_xy_from_root_m": [
+          0.2153805612268549,
+          0.2991615643297898
+        ],
+        "min_z_m": -1.885151152403175e-06,
+        "max_z_m": 1.3110954340727925,
+        "geometry_min_z_m": -1.8349366670000755e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 2.7333333333333334,
+        "max_abs_xy_from_root_m": [
+          0.2122346217958464,
+          0.2955947547266433
+        ],
+        "min_z_m": -3.692883841659167e-06,
+        "max_z_m": 1.3085813738137377,
+        "geometry_min_z_m": -3.576613252540689e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 2.7666666666666666,
+        "max_abs_xy_from_root_m": [
+          0.21270529602477062,
+          0.3299757552777258
+        ],
+        "min_z_m": -5.4844697965628075e-06,
+        "max_z_m": 1.304493885362476,
+        "geometry_min_z_m": -5.350541409973597e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 2.8,
+        "max_abs_xy_from_root_m": [
+          0.21250002044566507,
+          0.34192401198673394
+        ],
+        "min_z_m": -7.613565100594855e-06,
+        "max_z_m": 1.299452128061654,
+        "geometry_min_z_m": -7.428048074256677e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 2.8333333333333335,
+        "max_abs_xy_from_root_m": [
+          0.21154260357773857,
+          0.3259896607779673
+        ],
+        "min_z_m": -1.874466420696136e-05,
+        "max_z_m": 1.2928677045797643,
+        "geometry_min_z_m": -9.062234375281121e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.8666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.21120943002854098,
+          0.3014628155458965
+        ],
+        "min_z_m": -0.0006640729123764261,
+        "max_z_m": 1.289644977131168,
+        "geometry_min_z_m": -1.1965417320604355e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.9,
+        "max_abs_xy_from_root_m": [
+          0.21051328245454748,
+          0.2763615045291985
+        ],
+        "min_z_m": -0.0008230613333889136,
+        "max_z_m": 1.29088256565052,
+        "geometry_min_z_m": -1.4004131942966722e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 2.933333333333333,
+        "max_abs_xy_from_root_m": [
+          0.21037287246819503,
+          0.268918678169328
+        ],
+        "min_z_m": -0.0015546317403009047,
+        "max_z_m": 1.2930539751843853,
+        "geometry_min_z_m": -1.8084491725717244e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 2.966666666666667,
+        "max_abs_xy_from_root_m": [
+          0.2122884952667583,
+          0.27689220182875474
+        ],
+        "min_z_m": -0.00186145163617224,
+        "max_z_m": 1.296131360077409,
+        "geometry_min_z_m": -5.838623882317533e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 3.0,
+        "max_abs_xy_from_root_m": [
+          0.21704886635055587,
+          0.2645122779916562
+        ],
+        "min_z_m": -3.5690255337575416e-06,
+        "max_z_m": 1.2988609862544025,
+        "geometry_min_z_m": -3.5395378507937364e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 3.033333333333333,
+        "max_abs_xy_from_root_m": [
+          0.23272765891742786,
+          0.2539212732473217
+        ],
+        "min_z_m": -2.7326459165269434e-06,
+        "max_z_m": 1.3012132163959453,
+        "geometry_min_z_m": -2.678779511770986e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 3.066666666666667,
+        "max_abs_xy_from_root_m": [
+          0.25435905638316747,
+          0.2503782036888289
+        ],
+        "min_z_m": -3.547097785314146e-06,
+        "max_z_m": 1.3036506123724085,
+        "geometry_min_z_m": -3.4589718580935874e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 3.1,
+        "max_abs_xy_from_root_m": [
+          0.2756210293210195,
+          0.24606277792689468
+        ],
+        "min_z_m": -4.181441057293789e-06,
+        "max_z_m": 1.3057171947609965,
+        "geometry_min_z_m": -4.086695881681639e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 3.1333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2948949261685847,
+          0.24285071935360136
+        ],
+        "min_z_m": -3.141090764338661e-06,
+        "max_z_m": 1.3068913301669538,
+        "geometry_min_z_m": -2.9317526829041388e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 3.1666666666666665,
+        "max_abs_xy_from_root_m": [
+          0.3044078904906957,
+          0.24236539573190186
+        ],
+        "min_z_m": -2.268145236496155e-06,
+        "max_z_m": 1.306880171900073,
+        "geometry_min_z_m": -2.148013586663472e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 3.2,
+        "max_abs_xy_from_root_m": [
+          0.30568705443285715,
+          0.25864352146282954
+        ],
+        "min_z_m": -2.123274533839814e-06,
+        "max_z_m": 1.3054485817767434,
+        "geometry_min_z_m": -1.8975032012721535e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 3.2333333333333334,
+        "max_abs_xy_from_root_m": [
+          0.3011564625801597,
+          0.2680264472315059
+        ],
+        "min_z_m": -2.6161397895727023e-06,
+        "max_z_m": 1.3035838943869793,
+        "geometry_min_z_m": -2.461155850908177e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 3.2666666666666666,
+        "max_abs_xy_from_root_m": [
+          0.2940096210826386,
+          0.2808932845848702
+        ],
+        "min_z_m": -2.9300575097451764e-06,
+        "max_z_m": 1.3009213315069725,
+        "geometry_min_z_m": -2.579344118642385e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 3.3,
+        "max_abs_xy_from_root_m": [
+          0.2866117294664683,
+          0.3443973674642251
+        ],
+        "min_z_m": -4.329001612742023e-06,
+        "max_z_m": 1.2968783323542947,
+        "geometry_min_z_m": -3.3638092919036078e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 3.3333333333333335,
+        "max_abs_xy_from_root_m": [
+          0.28136997641368033,
+          0.3938021304250512
+        ],
+        "min_z_m": -5.391944055577191e-06,
+        "max_z_m": 1.2911480224755822,
+        "geometry_min_z_m": -4.29642177510528e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 3.3666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.27879224837032623,
+          0.4236290085209369
+        ],
+        "min_z_m": -5.429244420540602e-06,
+        "max_z_m": 1.2853550416317827,
+        "geometry_min_z_m": -4.302748639141429e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 3.4,
+        "max_abs_xy_from_root_m": [
+          0.2777013831332926,
+          0.43498010180561764
+        ],
+        "min_z_m": -3.573044382270546e-05,
+        "max_z_m": 1.279301535791602,
+        "geometry_min_z_m": -7.051711105147962e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 3.433333333333333,
+        "max_abs_xy_from_root_m": [
+          0.27664482349135433,
+          0.42212229201238927
+        ],
+        "min_z_m": -0.00019860592484478162,
+        "max_z_m": 1.2741956900010445,
+        "geometry_min_z_m": -9.500709271962303e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 3.466666666666667,
+        "max_abs_xy_from_root_m": [
+          0.2746439342314755,
+          0.38244252257732114
+        ],
+        "min_z_m": -0.0009568715465772884,
+        "max_z_m": 1.2698269880557982,
+        "geometry_min_z_m": -3.6405380559318204e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 3.5,
+        "max_abs_xy_from_root_m": [
+          0.27411793049394717,
+          0.35065742514518305
+        ],
+        "min_z_m": -0.001102059386937554,
+        "max_z_m": 1.2717236730708517,
+        "geometry_min_z_m": -1.3174957184496072e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 3.533333333333333,
+        "max_abs_xy_from_root_m": [
+          0.27356646501853454,
+          0.3604513596939185
+        ],
+        "min_z_m": -0.0018477833810854605,
+        "max_z_m": 1.2769428039647512,
+        "geometry_min_z_m": -1.1256660850750277e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 3.566666666666667,
+        "max_abs_xy_from_root_m": [
+          0.28369858052165764,
+          0.3661241781283877
+        ],
+        "min_z_m": -0.002008364688184272,
+        "max_z_m": 1.283157354257277,
+        "geometry_min_z_m": -6.277131631753953e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 3.6,
+        "max_abs_xy_from_root_m": [
+          0.2887862427317689,
+          0.3472205378311415
+        ],
+        "min_z_m": -5.676819998877425e-06,
+        "max_z_m": 1.2881182099073998,
+        "geometry_min_z_m": -5.617086145316003e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 3.6333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.28877540794851786,
+          0.3130461375942559
+        ],
+        "min_z_m": -4.1790319462303716e-06,
+        "max_z_m": 1.2923270484041824,
+        "geometry_min_z_m": -4.09831559933585e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 3.6666666666666665,
+        "max_abs_xy_from_root_m": [
+          0.2874482453990712,
+          0.2712952280661689
+        ],
+        "min_z_m": -3.594155544989208e-06,
+        "max_z_m": 1.2960955429784398,
+        "geometry_min_z_m": -3.5339276991041765e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 3.7,
+        "max_abs_xy_from_root_m": [
+          0.29660499752312575,
+          0.22500737106155455
+        ],
+        "min_z_m": -4.2909064203039415e-06,
+        "max_z_m": 1.301269131073346,
+        "geometry_min_z_m": -4.210055059972358e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 3.7333333333333334,
+        "max_abs_xy_from_root_m": [
+          0.304928060685528,
+          0.19283984821806044
+        ],
+        "min_z_m": -3.905560573391753e-06,
+        "max_z_m": 1.3057367051295368,
+        "geometry_min_z_m": -3.85681967258935e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 3.7666666666666666,
+        "max_abs_xy_from_root_m": [
+          0.3095613143521838,
+          0.222088362811931
+        ],
+        "min_z_m": -3.3345357731418e-06,
+        "max_z_m": 1.3090698775406922,
+        "geometry_min_z_m": -3.291008756495413e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 3.8,
+        "max_abs_xy_from_root_m": [
+          0.3104964297576558,
+          0.24491978509568924
+        ],
+        "min_z_m": -2.7432341256627968e-06,
+        "max_z_m": 1.3104920416599364,
+        "geometry_min_z_m": -2.7068925479893993e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 3.8333333333333335,
+        "max_abs_xy_from_root_m": [
+          0.3057283720834576,
+          0.2584691228541729
+        ],
+        "min_z_m": -2.8047754056098606e-06,
+        "max_z_m": 1.310459508293865,
+        "geometry_min_z_m": -2.7181228806029065e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 3.8666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.2969456454319701,
+          0.2606560297825702
+        ],
+        "min_z_m": -2.4985187029452627e-06,
+        "max_z_m": 1.3092911774735672,
+        "geometry_min_z_m": -2.388013339794416e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 3.9,
+        "max_abs_xy_from_root_m": [
+          0.2879741985181994,
+          0.3234263877851866
+        ],
+        "min_z_m": -3.6460131308188592e-06,
+        "max_z_m": 1.3063686733498996,
+        "geometry_min_z_m": -3.5222411856970087e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 3.933333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2797945159500106,
+          0.37490940069838885
+        ],
+        "min_z_m": -5.787928281757171e-06,
+        "max_z_m": 1.3019977901852307,
+        "geometry_min_z_m": -5.613264000552988e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 3.966666666666667,
+        "max_abs_xy_from_root_m": [
+          0.2720435534892456,
+          0.4052924701459091
+        ],
+        "min_z_m": -7.571110354251398e-06,
+        "max_z_m": 1.2963346066995143,
+        "geometry_min_z_m": -7.3619604234959404e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.0,
+        "max_abs_xy_from_root_m": [
+          0.26630791121708874,
+          0.41202354705354693
+        ],
+        "min_z_m": -9.519745906037824e-06,
+        "max_z_m": 1.2902207654276374,
+        "geometry_min_z_m": -9.116581374757349e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.033333333333333,
+        "max_abs_xy_from_root_m": [
+          0.26625022792507824,
+          0.39225108507218565
+        ],
+        "min_z_m": -3.094514551416072e-05,
+        "max_z_m": 1.283464738318022,
+        "geometry_min_z_m": -9.20122287336421e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 4.066666666666666,
+        "max_abs_xy_from_root_m": [
+          0.26619887642140583,
+          0.3589822831825451
+        ],
+        "min_z_m": -0.0007256632720939044,
+        "max_z_m": 1.278365740175042,
+        "geometry_min_z_m": -1.2801728461068161e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 4.1,
+        "max_abs_xy_from_root_m": [
+          0.26572904885123894,
+          0.3285141353998071
+        ],
+        "min_z_m": -0.0008724930738989792,
+        "max_z_m": 1.279703177743527,
+        "geometry_min_z_m": -1.9138349030405413e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 4.133333333333334,
+        "max_abs_xy_from_root_m": [
+          0.26379681377803177,
+          0.3302654688021569
+        ],
+        "min_z_m": -0.0016917173463935342,
+        "max_z_m": 1.28321628517884,
+        "geometry_min_z_m": -1.9097058409467405e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 4.166666666666667,
+        "max_abs_xy_from_root_m": [
+          0.26372562719402737,
+          0.3326590021390814
+        ],
+        "min_z_m": -0.0007873488561429137,
+        "max_z_m": 1.2878096991549817,
+        "geometry_min_z_m": -4.755499328602288e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 4.2,
+        "max_abs_xy_from_root_m": [
+          0.27504884687150444,
+          0.31070493587744963
+        ],
+        "min_z_m": -1.648070376782107e-05,
+        "max_z_m": 1.2919426828615448,
+        "geometry_min_z_m": -4.135436713276382e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.233333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2917575265143775,
+          0.2755232218159058
+        ],
+        "min_z_m": -5.2901480901840214e-06,
+        "max_z_m": 1.2959777064857105,
+        "geometry_min_z_m": -5.223998870700075e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 4.266666666666667,
+        "max_abs_xy_from_root_m": [
+          0.3106984083215174,
+          0.23210314955687394
+        ],
+        "min_z_m": -3.5811161513965573e-06,
+        "max_z_m": 1.2997585327618009,
+        "geometry_min_z_m": -3.489172453192968e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 4.3,
+        "max_abs_xy_from_root_m": [
+          0.3250786627533149,
+          0.19256751841975017
+        ],
+        "min_z_m": -3.3528697676241115e-06,
+        "max_z_m": 1.302642866557357,
+        "geometry_min_z_m": -3.2776087367071896e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 4.333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.33116241779475786,
+          0.21747336257327632
+        ],
+        "min_z_m": -2.989079127109495e-06,
+        "max_z_m": 1.305176444526958,
+        "geometry_min_z_m": -2.9033050562487714e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.366666666666666,
+        "max_abs_xy_from_root_m": [
+          0.3304222180037808,
+          0.24056709952719046
+        ],
+        "min_z_m": -3.3561233865261886e-06,
+        "max_z_m": 1.3070660217674308,
+        "geometry_min_z_m": -3.2274094469387712e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.4,
+        "max_abs_xy_from_root_m": [
+          0.3263672633019308,
+          0.2558800714971845
+        ],
+        "min_z_m": -3.05670982475581e-06,
+        "max_z_m": 1.3073841327474665,
+        "geometry_min_z_m": -2.896994277804682e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.433333333333334,
+        "max_abs_xy_from_root_m": [
+          0.3213239046056984,
+          0.26313147221094013
+        ],
+        "min_z_m": -3.4506362344144392e-06,
+        "max_z_m": 1.3061926982865113,
+        "geometry_min_z_m": -3.1971996002459757e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.466666666666667,
+        "max_abs_xy_from_root_m": [
+          0.31675736705032165,
+          0.31973057901626234
+        ],
+        "min_z_m": -4.80227737641864e-06,
+        "max_z_m": 1.3035026138962924,
+        "geometry_min_z_m": -4.691364080397151e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.5,
+        "max_abs_xy_from_root_m": [
+          0.3129661344519974,
+          0.38006563611858013
+        ],
+        "min_z_m": -5.268060248600492e-06,
+        "max_z_m": 1.2990966125727967,
+        "geometry_min_z_m": -5.006999428999737e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.533333333333333,
+        "max_abs_xy_from_root_m": [
+          0.31053539954381293,
+          0.4211898369189697
+        ],
+        "min_z_m": -6.3222170149299095e-06,
+        "max_z_m": 1.2930224450200933,
+        "geometry_min_z_m": -5.955939562491373e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.566666666666666,
+        "max_abs_xy_from_root_m": [
+          0.3092469259701254,
+          0.44058762867217993
+        ],
+        "min_z_m": -8.040315988111502e-06,
+        "max_z_m": 1.2857274635864149,
+        "geometry_min_z_m": -7.611269084152779e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 4.6,
+        "max_abs_xy_from_root_m": [
+          0.30813936455396274,
+          0.4381134838993681
+        ],
+        "min_z_m": -6.269044572346227e-05,
+        "max_z_m": 1.2782928326769945,
+        "geometry_min_z_m": -9.730134917847189e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 4.633333333333334,
+        "max_abs_xy_from_root_m": [
+          0.30500165520625444,
+          0.40904165425103756
+        ],
+        "min_z_m": -0.00032632306130191135,
+        "max_z_m": 1.272797273646089,
+        "geometry_min_z_m": -1.4198771416459345e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 4.666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.3010021356955086,
+          0.3677180060457381
+        ],
+        "min_z_m": -0.0008163764962417983,
+        "max_z_m": 1.2708957249336459,
+        "geometry_min_z_m": -1.6380527891712848e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 4.7,
+        "max_abs_xy_from_root_m": [
+          0.29740055456528225,
+          0.33600418195250725
+        ],
+        "min_z_m": -0.0015121556396041208,
+        "max_z_m": 1.2743439321782686,
+        "geometry_min_z_m": -1.6545152684940834e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 4.733333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2928968782390431,
+          0.35126166105781564
+        ],
+        "min_z_m": -0.0021383559401361163,
+        "max_z_m": 1.2795835586942839,
+        "geometry_min_z_m": -7.841469776746768e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.766666666666667,
+        "max_abs_xy_from_root_m": [
+          0.29208916487514003,
+          0.3425874306514558
+        ],
+        "min_z_m": -7.085954395774641e-06,
+        "max_z_m": 1.2839631521890666,
+        "geometry_min_z_m": -7.062295551098739e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.8,
+        "max_abs_xy_from_root_m": [
+          0.29629655334440486,
+          0.3166170810650577
+        ],
+        "min_z_m": -5.2805423281510055e-06,
+        "max_z_m": 1.2880772447210074,
+        "geometry_min_z_m": -5.226087778055326e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 4.833333333333333,
+        "max_abs_xy_from_root_m": [
+          0.3023438443525883,
+          0.28038725396649156
+        ],
+        "min_z_m": -4.732050488946704e-06,
+        "max_z_m": 1.2921786558305597,
+        "geometry_min_z_m": -4.696875014080504e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 4.866666666666666,
+        "max_abs_xy_from_root_m": [
+          0.3098235594233252,
+          0.23741483875013358
+        ],
+        "min_z_m": -3.4084210671428417e-06,
+        "max_z_m": 1.296144697224288,
+        "geometry_min_z_m": -3.381397225867e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 4.9,
+        "max_abs_xy_from_root_m": [
+          0.3178971096925025,
+          0.21127414343287754
+        ],
+        "min_z_m": -3.736228694699306e-06,
+        "max_z_m": 1.300303597039179,
+        "geometry_min_z_m": -3.726405588034415e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 4.933333333333334,
+        "max_abs_xy_from_root_m": [
+          0.323592136472854,
+          0.2180821368920398
+        ],
+        "min_z_m": -3.7357959674841346e-06,
+        "max_z_m": 1.3040286238397476,
+        "geometry_min_z_m": -3.7042301210543638e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 4.966666666666667,
+        "max_abs_xy_from_root_m": [
+          0.3240833657593054,
+          0.242344788374929
+        ],
+        "min_z_m": -3.229275067288817e-06,
+        "max_z_m": 1.3065929275704,
+        "geometry_min_z_m": -3.18962533798952e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.0,
+        "max_abs_xy_from_root_m": [
+          0.31830757284848943,
+          0.2582469322946075
+        ],
+        "min_z_m": -3.085483924337995e-06,
+        "max_z_m": 1.307799056479812,
+        "geometry_min_z_m": -2.9993594869055784e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.033333333333333,
+        "max_abs_xy_from_root_m": [
+          0.30756161610267974,
+          0.2648541780032261
+        ],
+        "min_z_m": -3.09342324699563e-06,
+        "max_z_m": 1.3069326860323163,
+        "geometry_min_z_m": -2.9884715074968843e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.066666666666666,
+        "max_abs_xy_from_root_m": [
+          0.29430591221514213,
+          0.30732004795855516
+        ],
+        "min_z_m": -4.011655331682962e-06,
+        "max_z_m": 1.3043076605016675,
+        "geometry_min_z_m": -3.851874341989463e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.1,
+        "max_abs_xy_from_root_m": [
+          0.2814894013341007,
+          0.36390590444406
+        ],
+        "min_z_m": -5.4124966653440465e-06,
+        "max_z_m": 1.300135583783847,
+        "geometry_min_z_m": -5.2326303317017445e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.133333333333334,
+        "max_abs_xy_from_root_m": [
+          0.2716250640447502,
+          0.3983028533777784
+        ],
+        "min_z_m": -7.262166919638768e-06,
+        "max_z_m": 1.2951649691101812,
+        "geometry_min_z_m": -7.058043510296819e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.166666666666667,
+        "max_abs_xy_from_root_m": [
+          0.26559672308928306,
+          0.4093071355232851
+        ],
+        "min_z_m": -8.860638841902413e-06,
+        "max_z_m": 1.289363853038071,
+        "geometry_min_z_m": -8.363251925151693e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.2,
+        "max_abs_xy_from_root_m": [
+          0.2649056688853477,
+          0.3918298389973245
+        ],
+        "min_z_m": -1.6562378736525996e-05,
+        "max_z_m": 1.2827570406227493,
+        "geometry_min_z_m": -8.939944712526432e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 5.233333333333333,
+        "max_abs_xy_from_root_m": [
+          0.26741740622142807,
+          0.36477137003137017
+        ],
+        "min_z_m": -0.0007648613879791544,
+        "max_z_m": 1.2775359828951434,
+        "geometry_min_z_m": -1.3000904411634984e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 5.266666666666667,
+        "max_abs_xy_from_root_m": [
+          0.2697491691661096,
+          0.3350427907658329
+        ],
+        "min_z_m": -0.0007348658240533823,
+        "max_z_m": 1.2781219044867365,
+        "geometry_min_z_m": -1.5578889584422217e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 5.3,
+        "max_abs_xy_from_root_m": [
+          0.2755999532069282,
+          0.3236009945160845
+        ],
+        "min_z_m": -0.0015041147726503334,
+        "max_z_m": 1.2816214243243396,
+        "geometry_min_z_m": -1.7099417419313978e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 5.333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2862220350743243,
+          0.3340109427651896
+        ],
+        "min_z_m": -0.0022530696788660987,
+        "max_z_m": 1.2858257467576557,
+        "geometry_min_z_m": -9.883508453573109e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 5.366666666666666,
+        "max_abs_xy_from_root_m": [
+          0.3008950826096637,
+          0.3189707849072754
+        ],
+        "min_z_m": -2.2433869855814637e-05,
+        "max_z_m": 1.2889373654716585,
+        "geometry_min_z_m": -3.1477753559949057e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 5.4,
+        "max_abs_xy_from_root_m": [
+          0.31455556286270436,
+          0.2878904820597086
+        ],
+        "min_z_m": -4.9755516502228425e-06,
+        "max_z_m": 1.2932447986610764,
+        "geometry_min_z_m": -4.92904939428801e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 5.433333333333334,
+        "max_abs_xy_from_root_m": [
+          0.32592470815228936,
+          0.24854115561491597
+        ],
+        "min_z_m": -6.544047915030271e-06,
+        "max_z_m": 1.2983159046065271,
+        "geometry_min_z_m": -3.3082980696562403e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 5.466666666666667,
+        "max_abs_xy_from_root_m": [
+          0.3331500195962871,
+          0.20500700443669473
+        ],
+        "min_z_m": -2.2123610978197483e-06,
+        "max_z_m": 1.3028244913682139,
+        "geometry_min_z_m": -2.16606440566966e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 5.5,
+        "max_abs_xy_from_root_m": [
+          0.33375686948525995,
+          0.2211046294502239
+        ],
+        "min_z_m": -6.070242011824156e-07,
+        "max_z_m": 1.3060656500754713,
+        "geometry_min_z_m": -5.831271242418695e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.533333333333333,
+        "max_abs_xy_from_root_m": [
+          0.3286371160182622,
+          0.23820000445527612
+        ],
+        "min_z_m": -1.5976858965677243e-06,
+        "max_z_m": 1.3078441513678636,
+        "geometry_min_z_m": -1.5481022139886627e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.566666666666666,
+        "max_abs_xy_from_root_m": [
+          0.3217182585667899,
+          0.25356775015574584
+        ],
+        "min_z_m": -2.430939417576161e-06,
+        "max_z_m": 1.3086147782699253,
+        "geometry_min_z_m": -2.3681839134226737e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.6,
+        "max_abs_xy_from_root_m": [
+          0.3156606121025973,
+          0.2662519001302428
+        ],
+        "min_z_m": -2.6996063886702837e-06,
+        "max_z_m": 1.308222300584478,
+        "geometry_min_z_m": -2.651122960430248e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.633333333333334,
+        "max_abs_xy_from_root_m": [
+          0.3109659117772843,
+          0.2934586868584965
+        ],
+        "min_z_m": -3.150294898328354e-06,
+        "max_z_m": 1.3063776820879007,
+        "geometry_min_z_m": -3.0595993489642564e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.30737520978581934,
+          0.35534094325656795
+        ],
+        "min_z_m": -4.359829224878653e-06,
+        "max_z_m": 1.302810026711306,
+        "geometry_min_z_m": -3.8871617715208195e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.7,
+        "max_abs_xy_from_root_m": [
+          0.3055088387787741,
+          0.40258342563657834
+        ],
+        "min_z_m": -5.772715568931608e-06,
+        "max_z_m": 1.297762980052655,
+        "geometry_min_z_m": -5.513614918196616e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.733333333333333,
+        "max_abs_xy_from_root_m": [
+          0.30464854898550975,
+          0.42933406649719075
+        ],
+        "min_z_m": -7.423820585140961e-06,
+        "max_z_m": 1.2919404012338807,
+        "geometry_min_z_m": -7.125366328021056e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.766666666666667,
+        "max_abs_xy_from_root_m": [
+          0.30360862284612367,
+          0.43561136893848484
+        ],
+        "min_z_m": -9.314556673578611e-06,
+        "max_z_m": 1.285744292645335,
+        "geometry_min_z_m": -8.91938373811206e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.8,
+        "max_abs_xy_from_root_m": [
+          0.30079607480597836,
+          0.4227237819242369
+        ],
+        "min_z_m": -2.7497038495992443e-05,
+        "max_z_m": 1.278358770682245,
+        "geometry_min_z_m": -9.005158689032698e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 5.833333333333333,
+        "max_abs_xy_from_root_m": [
+          0.29499598406759375,
+          0.3842482958586366
+        ],
+        "min_z_m": -0.000768410225048935,
+        "max_z_m": 1.2716806327037498,
+        "geometry_min_z_m": -1.3238224427739032e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 5.866666666666666,
+        "max_abs_xy_from_root_m": [
+          0.28976759216635983,
+          0.3545665743301569
+        ],
+        "min_z_m": -0.000752512964477231,
+        "max_z_m": 1.2716686684556102,
+        "geometry_min_z_m": -1.3719321880573121e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 5.9,
+        "max_abs_xy_from_root_m": [
+          0.2843244996532839,
+          0.3260550910734352
+        ],
+        "min_z_m": -0.0014902672695940034,
+        "max_z_m": 1.2770894219787494,
+        "geometry_min_z_m": -1.2764896326400432e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 5.933333333333334,
+        "max_abs_xy_from_root_m": [
+          0.28186134164971755,
+          0.33994396721497466
+        ],
+        "min_z_m": -0.0021070852502066972,
+        "max_z_m": 1.2837811862012791,
+        "geometry_min_z_m": -7.3494696803269935e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 5.966666666666667,
+        "max_abs_xy_from_root_m": [
+          0.28424211588257897,
+          0.3289398266652732
+        ],
+        "min_z_m": -6.214632707439438e-06,
+        "max_z_m": 1.2889556624032799,
+        "geometry_min_z_m": -6.195957235884814e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.0,
+        "max_abs_xy_from_root_m": [
+          0.29060540185706607,
+          0.30014372272006895
+        ],
+        "min_z_m": -4.4398482375862525e-06,
+        "max_z_m": 1.293556168975209,
+        "geometry_min_z_m": -4.409509004543732e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 6.033333333333333,
+        "max_abs_xy_from_root_m": [
+          0.29888951401671093,
+          0.2621060190059872
+        ],
+        "min_z_m": -3.7797770249120566e-06,
+        "max_z_m": 1.2977931011355284,
+        "geometry_min_z_m": -3.7299058903705884e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 6.066666666666666,
+        "max_abs_xy_from_root_m": [
+          0.3089652333877577,
+          0.21926143015011235
+        ],
+        "min_z_m": -3.5153302497259453e-06,
+        "max_z_m": 1.3017253902267878,
+        "geometry_min_z_m": -3.5081319107914746e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 6.1,
+        "max_abs_xy_from_root_m": [
+          0.3186578049050155,
+          0.21248087458228682
+        ],
+        "min_z_m": -3.4383791574568723e-06,
+        "max_z_m": 1.3050084110701488,
+        "geometry_min_z_m": -3.405171014184312e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 6.133333333333334,
+        "max_abs_xy_from_root_m": [
+          0.3246126454488554,
+          0.2287068709560529
+        ],
+        "min_z_m": -2.819071927520622e-06,
+        "max_z_m": 1.307538072901836,
+        "geometry_min_z_m": -2.7765256879093425e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.166666666666667,
+        "max_abs_xy_from_root_m": [
+          0.325129177127371,
+          0.2515920089001291
+        ],
+        "min_z_m": -1.8860317160598883e-06,
+        "max_z_m": 1.309054351959851,
+        "geometry_min_z_m": -1.8058759798135482e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.2,
+        "max_abs_xy_from_root_m": [
+          0.3202240160129133,
+          0.26611695964115967
+        ],
+        "min_z_m": -2.6057415668731543e-06,
+        "max_z_m": 1.309350734025399,
+        "geometry_min_z_m": -2.4647908456500167e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.233333333333333,
+        "max_abs_xy_from_root_m": [
+          0.3115907602980119,
+          0.27066453392821543
+        ],
+        "min_z_m": -2.599850411691418e-06,
+        "max_z_m": 1.308605362327925,
+        "geometry_min_z_m": -2.4654131494201634e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.266666666666667,
+        "max_abs_xy_from_root_m": [
+          0.3013066568087872,
+          0.3156671469840404
+        ],
+        "min_z_m": -3.5093218908460733e-06,
+        "max_z_m": 1.3062252291656795,
+        "geometry_min_z_m": -3.355958994789854e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.3,
+        "max_abs_xy_from_root_m": [
+          0.2911958137266808,
+          0.3704522205406988
+        ],
+        "min_z_m": -4.632100203842693e-06,
+        "max_z_m": 1.3030818690930486,
+        "geometry_min_z_m": -4.4329914318163785e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.28165093255336515,
+          0.404423166918356
+        ],
+        "min_z_m": -6.199495355241336e-06,
+        "max_z_m": 1.299078048042958,
+        "geometry_min_z_m": -5.985650462106071e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.366666666666666,
+        "max_abs_xy_from_root_m": [
+          0.27275714774247817,
+          0.4176334702707756
+        ],
+        "min_z_m": -7.582562515991154e-06,
+        "max_z_m": 1.2941939543960035,
+        "geometry_min_z_m": -7.145488086442858e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.4,
+        "max_abs_xy_from_root_m": [
+          0.2667561279002175,
+          0.40516832889875687
+        ],
+        "min_z_m": -9.071019816640769e-06,
+        "max_z_m": 1.2883915170317926,
+        "geometry_min_z_m": -8.542167108892967e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.433333333333334,
+        "max_abs_xy_from_root_m": [
+          0.2651345170061248,
+          0.3728459285707473
+        ],
+        "min_z_m": -0.0008727315537628844,
+        "max_z_m": 1.2826713426547403,
+        "geometry_min_z_m": -9.122750942344195e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 6.466666666666667,
+        "max_abs_xy_from_root_m": [
+          0.2645705883592342,
+          0.34796859001001224
+        ],
+        "min_z_m": -0.0006478489328822848,
+        "max_z_m": 1.281078189044459,
+        "geometry_min_z_m": -8.74427162726732e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_06"
+      },
+      {
+        "time_s": 6.5,
+        "max_abs_xy_from_root_m": [
+          0.26601003390002376,
+          0.32200420429217047
+        ],
+        "min_z_m": -0.0008155037567949552,
+        "max_z_m": 1.282412156469866,
+        "geometry_min_z_m": -1.0788935917201668e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 6.533333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2688864979856671,
+          0.3166836584017645
+        ],
+        "min_z_m": -0.0015236856087344486,
+        "max_z_m": 1.285305267153874,
+        "geometry_min_z_m": -1.294214270669558e-05,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 6.566666666666666,
+        "max_abs_xy_from_root_m": [
+          0.2723460833892961,
+          0.32740272874981713
+        ],
+        "min_z_m": -0.002226092629870835,
+        "max_z_m": 1.2891952042242074,
+        "geometry_min_z_m": -6.0024469192686974e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 6.6,
+        "max_abs_xy_from_root_m": [
+          0.27614775277492853,
+          0.3179074811221767
+        ],
+        "min_z_m": -4.251696546914152e-06,
+        "max_z_m": 1.293512961989314,
+        "geometry_min_z_m": -4.154385891700675e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.633333333333334,
+        "max_abs_xy_from_root_m": [
+          0.28195394131249785,
+          0.29439775628042497
+        ],
+        "min_z_m": -2.877178720828155e-06,
+        "max_z_m": 1.2974284403125305,
+        "geometry_min_z_m": -2.7943069098972095e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 6.666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.28835516009915096,
+          0.2670601088185123
+        ],
+        "min_z_m": -1.93412689108996e-06,
+        "max_z_m": 1.3015290377958375,
+        "geometry_min_z_m": -1.8300503050296471e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.7,
+        "max_abs_xy_from_root_m": [
+          0.293712017674137,
+          0.23693897269469488
+        ],
+        "min_z_m": -2.043921184295694e-06,
+        "max_z_m": 1.305951345362773,
+        "geometry_min_z_m": -1.961395706439814e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.733333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2969497701175836,
+          0.22295200846639318
+        ],
+        "min_z_m": -1.5713417302054555e-06,
+        "max_z_m": 1.310373998130848,
+        "geometry_min_z_m": -1.4620673956045396e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.766666666666667,
+        "max_abs_xy_from_root_m": [
+          0.29903813279105407,
+          0.21998592369034853
+        ],
+        "min_z_m": -1.425279375938393e-06,
+        "max_z_m": 1.3140560503346443,
+        "geometry_min_z_m": -1.327514680259101e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.8,
+        "max_abs_xy_from_root_m": [
+          0.3012507807624196,
+          0.21617984572230498
+        ],
+        "min_z_m": -6.294332632467148e-07,
+        "max_z_m": 1.316800404528967,
+        "geometry_min_z_m": -5.033850438455542e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.833333333333333,
+        "max_abs_xy_from_root_m": [
+          0.3037526589139681,
+          0.21101729641227607
+        ],
+        "min_z_m": -4.7622391504548167e-07,
+        "max_z_m": 1.3186537138077723,
+        "geometry_min_z_m": -2.64499462697583e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.866666666666666,
+        "max_abs_xy_from_root_m": [
+          0.3054488518859433,
+          0.20606631156288913
+        ],
+        "min_z_m": -8.853621938365031e-07,
+        "max_z_m": 1.3192558038069806,
+        "geometry_min_z_m": -6.967894676471881e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.9,
+        "max_abs_xy_from_root_m": [
+          0.3058664747480613,
+          0.20292354087126085
+        ],
+        "min_z_m": -1.3518730366188225e-06,
+        "max_z_m": 1.3189165151992563,
+        "geometry_min_z_m": -1.2054773880472783e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.933333333333334,
+        "max_abs_xy_from_root_m": [
+          0.3051752551249862,
+          0.21441292870919781
+        ],
+        "min_z_m": -2.263268695998355e-06,
+        "max_z_m": 1.3181406915908922,
+        "geometry_min_z_m": -2.0860830173214176e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 6.966666666666667,
+        "max_abs_xy_from_root_m": [
+          0.30349959402703774,
+          0.21870822607556306
+        ],
+        "min_z_m": -2.6292167584068826e-06,
+        "max_z_m": 1.3165555005516787,
+        "geometry_min_z_m": -2.586633221357028e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.0,
+        "max_abs_xy_from_root_m": [
+          0.3036400410666289,
+          0.2078021279247686
+        ],
+        "min_z_m": -2.6317389899346844e-06,
+        "max_z_m": 1.3156093424817532,
+        "geometry_min_z_m": -2.494804092180447e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.033333333333333,
+        "max_abs_xy_from_root_m": [
+          0.3047091664000252,
+          0.19899824843662017
+        ],
+        "min_z_m": -2.2701824365575773e-06,
+        "max_z_m": 1.315805338251638,
+        "geometry_min_z_m": -2.1667920313481193e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.066666666666666,
+        "max_abs_xy_from_root_m": [
+          0.3042096234649545,
+          0.1987158976539689
+        ],
+        "min_z_m": -2.6665636441644547e-06,
+        "max_z_m": 1.3171343942084346,
+        "geometry_min_z_m": -2.548421155306596e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.1,
+        "max_abs_xy_from_root_m": [
+          0.30172158230544355,
+          0.1985001710396972
+        ],
+        "min_z_m": -2.6858854465447446e-06,
+        "max_z_m": 1.3178773895920102,
+        "geometry_min_z_m": -2.5395832881237174e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.133333333333334,
+        "max_abs_xy_from_root_m": [
+          0.2983073764395723,
+          0.19731625197680813
+        ],
+        "min_z_m": -2.3162287379682733e-06,
+        "max_z_m": 1.318401106240882,
+        "geometry_min_z_m": -2.0183545218210863e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.166666666666667,
+        "max_abs_xy_from_root_m": [
+          0.2955931342047773,
+          0.19406719801711603
+        ],
+        "min_z_m": -2.2864832882538155e-06,
+        "max_z_m": 1.3188245572496728,
+        "geometry_min_z_m": -1.8444741854452273e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.2,
+        "max_abs_xy_from_root_m": [
+          0.29417069228925463,
+          0.18670403434880356
+        ],
+        "min_z_m": -2.0510057950062777e-06,
+        "max_z_m": 1.319303561530573,
+        "geometry_min_z_m": -1.8632578963062585e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.233333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2929621071015074,
+          0.17523363958861538
+        ],
+        "min_z_m": -1.540211081231535e-05,
+        "max_z_m": 1.319505694777931,
+        "geometry_min_z_m": -1.2294623597391974e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.266666666666667,
+        "max_abs_xy_from_root_m": [
+          0.2920346416899644,
+          0.16075172435648
+        ],
+        "min_z_m": -4.140556188334671e-05,
+        "max_z_m": 1.3193086540021386,
+        "geometry_min_z_m": -1.794138108927347e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.3,
+        "max_abs_xy_from_root_m": [
+          0.2919856971017438,
+          0.15439422554632287
+        ],
+        "min_z_m": -5.79593297961728e-05,
+        "max_z_m": 1.3193977690952554,
+        "geometry_min_z_m": -1.2440529899692548e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.333333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2928801786432196,
+          0.15255644927287904
+        ],
+        "min_z_m": -5.165426921805577e-05,
+        "max_z_m": 1.3194492882932667,
+        "geometry_min_z_m": -1.704189393742818e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.366666666666666,
+        "max_abs_xy_from_root_m": [
+          0.294682353619919,
+          0.15154181908990694
+        ],
+        "min_z_m": -1.792833463892113e-05,
+        "max_z_m": 1.319301389603919,
+        "geometry_min_z_m": -1.8247120009452777e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.4,
+        "max_abs_xy_from_root_m": [
+          0.29579678297430156,
+          0.15148876244711573
+        ],
+        "min_z_m": -7.482795860228042e-07,
+        "max_z_m": 1.3191064242401775,
+        "geometry_min_z_m": -6.438566453265473e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.433333333333334,
+        "max_abs_xy_from_root_m": [
+          0.2958541391262681,
+          0.15201943563716114
+        ],
+        "min_z_m": -1.3018689741309264e-06,
+        "max_z_m": 1.3189523923240576,
+        "geometry_min_z_m": -1.0351996337148658e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.466666666666667,
+        "max_abs_xy_from_root_m": [
+          0.2952526897074268,
+          0.15269744063360235
+        ],
+        "min_z_m": -1.10328847775093e-06,
+        "max_z_m": 1.3188532083701427,
+        "geometry_min_z_m": -7.164854936153597e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.5,
+        "max_abs_xy_from_root_m": [
+          0.29396953051425534,
+          0.15336757430333492
+        ],
+        "min_z_m": -1.8043839194251121e-06,
+        "max_z_m": 1.31892680320628,
+        "geometry_min_z_m": -1.4158143418867286e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.533333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2927995754565256,
+          0.1551241622256505
+        ],
+        "min_z_m": -1.6351984984189216e-06,
+        "max_z_m": 1.3191539573252595,
+        "geometry_min_z_m": -1.1536726192140634e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.566666666666666,
+        "max_abs_xy_from_root_m": [
+          0.2914977043283784,
+          0.15675459955404136
+        ],
+        "min_z_m": -8.002291022046748e-07,
+        "max_z_m": 1.3192955252655443,
+        "geometry_min_z_m": -6.678170789402998e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.6,
+        "max_abs_xy_from_root_m": [
+          0.2897225411276203,
+          0.15850164038339898
+        ],
+        "min_z_m": -3.124426976933159e-07,
+        "max_z_m": 1.3193298401985274,
+        "geometry_min_z_m": -2.8849819264965826e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_05"
+      },
+      {
+        "time_s": 7.633333333333334,
+        "max_abs_xy_from_root_m": [
+          0.2877898998860413,
+          0.15992125115150913
+        ],
+        "min_z_m": -5.356790776997467e-07,
+        "max_z_m": 1.3193829138906688,
+        "geometry_min_z_m": -5.213304519278289e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.666666666666667,
+        "max_abs_xy_from_root_m": [
+          0.2856698866829781,
+          0.16090527507032348
+        ],
+        "min_z_m": -7.667262564431399e-07,
+        "max_z_m": 1.3195068088496869,
+        "geometry_min_z_m": -6.37545220987662e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.7,
+        "max_abs_xy_from_root_m": [
+          0.28355941187623657,
+          0.16163477423371475
+        ],
+        "min_z_m": -7.660187346172909e-07,
+        "max_z_m": 1.319677719659848,
+        "geometry_min_z_m": -7.086848743953489e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.733333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2815327478319656,
+          0.16188717781348316
+        ],
+        "min_z_m": -9.312801065516907e-07,
+        "max_z_m": 1.3198376977564032,
+        "geometry_min_z_m": -7.55771666843992e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.766666666666667,
+        "max_abs_xy_from_root_m": [
+          0.27976116790200756,
+          0.16139353430704517
+        ],
+        "min_z_m": -7.676851595805889e-07,
+        "max_z_m": 1.3199704378058952,
+        "geometry_min_z_m": -6.051957273890338e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.8,
+        "max_abs_xy_from_root_m": [
+          0.2782998887372159,
+          0.16034422742058752
+        ],
+        "min_z_m": -5.686549184591438e-07,
+        "max_z_m": 1.3200737826461495,
+        "geometry_min_z_m": -4.7568202022132966e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_07"
+      },
+      {
+        "time_s": 7.833333333333333,
+        "max_abs_xy_from_root_m": [
+          0.2773325989868276,
+          0.15862334226012464
+        ],
+        "min_z_m": -5.205445309519607e-07,
+        "max_z_m": 1.3200891144883409,
+        "geometry_min_z_m": -3.0959246491869125e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.866666666666666,
+        "max_abs_xy_from_root_m": [
+          0.2771682505807771,
+          0.15810932321311455
+        ],
+        "min_z_m": -1.7227268937908269e-06,
+        "max_z_m": 1.3201146842083495,
+        "geometry_min_z_m": -1.4227740656536439e-06,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.9,
+        "max_abs_xy_from_root_m": [
+          0.2767823929610085,
+          0.15759698835114477
+        ],
+        "min_z_m": -6.634962873841577e-07,
+        "max_z_m": 1.320129776353546,
+        "geometry_min_z_m": -5.07355051814623e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.933333333333334,
+        "max_abs_xy_from_root_m": [
+          0.27580197007591245,
+          0.1573134641443552
+        ],
+        "min_z_m": -9.524424732301751e-07,
+        "max_z_m": 1.3201159968588037,
+        "geometry_min_z_m": -7.17374502361319e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/right_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 7.966666666666667,
+        "max_abs_xy_from_root_m": [
+          0.2748491511432114,
+          0.15727989142915888
+        ],
+        "min_z_m": -9.515728071410323e-07,
+        "max_z_m": 1.3200833253074808,
+        "geometry_min_z_m": -9.219417604622304e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      },
+      {
+        "time_s": 8.0,
+        "max_abs_xy_from_root_m": [
+          0.27448711433792106,
+          0.15721952014711604
+        ],
+        "min_z_m": -7.469012298227939e-07,
+        "max_z_m": 1.3201298766991214,
+        "geometry_min_z_m": -7.046871055788398e-07,
+        "lowest_geometry_path": "/World/envs/env_0/Robot/left_ankle_roll_link/collisions/spheres/Sphere_04"
+      }
+    ],
+    "scope": "measured link transforms applied to authored collider AABBs; excludes cooking expansion and contact-force certification"
+  },
+  "scene-query-check.json": {
+    "enabled": true,
+    "support_hit": true,
+    "support_rigid_body": "/World/envs/env_0/warehouse/Environment/SM_floor50/SM_floor02/SM_floor02"
+  }
+}
