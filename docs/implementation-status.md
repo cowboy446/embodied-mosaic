@@ -48,3 +48,17 @@ The first smoke attempt failed with an empty RGB annotator buffer. Explicit Repl
 Seven missing Python dependencies were installed into a project-specific `runtime/python-deps` directory using offline wheels. The server's default package mirror timed out, so it was not used further. The existing simulation package environment was not modified. Arena probe 001 is queued/running under the shared GPU 7 lock, PID 721291; inspect its result before claiming compatibility.
 
 The user confirmed the model setting as `gpt-6.1-sol` with `low` reasoning. The config and protocol tests now assert that setting; a live restricted model transport remains unverified.
+
+### Feedback control and restricted CLI investigation
+
+Feedback smoke 001 completed on node43: a 0.20 m forward request moved approximately 0.1931 m; a 20-degree turn changed yaw approximately 19.03 degrees. All three diagnostic skills reached their endpoint criteria. This is not yet a collision-tested navigation episode. Private diagnostics remain in `runs/ego-feedback-001/diagnostic.json` on NAS.
+
+Arena probe 002 imported its environment, scene and asset registry successfully after adding hidapi to the isolated dependency overlay. Ground-plane spawning failed with a None collision-prim path passed to Stage.GetPrimAtPath. Runtime compatibility is still unverified; the ground asset resolution and spawn path need inspection.
+
+The user confirmed that only Codex login is available and requested continued investigation of restricted CLI transport. Installed CLI version: 0.140.0. Its help exposes ignore-user-config, ignore-rules, ephemeral sessions, image input and output-schema. A bubblewrap user/PID namespace smoke test succeeded locally; it used a read-only root bind solely to check availability, NOT to prove filesystem isolation.
+
+The generated app-server schema supports explicit base instructions, ephemeral sessions and environment selection. An empty dynamicTools list does not establish that built-in tools are absent. Current upstream source registers apply_patch based on model metadata independently of the shell-tool switch. Therefore disabling shell alone is insufficient. This source inspection uses upstream main, not a verified source match for the installed binary. No isolated model call has passed acceptance yet.
+
+Next transport gates: a minimal filesystem allowlist; no inherited project/user instructions or plugins; explicit tool inventory verification; out-of-sandbox canary rejection; a live ego-image to skill-JSON call using gpt-6.1-sol at low reasoning. Authentication must stay outside model-visible context and all credential material stays out of Git and episode logs.
+
+References inspected: https://github.com/openai/codex/blob/main/codex-rs/core/src/tools/spec_plan.rs and https://github.com/openai/codex/blob/main/codex-rs/core/config.schema.json.
