@@ -11,11 +11,32 @@ it. Historical sections below retain failed attempts and are not current status.
   using the documented isolated compatibility overlay.
 - G1 receives physical 29-joint SONIC targets at 50 Hz, physics at 300 Hz;
   ego RGB is recorded at 640×480 / 30 Hz with joint states and camera poses.
-- Probe 014 reaches and settles at its grid target. Independent geometric goal,
-  settling and image checks pass. Full safety certification remains open.
-- Support-ray checks and distinct-seed paths are being tested in probes 015/016.
+- Navigation has now been exercised in warehouse, office and hospital scenes.
+  Hospital probes 031 and 045 reached their goals; office long-route probes
+  stopped at conservative corridor checks. Full safety certification remains open.
+- Seeded object placement now checks pairwise separation, environment geometry,
+  spawn clearance and runtime overlap/support. Office dynamic-stock probes passed
+  the recorded two-second stability gate; hospital gas carts tipped and failed it.
 - Scene/asset randomization, 64/512-episode reliability, complete replay,
   restricted agent transport and later H5 phases remain incomplete.
+
+### Current experiment priority
+
+1. Test initialization across different realistic indoor scenes and asset sets
+   before spending further iterations on any single scene. Record loading,
+   missing dependencies/materials, placement, support and settling separately.
+2. Use bounded placement retries. Preserve rejected layouts and diagnostics;
+   advance to another scene/asset combination when the retry budget is exhausted.
+   A failing asset must not silently become a static object or disappear to pass.
+3. Within each feasible episode, prefer distant reachable goals and broad spatial
+   coverage. Measure executed path length, start-to-finish displacement and unique
+   visited grid cells, separately from planned path length. Multi-waypoint routes
+   are the next extension; repeated circling must not count as broader coverage.
+4. Longer routes remain subject to support, collision and controller checks.
+   Do not shrink safety margins just to enter shelf gaps or meet a length target.
+5. Current distant-goal selection is implemented; coverage-aware multi-waypoint
+   planning and a balanced multi-scene campaign remain pending. Downloading new
+   scenes is not evidence of runtime compatibility.
 
 ## Acceptance gates
 
