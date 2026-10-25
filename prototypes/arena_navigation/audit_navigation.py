@@ -24,6 +24,7 @@ def audit(root):
   if i and abs(r['time_s']-frames[i-1]['time_s']-1/30)>1e-6:errors.append('frame clock discontinuity')
   if len(r['joint_position'])!=len(report['joint_names']) or len(r['joint_velocity'])!=len(report['joint_names']):errors.append('incomplete joint state')
  if report['status']=='task_success' and not report.get('terminal_state',{}).get('automatic_reset_suppressed'):errors.append('terminal state preservation not confirmed')
+ result['termination']=report['status']
  if rows:
   distances=[math.dist(r['position'][:2],plan['route'][-1]) for r in rows]
   result.update(minimum_goal_distance_m=min(distances),final_goal_distance_m=distances[-1])

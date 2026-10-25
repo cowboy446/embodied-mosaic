@@ -1,7 +1,9 @@
 """Arena task-level G1/SONIC integration probe, not batch/navigation acceptance."""
-import argparse,json,sys,traceback
+import argparse,json,sys,traceback,time,hashlib
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
+p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
+started_monotonic=time.monotonic();started_unix=time.time()
+(out/'run-config.json').write_text(json.dumps(vars(a),indent=2))
 import site
 site.addsitedir('/mnt/nas/zhangrong/embodied-mosaic/runtime/ik-deps')
 from isaacsim import SimulationApp
@@ -32,7 +34,8 @@ try:
  for key,val in [('left_hand','ThreeFinger'),('right_hand','ThreeFinger'),('Physics','SimplifiedPhysX')]:
   if key in rp.GetVariantSets().GetNames():rp.GetVariantSet(key).SetVariantSelection(val)
  rs.GetRootLayer().Save()
- ref=np.load(sonic_root/'output/reference.npz')['qpos'];initial=ref[0];emb=G1SonicEmbodiment(str(out/'robot.usda'),(-9.1,29.05,float(initial[2])),initial[3:7],sonic)
+ (out/'input-entrypoints.json').write_text(json.dumps({'scope':'entrypoint file hashes; full transitive asset dependency manifest remains pending','files':{str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in [src,asset,sonic_root/'output/reference.npz',sonic_root/'scripts/sonic_control.py']}},indent=2))
+ ref=np.load(sonic_root/'output/reference.npz')['qpos'];initial=ref[0];emb=G1SonicEmbodiment(str(out/'robot.usda'),(-9.1,29.05,float(initial[2])),initial[3:7],sonic,seed=a.seed)
  emb.scene_config.robot.init_state.joint_pos=dict(zip(sonic.NAMES,initial[7:].tolist()))
  descriptor=IsaacLabArenaEnvironment(name='Mosaic-G1-SONIC-Probe-v0',scene=Scene([Background(name='warehouse',usd_path=str(out/'background.usda'),object_min_z=0.)]),embodiment=emb,task=NavigateTask((-5.,29.)))
  args=argparse.Namespace(mimic=False,device=f'cuda:{a.gpu}',num_envs=1,disable_fabric=False)
@@ -47,6 +50,7 @@ try:
   sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'scripts'))
   from collision_guard import BaseCollisionGuard,Envelope
   from grid_navigation import plan_grid
+  from ground_support import GroundSupport
   from sonic_route_reference import RouteReference
   guard=BaseCollisionGuard(omni.physx.get_physx_scene_query_interface(),Envelope(.45,.45,.04,1.7,.10),'/World/envs/env_0/Robot')
   if not cfg.sim.enable_scene_query_support:raise RuntimeError('scene queries disabled')
@@ -54,10 +58,12 @@ try:
   support=omni.physx.get_physx_scene_query_interface().raycast_closest((float(start[0])+.9,float(start[1]),2.),(0.,0.,-1.),4.)
   (out/'scene-query-check.json').write_text(json.dumps({'enabled':bool(cfg.sim.enable_scene_query_support),'support_hit':bool(support.get('hit',False)),'support_rigid_body':str(support.get('rigidBody',''))},indent=2))
   if not support.get('hit',False):raise RuntimeError('scene query self-check failed: nearby ground not detected')
-  plan=plan_grid(start,lambda xy:guard.blocked(xy,0.,turning=True),seed=42,minimum_path=3.,maximum_path=5.)
+  support_guard=GroundSupport(omni.physx.get_physx_scene_query_interface(),'/World/envs/env_0/Robot')
+  plan=plan_grid(start,lambda xy:guard.blocked(xy,0.,turning=True) or not support_guard.supported(xy),seed=a.seed,minimum_path=3.,maximum_path=5.)
+  plan['support_checks']={'cached_positions':len(support_guard.cache),'rejected_positions':sum(not x for x in support_guard.cache.values()),'method':'5 downward rays; flat ground ±3cm; normal z >= 0.95','scope':'sampled support, not continuous surface proof'}
   (out/'grid-plan.json').write_text(json.dumps(plan,indent=2))
   if not plan['occupied']:raise RuntimeError('warehouse occupancy unexpectedly empty; verify collision queries and scene geometry')
-  route_policy=RouteReference(sonic.session('planner_sonic.onnx'),plan['route'])
+  route_policy=RouteReference(sonic.session('planner_sonic.onnx'),plan['route'],seed=a.seed)
   term=env.termination_manager.get_term_cfg('success');term.params['target_xy']=list(plan['route'][-1]);env.termination_manager.set_term_cfg('success',term)
   qpos=np.r_[start,robot.data.root_quat_w[0].cpu().numpy(),robot.data.joint_pos[0,ids].cpu().numpy()]
   context=collections.deque([qpos.copy() for _ in range(4)],maxlen=4)
@@ -90,6 +96,7 @@ try:
   if float(robot.data.root_pos_w[0,2])<.45:raise RuntimeError('fall detected')
   if route_policy and (step+1)%5==0:
    pos=robot.data.root_pos_w[0].cpu().numpy()
+   if not support_guard.supported(pos[:2]):raise RuntimeError('robot left sampled ground support')
    if guard.blocked(pos[:2],0.,turning=True):raise RuntimeError('robot left conservative free corridor')
   if bool(terminated.any()|truncated.any()):
    terminal_reason='task_success' if bool(terminated.any()) else 'timeout'
@@ -106,4 +113,5 @@ except BaseException:
  if 'planner_logs' in locals():(out/'planner-log.json').write_text(json.dumps(planner_logs))
  if 'env' in locals():env.close()
 finally:
+ report.update(wall_seconds=time.monotonic()-started_monotonic,started_unix=started_unix,seed=a.seed,gpu=a.gpu)
  (out/'report.json').write_text(json.dumps(report,indent=2));print('REPORT',report['status'],flush=True);app.close()

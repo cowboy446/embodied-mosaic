@@ -1,5 +1,22 @@
 # Implementation status
 
+## Current execution scope (2026-10-25)
+
+The later user instructions supersede the original ordering: use Arena with G1
+and SONIC, first validate rule-based grid navigation, and defer embodied-agent
+integration. The new diverse40 batch is stopped by user request; do not restart
+it. Historical sections below retain failed attempts and are not current status.
+
+- Arena 0.1.1 + Isaac Lab 2.3.0 runs on the existing Isaac Sim 5.1 installation
+  using the documented isolated compatibility overlay.
+- G1 receives physical 29-joint SONIC targets at 50 Hz, physics at 300 Hz;
+  ego RGB is recorded at 640×480 / 30 Hz with joint states and camera poses.
+- Probe 014 reaches and settles at its grid target. Independent geometric goal,
+  settling and image checks pass. Full safety certification remains open.
+- Support-ray checks and distinct-seed paths are being tested in probes 015/016.
+- Scene/asset randomization, 64/512-episode reliability, complete replay,
+  restricted agent transport and later H5 phases remain incomplete.
+
 ## Acceptance gates
 
 - [ ] Pin and test Arena against the existing Isaac Sim 5.1 runtime without modifying it.
@@ -165,3 +182,16 @@ Probe 014 startup confirmed scene queries enabled, a support ray hit on
 The new 4.25 m route turns away from the previous wall-directed goal. Navigation
 is still running. The offline image audit now flags frames with >95% of pixels
 below luma 4/255; probe 013 has 263 such frames out of 900 and is rejected.
+
+Probe 014 completed at 9.8267 s, without implicit reset. Independent trajectory
+checks confirmed 3.47 cm final error and max 0.0247 m/s speed over the settling
+window. All 294 RGB frames passed dimension, cadence and black-frame checks.
+`task_success=true`, but `safety_certified=false`: complete collision geometry,
+continuous support and contact validation are still pending. The interactive
+local grid review overlays collider AABBs, footprint-expanded occupancy, the
+planned route, measured trajectory and a time-indexed robot envelope.
+
+Probes 015/016 add five-ray flat-floor support checks and use seeds 43/44 on
+GPUs 1/2. These are target-path variation tests within one fixed warehouse and
+spawn; they are not yet the scene/asset randomization batch. No acceptance
+thresholds were relaxed.

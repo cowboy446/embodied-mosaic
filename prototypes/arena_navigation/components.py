@@ -64,8 +64,9 @@ class G1SonicEmbodiment(EmbodimentBase):
  Hand configuration is part of the prepared USD; no root kinematic drive.
  """
  name='mosaic_g1_sonic'
- def __init__(self,usd_path,position,rotation,sonic):
+ def __init__(self,usd_path,position,rotation,sonic,seed=42):
   super().__init__(enable_cameras=True)
+  self.seed=seed
   actuators={name:ImplicitActuatorCfg(joint_names_expr=[name],stiffness=float(sonic.KP[i]),damping=float(sonic.KD[i]),effort_limit_sim=float(sonic.EFFORT_PHYS[i]),armature=float(sonic.ARM_PHYS[i])) for i,name in enumerate(sonic.NAMES)}
   actuators['hands']=ImplicitActuatorCfg(joint_names_expr=['.*hand.*'],stiffness=8.,damping=.4,effort_limit_sim=2.,armature=.001)
   robot=ArticulationCfg(prim_path='{ENV_REGEX_NS}/Robot',spawn=sim.UsdFileCfg(usd_path=usd_path),
@@ -79,5 +80,5 @@ class G1SonicEmbodiment(EmbodimentBase):
 
  def modify_env_cfg(self,cfg):
   cfg.sim.enable_scene_query_support=True
-  cfg.sim.dt=1/300;cfg.sim.render_interval=10;cfg.decimation=2;cfg.seed=42
+  cfg.sim.dt=1/300;cfg.sim.render_interval=10;cfg.decimation=2;cfg.seed=self.seed
   return cfg
