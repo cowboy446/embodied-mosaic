@@ -1,0 +1,533 @@
+{
+  "046": {
+    "dynamics": {
+      "passed": true,
+      "duration_s": 2.0,
+      "translation_drift_m": [
+        0.0003896085862336879,
+        2.497889789080651e-07,
+        0.00039529536296017633,
+        0.0,
+        1.2731557704981462e-07,
+        4.789280498024284e-07,
+        9.848303581391754e-07
+      ],
+      "max_translation_excursion_m": [
+        0.0003896773908119791,
+        2.602375924076584e-07,
+        0.000395317960237996,
+        0.0,
+        1.4057727354849284e-07,
+        4.789280498024284e-07,
+        3.860982594657337e-06
+      ],
+      "max_orientation_change_deg": [
+        0.8179513770284401,
+        9.947836983144978e-05,
+        0.8178675939785619,
+        1.7075472925031877e-06,
+        4.130005916871033e-05,
+        5.9690929779967495e-05,
+        0.0002862218052388161
+      ],
+      "max_tail_linear_speed_m_s": [
+        0.0001606367686836089,
+        4.7219667833575194e-05,
+        9.13033856082141e-05,
+        5.5803026482722246e-05,
+        4.2222869845235815e-05,
+        6.022531986616802e-05,
+        0.0021909583489476505
+      ],
+      "max_tail_angular_speed_rad_s": [
+        0.0001635859030699888,
+        0.0001069316723995424,
+        0.00019445262932065723,
+        0.00012635724754189495,
+        0.0001586570390059637,
+        3.5684674214513706e-05,
+        0.004104167166366679
+      ],
+      "translation_limit_m": 0.05,
+      "orientation_limit_deg": 10.0,
+      "speed_limit_m_s": 0.02,
+      "angular_speed_limit_rad_s": 0.05,
+      "scope": "full recorded rigid-body drift/rotation and terminal velocity probe; contact penetration and material validation remain separate"
+    },
+    "initialization": {
+      "passed": true,
+      "objects": [
+        {
+          "path": "/World/envs/env_0/office/Stock/item00",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item00/Geometry/SM_Chair"
+          ],
+          "rigid_bodies": [
+            "/World/envs/env_0/office/Stock/item00"
+          ],
+          "physics_kind": "dynamic_or_kinematic",
+          "bounds": [
+            [
+              -4.234467690896842,
+              9.453617968554715,
+              0.0
+            ],
+            [
+              -3.408230023011134,
+              10.279592471538823,
+              0.8772270603304672
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item01",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item01/Geometry/SM_BoxPortableA"
+          ],
+          "rigid_bodies": [
+            "/World/envs/env_0/office/Stock/item01"
+          ],
+          "physics_kind": "dynamic_or_kinematic",
+          "bounds": [
+            [
+              -3.0621560903772314,
+              8.285986055644088,
+              0.0
+            ],
+            [
+              -2.590542282963953,
+              8.779760692768367,
+              0.30828399821506575
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item02",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item02/Geometry/SM_Chair"
+          ],
+          "rigid_bodies": [
+            "/World/envs/env_0/office/Stock/item02"
+          ],
+          "physics_kind": "dynamic_or_kinematic",
+          "bounds": [
+            [
+              -5.761333595647924,
+              8.786813970126822,
+              0.0
+            ],
+            [
+              -4.966063253956316,
+              9.582487782127885,
+              0.8772270603304672
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item03",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item03/Geometry/SM_Armchair"
+          ],
+          "rigid_bodies": [
+            "/World/envs/env_0/office/Stock/item03"
+          ],
+          "physics_kind": "dynamic_or_kinematic",
+          "bounds": [
+            [
+              -8.62138067052527,
+              4.97826723780784,
+              0.0
+            ],
+            [
+              -7.375154988761172,
+              6.085531232784875,
+              0.7900000091255964
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item04",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item04/Geometry/SM_BoxPortableC"
+          ],
+          "rigid_bodies": [
+            "/World/envs/env_0/office/Stock/item04"
+          ],
+          "physics_kind": "dynamic_or_kinematic",
+          "bounds": [
+            [
+              -1.7552498469352982,
+              4.826563898192912,
+              0.0
+            ],
+            [
+              -1.2749418296260848,
+              5.30789597688457,
+              0.30000000181818887
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item05",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item05/Geometry/SM_BoxPortableB"
+          ],
+          "rigid_bodies": [
+            "/World/envs/env_0/office/Stock/item05"
+          ],
+          "physics_kind": "dynamic_or_kinematic",
+          "bounds": [
+            [
+              -4.478436051407051,
+              5.231586627858393,
+              0.0
+            ],
+            [
+              -4.041480387135739,
+              5.615773999270504,
+              0.27600212265215857
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item06",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item06/Geometry/SM_Plant02"
+          ],
+          "rigid_bodies": [
+            "/World/envs/env_0/office/Stock/item06"
+          ],
+          "physics_kind": "dynamic_or_kinematic",
+          "bounds": [
+            [
+              -3.3784147638808726,
+              4.9178612460069635,
+              0.0
+            ],
+            [
+              -2.0882042445258606,
+              6.239363804486053,
+              1.554042937743892
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        }
+      ],
+      "scope": "conservative initial AABB and five-ray flat-floor support checks; not contact/settling certification"
+    },
+    "config": {
+      "scene_source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/rulegen-diverse40/runs/office-152000-0b1a60c48e/attempt-00/output/scene_initial.usda",
+      "random_stock": true,
+      "dynamic_stock": true,
+      "scene_name": "office",
+      "grid_radius": 5.0,
+      "min_path": 3.0,
+      "max_path": 5.0,
+      "prefer_far": false,
+      "output": "/mnt/nas/zhangrong/embodied-mosaic/runs/arena-g1-046",
+      "gpu": 0,
+      "route": false,
+      "native_scene_collision": true,
+      "align_spawn_floor": true,
+      "seed": 83,
+      "spawn_xy": [
+        -4.722265,
+        7.512265
+      ],
+      "yaw_deg": 0.0,
+      "seconds": 12.0
+    }
+  },
+  "047": {
+    "dynamics": {
+      "passed": false,
+      "duration_s": 2.0,
+      "translation_drift_m": [
+        0.10996710023345978,
+        0.00015723927847318962,
+        0.1887301276031523,
+        0.045586047460301336,
+        0.00011506315041994648
+      ],
+      "max_translation_excursion_m": [
+        0.10996710023345978,
+        0.00015723927847318962,
+        0.1887301276031523,
+        0.04668297537488867,
+        0.00011600419141252706
+      ],
+      "max_orientation_change_deg": [
+        93.34207259393749,
+        0.015476290441488516,
+        88.23104507682294,
+        49.05542361669744,
+        1.2281484117220516
+      ],
+      "max_tail_linear_speed_m_s": [
+        2.060136207291144,
+        0.0005936183446359344,
+        9.875447137496689e-05,
+        0.2685458624306038,
+        0.0003497301276117724
+      ],
+      "max_tail_angular_speed_rad_s": [
+        6.8178396915284,
+        0.0005881194426265444,
+        0.00015109583203108361,
+        3.852327981959394,
+        0.0008286143487588871
+      ],
+      "translation_limit_m": 0.05,
+      "orientation_limit_deg": 10.0,
+      "speed_limit_m_s": 0.02,
+      "angular_speed_limit_rad_s": 0.05,
+      "scope": "full recorded rigid-body drift/rotation and terminal velocity probe; contact penetration and material validation remain separate"
+    },
+    "initialization": {
+      "passed": true,
+      "objects": [
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item00",
+          "enabled_colliders": [
+            "/World/envs/env_0/hospital/Stock/item00/Geometry/SM_GasCart_01c"
+          ],
+          "rigid_bodies": [
+            "/World/envs/env_0/hospital/Stock/item00"
+          ],
+          "physics_kind": "dynamic_or_kinematic",
+          "bounds": [
+            [
+              -7.990247602968052,
+              9.046808531542766,
+              0.0
+            ],
+            [
+              -7.741677575903058,
+              9.29537855733815,
+              0.9227987774580986
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item01",
+          "enabled_colliders": [
+            "/World/envs/env_0/hospital/Stock/item01/Geometry/SM_MedicalCabinet_01a/Section0",
+            "/World/envs/env_0/hospital/Stock/item01/Geometry/SM_MedicalCabinet_01a/Section1"
+          ],
+          "rigid_bodies": [
+            "/World/envs/env_0/hospital/Stock/item01"
+          ],
+          "physics_kind": "dynamic_or_kinematic",
+          "bounds": [
+            [
+              -9.791595712487508,
+              6.915893018033716,
+              0.0
+            ],
+            [
+              -8.773585621643473,
+              8.002781357715183,
+              1.9677354193984986
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item02",
+          "enabled_colliders": [
+            "/World/envs/env_0/hospital/Stock/item02/Geometry/SM_GasCart_01b"
+          ],
+          "rigid_bodies": [
+            "/World/envs/env_0/hospital/Stock/item02"
+          ],
+          "physics_kind": "dynamic_or_kinematic",
+          "bounds": [
+            [
+              -9.005931163049777,
+              11.46234114415161,
+              0.0
+            ],
+            [
+              -8.619934481190592,
+              11.84022352447044,
+              1.0926642188579385
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item03",
+          "enabled_colliders": [
+            "/World/envs/env_0/hospital/Stock/item03/Geometry/SM_GasCart_01c"
+          ],
+          "rigid_bodies": [
+            "/World/envs/env_0/hospital/Stock/item03"
+          ],
+          "physics_kind": "dynamic_or_kinematic",
+          "bounds": [
+            [
+              -9.181645946107446,
+              9.182379497367691,
+              0.0
+            ],
+            [
+              -8.970202735154945,
+              9.393822800506886,
+              0.9227987774580986
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item04",
+          "enabled_colliders": [
+            "/World/envs/env_0/hospital/Stock/item04/Geometry/SM_SupplyCart_02a"
+          ],
+          "rigid_bodies": [
+            "/World/envs/env_0/hospital/Stock/item04"
+          ],
+          "physics_kind": "dynamic_or_kinematic",
+          "bounds": [
+            [
+              -11.142977775819771,
+              14.332755908813574,
+              0.0
+            ],
+            [
+              -10.46403004143725,
+              15.270477825189623,
+              0.7820838753413284
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        }
+      ],
+      "scope": "conservative initial AABB and five-ray flat-floor support checks; not contact/settling certification"
+    },
+    "config": {
+      "scene_source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/rulegen-diverse40/runs/hospital-152001-757e966d26/attempt-00/output/scene_initial.usda",
+      "random_stock": true,
+      "dynamic_stock": true,
+      "scene_name": "hospital",
+      "grid_radius": 5.0,
+      "min_path": 3.0,
+      "max_path": 5.0,
+      "prefer_far": false,
+      "output": "/mnt/nas/zhangrong/embodied-mosaic/runs/arena-g1-047",
+      "gpu": 1,
+      "route": false,
+      "native_scene_collision": true,
+      "align_spawn_floor": true,
+      "seed": 83,
+      "spawn_xy": [
+        -9.261082,
+        10.508025
+      ],
+      "yaw_deg": 0.0,
+      "seconds": 12.0
+    }
+  }
+}
