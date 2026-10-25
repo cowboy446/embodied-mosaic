@@ -1,7 +1,7 @@
 """Arena task-level G1/SONIC integration probe, not batch/navigation acceptance."""
 import argparse,json,sys,traceback,time,hashlib
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--tour-stops',type=int,default=1);p.add_argument('--scene-source');p.add_argument('--random-stock',action='store_true');p.add_argument('--dynamic-stock',action='store_true');p.add_argument('--scene-name',default='warehouse');p.add_argument('--grid-radius',type=float,default=5.);p.add_argument('--min-path',type=float,default=3.);p.add_argument('--max-path',type=float,default=5.);p.add_argument('--prefer-far',action='store_true');p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
+p=argparse.ArgumentParser();p.add_argument('--stock-spec');p.add_argument('--tour-stops',type=int,default=1);p.add_argument('--scene-source');p.add_argument('--random-stock',action='store_true');p.add_argument('--dynamic-stock',action='store_true');p.add_argument('--scene-name',default='warehouse');p.add_argument('--grid-radius',type=float,default=5.);p.add_argument('--min-path',type=float,default=3.);p.add_argument('--max-path',type=float,default=5.);p.add_argument('--prefer-far',action='store_true');p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
 started_monotonic=time.monotonic();started_unix=time.time()
 (out/'run-config.json').write_text(json.dumps(vars(a),indent=2))
 import site
@@ -44,6 +44,13 @@ try:
    authored.append(str(prim.GetPath()))
   if not authored:raise RuntimeError('no native environment meshes')
   (out/'scene-collision-authoring.json').write_text(json.dumps({'mode':'native_static_triangle_meshes','instanceability_overrides':instance_overrides,'source_asset_files_modified':False,'enabled_meshes':authored,'disabled_legacy_proxies':['/World/SceneCollision','/World/PhysicsFloor','/World/Environment/GroundPlane'],'scope':'full environment mesh collision authoring, runtime coverage still needs validation'},indent=2))
+ if a.stock_spec:
+  if not a.random_stock:raise ValueError('new stock requires placement validation')
+  from stock_assets import populate_stock
+  spec=json.loads(Path(a.stock_spec).read_text());catalog=json.loads(Path(spec['catalog']).read_text())
+  selection=populate_stock(bg,catalog,spec['anchors_xy'],a.seed)
+  (out/'stock-spec.json').write_text(json.dumps(spec,indent=2))
+  (out/'stock-selection.json').write_text(json.dumps(selection,indent=2))
  if a.random_stock:
   from random_stock import randomize_stock,PlacementRejected
   try:stock_recipe=randomize_stock(bg,a.seed,reserved_xy=[a.spawn_xy])
