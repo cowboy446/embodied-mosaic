@@ -96,3 +96,11 @@ Live CLI smoke 001 authenticated successfully but the backend rejected gpt-6.1-s
 A mailbox-driven server pilot and coordinator-only SSH bridge were added. The policy sees RGB, semantic goal, skill bounds, own recent actions and wheel encoder readings. Target coordinates and poses are confined to the server's private logs/evaluation. The pilot uses a forward ray fan, not a full swept-volume collision certificate, and must not count toward batch safety acceptance. Queued on node43 with GPU 7 lock: ego-agent-001, PID 853804.
 
 Arena probe 005 completed its reported checks but its process remained alive in shutdown for over five minutes, retaining the GPU lock. The exact diagnostic child PID 830227 was verified and sent SIGTERM; the incident is recorded on NAS. Thus successful stepping does not establish clean runtime lifecycle compatibility.
+
+### First prompt-constrained episode completed
+
+Episode ego-agent-001 ran on node43 GPU 7 and exited normally. A fresh-context gpt-6.1-sol low policy selected move_forward 0.3 m twice, then finish. The independent private evaluator measured 1.21455 m remaining from robot center to target and rejected task success. Both movement controllers returned reached; final settling speed was 0.000612 m/s. This is a completed closed-loop pilot with policy failure, not a successful navigation task or strict-isolation acceptance. 255 RGB frames including initial observation and a 30 fps MP4 are retained on NAS; the small preview and observation packets are copied locally under runs/policy-001. The policy agent has ended and must not be reused for another episode.
+
+A scheduling attempt to move the waiting pilot to GPU 3 raced with the original GPU 7 start. Its precondition correctly detected an existing child, but the surrounding shell lacked fail-fast behavior and continued. The duplicate failed at exclusive output-directory creation before SimulationApp initialization. The original run remained active; its PID file was restored. Future scheduling scripts must fail closed on prerequisite checks.
+
+Local harness.py was observed changed back to an older interface outside this edit sequence. Its contents were preserved under runs/external-edits and not overwritten. Server pilot used the previously uploaded proprioception/skill-registry version. Reconcile the local edit before deploying subsequent episodes.

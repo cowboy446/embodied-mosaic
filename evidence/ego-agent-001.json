@@ -1,0 +1,21 @@
+{
+  "success": false,
+  "task_success": false,
+  "safety_certified": false,
+  "termination": "agent_finish",
+  "final_distance_m": 1.2145489876444011,
+  "maximum_settling_speed_m_s": 0.000611616849701844,
+  "reason": "outside_target_or_not_settled",
+  "episode": "ego-agent-001",
+  "model": "gpt-6.1-sol",
+  "reasoning_effort": "low",
+  "policy_isolation": "prompt_only",
+  "actions": [
+    "move_forward 0.3",
+    "move_forward 0.3",
+    "finish"
+  ],
+  "frame_count": 255,
+  "sim_duration_s": 8.466666666666667,
+  "process_exited": true
+}
