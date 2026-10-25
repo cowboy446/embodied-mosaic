@@ -1,0 +1,58 @@
+--- a/isaaclab_arena/assets/object_library.py
++++ b/isaaclab_arena/assets/object_library.py
+@@ -114,15 +114,9 @@
+ class Microwave(LibraryObject, Openable):
+     """A microwave oven."""
+ 
+-    # Only required when using Lightwheel SDK
+-    from lightwheel_sdk.loader import object_loader
+-
+     name = "microwave"
+     tags = ["object", "openable"]
+-    file_path, object_name, metadata = object_loader.acquire_by_registry(
+-        registry_type="fixtures", file_name="Microwave039", file_type="USD"
+-    )
+-    usd_path = file_path
++    usd_path = None  # Resolved on construction, not registry import.
+     object_type = ObjectType.ARTICULATION
+ 
+     # Openable affordance parameters
+@@ -130,6 +124,10 @@
+     openable_open_threshold = 0.5
+ 
+     def __init__(self, prim_path: str | None = None, initial_pose: Pose | None = None):
++        from lightwheel_sdk.loader import object_loader
++        self.usd_path, self.object_name, self.metadata = object_loader.acquire_by_registry(
++            registry_type="fixtures", file_name="Microwave039", file_type="USD"
++        )
+         super().__init__(
+             prim_path=prim_path,
+             initial_pose=initial_pose,
+@@ -144,15 +142,9 @@
+     Encapsulates the pick-up object config for a pick-and-place environment.
+     """
+ 
+-    # Only required when using Lightwheel SDK
+-    from lightwheel_sdk.loader import object_loader
+-
+     name = "coffee_machine"
+     tags = ["object", "pressable"]
+-    file_path, object_name, metadata = object_loader.acquire_by_registry(
+-        registry_type="fixtures", file_name="CoffeeMachine108", file_type="USD"
+-    )
+-    usd_path = file_path
++    usd_path = None  # Resolved on construction, not registry import.
+     object_type = ObjectType.ARTICULATION
+ 
+     # Openable affordance parameters
+@@ -160,6 +152,10 @@
+     pressedness_threshold = 0.5
+ 
+     def __init__(self, prim_path: str | None = None, initial_pose: Pose | None = None):
++        from lightwheel_sdk.loader import object_loader
++        self.usd_path, self.object_name, self.metadata = object_loader.acquire_by_registry(
++            registry_type="fixtures", file_name="CoffeeMachine108", file_type="USD"
++        )
+         super().__init__(
+             prim_path=prim_path,
+             initial_pose=initial_pose,
