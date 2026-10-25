@@ -47,7 +47,7 @@ class Episode:
   if not isinstance(rgb_png,bytes) or not rgb_png.startswith(b'\x89PNG\r\n\x1a\n') or len(rgb_png)>4_000_000: raise ProtocolError('expected bounded RGB PNG')
   self.issued=True
   # Explicitly constructed public fields; never merge a simulator state dictionary.
-  return {'model':'gpt6.1-sol-light','tools':[], 'instructions':Path(__file__).with_name('agent_instructions.txt').read_text(),
+  return {'model':'gpt-6.1-sol','reasoning_effort':'low','tools':[], 'instructions':Path(__file__).with_name('agent_instructions.txt').read_text(),
    'input':{'episode':self.token,'observation_id':self.step,'goal':self.goal,
      'skills':json.loads(json.dumps(SKILLS)),
      'recent_own_actions':json.loads(json.dumps(self.history[-8:])),

@@ -39,8 +39,8 @@ try:
   speed=.12 if 15<=frame<60 else 0.;omega=.25 if 60<=frame<80 else 0.
   wheels=np.array([(speed-omega*.53194/2)/.2408,(speed+omega*.53194/2)/.2408])
   for _ in range(4):robot.apply_action(ArticulationAction(joint_velocities=wheels,joint_indices=indices));world.step(render=False)
-  world.render()
-  for _ in range(4 if frame==0 else 1):world.render()
+  # Trigger the annotator explicitly; rendering alone may leave its buffer empty.
+  rep.orchestrator.step(rt_subframes=8 if frame==0 else 2, delta_time=0, pause_timeline=False)
   image=np.asarray(rgb.get_data())[...,:3].copy()
   if image.shape!=(480,640,3):raise RuntimeError(f'invalid RGB {image.shape}')
   Image.fromarray(image).save(out/f'{frame:06d}.png')

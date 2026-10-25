@@ -7,7 +7,7 @@ class BoundaryTests(unittest.TestCase):
  def test_payload_whitelist(self):
   e=Episode('到达可见的红色标记');p=e.request(PNG)
   self.assertEqual(set(p['input']),{'episode','observation_id','goal','skills','recent_own_actions','image'})
-  self.assertEqual(p['tools'],[]);self.assertEqual(p['model'],'gpt6.1-sol-light')
+  self.assertEqual(p['reasoning_effort'],'low');self.assertEqual(p['tools'],[]);self.assertEqual(p['model'],'gpt-6.1-sol')
  def test_cross_episode_and_stale(self):
   a,b=Episode('A'),Episode('B');a.request(PNG);b.request(PNG)
   with self.assertRaises(ProtocolError):b.accept(self.cmd(a))

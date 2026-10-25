@@ -6,7 +6,7 @@
 - [ ] Select direct reuse or documented adaptation based on a simulator smoke test.
 - [ ] Integrate one mobile robot and one fixed 640×480 ego RGB camera.
 - [ ] Validate physical move/turn/wait skills and private navigation evaluator.
-- [ ] Connect gpt6.1-sol-light through a restricted model transport; prove input/tool isolation.
+- [ ] Connect gpt-6.1-sol through a restricted model transport; prove input/tool isolation.
 - [ ] Execute and record the first real task, including unsuccessful attempts.
 - [ ] Run constraint-randomized pilot (proposed 64 episodes).
 - [ ] Expand to stable batch generation (proposed 512), report diversity and cost.
@@ -38,3 +38,13 @@ Server output: `/mnt/nas/zhangrong/embodied-mosaic/runs/ego-smoke-001`.
 Latest queued lock process: PID 695642 on node43 (revalidate before acting). It uses the shared GPU 7 lock. The source was corrected before simulation launch to the explicit slot `source_episode`, rather than inferring provenance from the copied H5 path.
 
 Arena release/0.1.1 pins Isaac Lab commit `6acdd82a1633732d32bb575e3d792e34fdeb437e`, whose VERSION reports 2.3.0. Arena's default Docker base is Sim 5.0.0; compatibility with our 5.1 remains to be tested. Source was transferred to the NAS vendor directory. Current server driver is 580.65.06; no Arena or Sim 6.2 container was found in the local Docker image inventory.
+
+### Ego diagnostic 002 and dependency overlay
+
+The second native smoke run completed 90 RGB frames (640×480). Frame 19 was visually inspected: warehouse shelving, floor and wall were visible with no robot self-occlusion in that sample. Measured forward displacement between frames 15 and 59 was 0.17374 m. The wrapped yaw change during the short turn was approximately 2.98 degrees, below the roughly 9-degree command; closed-loop skill endpoint control is still required. No agent task was executed.
+
+The first smoke attempt failed with an empty RGB annotator buffer. Explicit Replicator capture fixed that failure. Logs for both attempts remain on NAS.
+
+Seven missing Python dependencies were installed into a project-specific `runtime/python-deps` directory using offline wheels. The server's default package mirror timed out, so it was not used further. The existing simulation package environment was not modified. Arena probe 001 is queued/running under the shared GPU 7 lock, PID 721291; inspect its result before claiming compatibility.
+
+The user confirmed the model setting as `gpt-6.1-sol` with `low` reasoning. The config and protocol tests now assert that setting; a live restricted model transport remains unverified.

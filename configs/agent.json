@@ -1,9 +1,10 @@
 {
-  "requested_model": "gpt6.1-sol-light",
-  "resolved_model": null,
-  "resolution_status": "pending_provider_verification",
+  "requested_model": "gpt-6.1-sol",
+  "resolved_model": "gpt-6.1-sol",
+  "resolution_status": "user_confirmed_model_and_effort_transport_not_yet_verified",
   "allow_model_fallback": false,
   "tools": [],
   "context_scope": "episode_only",
-  "max_own_actions_in_context": 8
+  "max_own_actions_in_context": 8,
+  "reasoning_effort": "low"
 }
