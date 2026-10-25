@@ -13,8 +13,23 @@ def classify(root,returncode):
     if not report_path.exists():return {'decision':'stop_error','reason':'missing_terminal_report','returncode':returncode}
     report=json.loads(report_path.read_text())
     stock=json.loads(stock_path.read_text()) if stock_path.exists() else None
+    rejected_path=root/'stock-randomization-rejected.json'
+    if report.get('status')=='failed' and report.get('phase')=='asset_preparation' and rejected_path.exists():
+        rejected=json.loads(rejected_path.read_text())
+        failed=rejected.get('failed_object');attempts=[r for r in rejected.get('attempts',[]) if r.get('path')==failed]
+        limit=rejected.get('max_trials_per_object')
+        if failed and isinstance(limit,int) and limit>0 and len(attempts)==limit and all(r.get('conflicts') for r in attempts):
+            return {'decision':'retry_layout','initial_geometry_passed':False,'reason':'bounded_placement_exhausted',
+                    'rejected_objects':[failed],'attempt_count':len(attempts),'returncode':returncode}
     if stock and stock['passed']:
-        return {'decision':'stop_layout_pass','initial_geometry_passed':True,'navigation_status':report['status'],'phase':report.get('phase'),'returncode':returncode,'settling_certified':False}
+        dynamics_path=root/'stock-dynamics.json'
+        stability=json.loads(dynamics_path.read_text()).get('summary') if dynamics_path.exists() else None
+        if stability is not None and not stability.get('passed',False):
+            return {'decision':'stop_stability_failure','initial_geometry_passed':True,'short_stability_passed':False,
+                    'stability':stability,'navigation_status':report['status'],'returncode':returncode,'settling_certified':False}
+        return {'decision':'stop_layout_pass','initial_geometry_passed':True,'navigation_status':report['status'],
+                'phase':report.get('phase'),'returncode':returncode,'settling_certified':False,
+                'short_stability_passed':stability.get('passed') if stability else None}
     if stock and not stock['passed'] and report.get('phase')=='stock_initialization':
         return {'decision':'retry_layout','initial_geometry_passed':False,'rejected_objects':[r['path'] for r in stock['objects'] if not r['passed']],'returncode':returncode}
     return {'decision':'stop_error','reason':'non_layout_failure','phase':report.get('phase'),'traceback':report.get('traceback'),'returncode':returncode}

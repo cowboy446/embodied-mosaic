@@ -1,0 +1,21 @@
+{
+  "arena-g1-049": {
+    "decision": "stop_layout_pass",
+    "initial_geometry_passed": true,
+    "navigation_status": "stepped",
+    "phase": "rollout",
+    "returncode": 0,
+    "settling_certified": false,
+    "short_stability_passed": true
+  },
+  "arena-g1-050": {
+    "decision": "retry_layout",
+    "initial_geometry_passed": false,
+    "reason": "bounded_placement_exhausted",
+    "rejected_objects": [
+      "/World/Stock/item02"
+    ],
+    "attempt_count": 64,
+    "returncode": 0
+  }
+}
