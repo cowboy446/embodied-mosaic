@@ -18,3 +18,25 @@ class OrderedRoute:
         return {'next_waypoint_index':self.index,'waypoint_count':len(self.route),
                 'completed':self.index==len(self.route),'corner_radius_m':self.corner_radius,
                 'final_radius_m':self.final_radius,'measurement':'robot root XY at environment steps'}
+
+
+def audit_ordered_samples(route, samples, corner_radius=.3, final_radius=.1):
+    """Scan saved samples independently of the online waypoint index."""
+    OrderedRoute(route, corner_radius, final_radius)  # Validate route contract.
+    previous_time=-math.inf
+    for row in samples:
+        if not math.isfinite(row['time_s']) or row['time_s']<=previous_time:
+            raise ValueError('nonmonotonic sample clock')
+        previous_time=row['time_s']
+        if len(row['position'])<2 or not all(math.isfinite(v) for v in row['position'][:2]):
+            raise ValueError('invalid position')
+    cursor=0;visits=[]
+    for index, waypoint in enumerate(route[1:],1):
+        radius=final_radius if index==len(route)-1 else corner_radius
+        found=next((j for j in range(cursor,len(samples))
+                    if math.dist(samples[j]['position'][:2],waypoint)<radius),None)
+        if found is None:
+            return {'completed':False,'first_missing_waypoint':index,'visits':visits}
+        visits.append({'waypoint_index':index,'sample_index':found,'time_s':samples[found]['time_s']})
+        cursor=found
+    return {'completed':True,'visits':visits}

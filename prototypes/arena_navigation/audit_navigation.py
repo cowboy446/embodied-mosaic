@@ -4,6 +4,8 @@ from pathlib import Path
 from PIL import Image,ImageStat
 sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'scripts'))
 from navigation_evaluator import NavigationCriterion
+from ordered_route import audit_ordered_samples
+from trajectory_coverage import measure
 
 def audit(root):
  root=Path(root);report=json.loads((root/'report.json').read_text());plan=json.loads((root/'grid-plan.json').read_text())
@@ -11,6 +13,11 @@ def audit(root):
  samples=[{'sim_time':r['time_s'],'position':r['position']} for r in rows]
  criterion=NavigationCriterion(tuple(plan['route'][-1]),minimum_distance_m=0.,maximum_distance_m=.15)
  result=criterion.evaluate('agent_finish' if report['status']=='task_success' else report['status'],samples,collision_detected=False,safety_certified=False)
+ ordered=audit_ordered_samples(plan['route'],rows)
+ result['ordered_route_audit']=ordered
+ if not ordered['completed']:
+  result.update(task_success=False,success=False,reason='ordered_route_incomplete')
+ if rows:result['trajectory_coverage']=measure(rows)
  image_quality=[]
  capture=json.loads((root/'capture.json').read_text());frames=capture['frames'];errors=[]
  for i,r in enumerate(frames):
