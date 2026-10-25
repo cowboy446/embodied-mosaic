@@ -2,6 +2,7 @@
 set -euo pipefail
 run_id=${1:?run id required}
 gpu=${2:-1}
+shift 2
 [[ "$run_id" =~ ^arena-g1-[0-9]+$ ]] || exit 2
 [[ "$gpu" =~ ^[0-7]$ ]] || exit 2
 base=/mnt/nas/zhangrong/embodied-mosaic
@@ -12,5 +13,5 @@ export RULEGEN_ISAAC_RUNTIME="$local_base/runtime/isaacsim510"
 export LD_LIBRARY_PATH="$local_base/runtime/compat-libs"
 export PYTHONPATH="$base/runtime/python-deps:$base/vendor/arena-0.1.1-mosaic:$base/vendor/IsaacLab-2.3.0/source/isaaclab:$base/vendor/IsaacLab-2.3.0/source/isaaclab_tasks:$base/vendor/IsaacLab-2.3.0/source/isaaclab_assets"
 export OMNI_KIT_ACCEPT_EULA=YES OMP_NUM_THREADS=2 OPENBLAS_NUM_THREADS=1
-nohup flock "$local_base/locks/campaign-gpu-$gpu.lock" bash "$original/rulegen-diverse40/scripts/isaac_python.sh" "$base/prototypes/arena_navigation/run_g1_probe.py" --output "$base/runs/$run_id" --gpu "$gpu" > "$base/runs/$run_id.log" 2>&1 < /dev/null &
+nohup flock "$local_base/locks/campaign-gpu-$gpu.lock" bash "$original/rulegen-diverse40/scripts/isaac_python.sh" "$base/prototypes/arena_navigation/run_g1_probe.py" --output "$base/runs/$run_id" --gpu "$gpu" "$@" > "$base/runs/$run_id.log" 2>&1 < /dev/null &
 echo $! | tee "$base/runs/$run_id.pid"
