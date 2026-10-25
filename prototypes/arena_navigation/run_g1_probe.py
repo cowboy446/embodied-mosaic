@@ -1,7 +1,7 @@
 """Arena task-level G1/SONIC integration probe, not batch/navigation acceptance."""
 import argparse,json,sys,traceback
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
+p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
 import site
 site.addsitedir('/mnt/nas/zhangrong/embodied-mosaic/runtime/ik-deps')
 from isaacsim import SimulationApp
@@ -20,7 +20,7 @@ try:
  from isaaclab_arena.scene.scene import Scene
  from isaaclab_arena.assets.background import Background
  from isaaclab_arena.environments.isaaclab_arena_environment import IsaacLabArenaEnvironment
- from isaaclab_arena.environments.arena_env_builder import ArenaEnvBuilder
+ from single_episode_env import SingleEpisodeBuilder
  src=root/'rulegen-diverse40/runs/warehouse-152002-2fc99598b2/attempt-02/output/scene_initial.usda'
  bg=Usd.Stage.CreateNew(str(out/'background.usda'));bg.GetRootLayer().subLayerPaths=[str(src)];bg.SetDefaultPrim(bg.GetPrimAtPath('/World'))
  for path in ['/World/Actors','/World/physicsScene','/World/PhysicsScene']:
@@ -36,12 +36,12 @@ try:
  emb.scene_config.robot.init_state.joint_pos=dict(zip(sonic.NAMES,initial[7:].tolist()))
  descriptor=IsaacLabArenaEnvironment(name='Mosaic-G1-SONIC-Probe-v0',scene=Scene([Background(name='warehouse',usd_path=str(out/'background.usda'),object_min_z=0.)]),embodiment=emb,task=NavigateTask((-5.,29.)))
  args=argparse.Namespace(mimic=False,device=f'cuda:{a.gpu}',num_envs=1,disable_fabric=False)
- env,cfg=ArenaEnvBuilder(descriptor,args).make_registered_and_return_cfg();report['arena_environment_constructed']=True
+ env,cfg=SingleEpisodeBuilder(descriptor,args).make_registered_and_return_cfg();report['arena_environment_constructed']=True
  obs,_=env.reset();robot=env.scene['robot'];ids,_=robot.find_joints(sonic.NAMES,preserve_order=True);ctrl=sonic.Controller();states=[]
  camera=env.scene['ego_camera'];capture=[]
  for _ in range(8):env.sim.render()
  camera.update(0.,force_recompute=True)
- route_policy=None;planner_logs=[]
+ route_policy=None;planner_logs=[];terminal_reason='budget_exhausted'
  if a.route:
   import collections,omni.physx
   sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'scripts'))
@@ -57,7 +57,7 @@ try:
   qpos=np.r_[start,robot.data.root_quat_w[0].cpu().numpy(),robot.data.joint_pos[0,ids].cpu().numpy()]
   context=collections.deque([qpos.copy() for _ in range(4)],maxlen=4)
   reference_start=0
- for step in range(1800 if a.route else 300):
+ for step in range(round(a.seconds*150) if a.route else 300):
   if step%3==0:
    d=robot.data;q=d.joint_pos[0,ids].cpu().numpy();dq=d.joint_vel[0,ids].cpu().numpy();quat=d.root_quat_w[0].cpu().numpy();ang=d.root_ang_vel_w[0].cpu().numpy()
    frame=step//3
@@ -82,11 +82,14 @@ try:
   if route_policy and (step+1)%5==0:
    pos=robot.data.root_pos_w[0].cpu().numpy()
    if guard.blocked(pos[:2],0.,turning=True):raise RuntimeError('robot left conservative free corridor')
-  if bool(terminated.any()|truncated.any()):raise RuntimeError('task terminal; requires terminal-state acceptance audit')
+  if bool(terminated.any()|truncated.any()):
+   terminal_reason='task_success' if bool(terminated.any()) else 'timeout'
+   report['terminal_state']={'time_s':(step+1)/150,'position':robot.data.root_pos_w[0].cpu().tolist(),'linear_velocity':robot.data.root_lin_vel_w[0].cpu().tolist(),'joint_position':robot.data.joint_pos[0].cpu().tolist(),'joint_velocity':robot.data.joint_vel[0].cpu().tolist(),'automatic_reset_suppressed':bool(env._terminal_hold)}
+   break
  (out/'planner-log.json').write_text(json.dumps(planner_logs,indent=2))
  (out/'capture.json').write_text(json.dumps({'fps':30,'resolution':[640,480],'mount_body':'torso_link','frames':capture},indent=2))
 
- report.update(status='route_budget_exhausted' if a.route else 'stepped',physics_dt=cfg.sim.dt,decimation=cfg.decimation,control_hz=50,recording_hz=30,capture_frames=len(capture),action_shape=list(env.action_manager.action.shape),joint_names=robot.joint_names,states=states)
+ report.update(status=terminal_reason if a.route else 'stepped',physics_dt=cfg.sim.dt,decimation=cfg.decimation,control_hz=50,recording_hz=30,capture_frames=len(capture),action_shape=list(env.action_manager.action.shape),joint_names=robot.joint_names,states=states)
  env.close()
 except BaseException:
  report.update(status='failed',traceback=traceback.format_exc());traceback.print_exc()
