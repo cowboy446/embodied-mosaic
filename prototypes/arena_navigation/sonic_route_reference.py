@@ -1,5 +1,5 @@
 """Waypoint-conditioned SONIC motion planning, separate from physical tracking.
-Uses measured robot context. A grid route does not itself certify body clearance.
+Preserves planned motion context; uses measured position for waypoint feedback. A grid route does not itself certify body clearance.
 """
 import numpy as np
 
@@ -8,10 +8,11 @@ class RouteReference:
   self.planner=planner_session;self.route=np.asarray(route,dtype='f4');self.index=1;self.seed=seed;self.calls=0;self.speed=speed;self.radius=reach_radius
   if self.route.ndim!=2 or self.route.shape[1]!=2 or len(self.route)<2 or not np.isfinite(self.route).all():raise ValueError('invalid route')
   if not 0<speed<=1.35:raise ValueError('speed outside initial validation range')
- def generate(self,context):
+ def generate(self,context,measured_xy=None):
   context=np.asarray(context,dtype='f4')
   if context.shape!=(4,36) or not np.isfinite(context).all():raise ValueError('expected four measured 36D qpos samples')
-  pos=context[-1,:2]
+  pos=context[-1,:2] if measured_xy is None else np.asarray(measured_xy,dtype='f4')
+  if pos.shape!=(2,) or not np.isfinite(pos).all():raise ValueError('invalid measured position')
   while self.index<len(self.route) and np.linalg.norm(self.route[self.index]-pos)<self.radius:self.index+=1
   finished=self.index==len(self.route)
   direction=np.zeros(3,dtype='f4')

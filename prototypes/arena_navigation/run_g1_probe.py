@@ -62,8 +62,9 @@ try:
    d=robot.data;q=d.joint_pos[0,ids].cpu().numpy();dq=d.joint_vel[0,ids].cpu().numpy();quat=d.root_quat_w[0].cpu().numpy();ang=d.root_ang_vel_w[0].cpu().numpy()
    frame=step//3
    if route_policy:
-    if step%90==0:
-     motion,log=route_policy.generate(np.asarray(context));ref=sonic.resample(motion,np.arange(0,(len(motion)-1)*50/30)*30/50)
+    if step%90==0 or (step>0 and len(ref)-(frame-reference_start)<51):
+     planning_context=np.asarray(context) if step==0 else sonic.resample(ref,(frame-reference_start)+np.arange(4)*50/30)
+     motion,log=route_policy.generate(planning_context,d.root_pos_w[0,:2].cpu().numpy());ref=sonic.resample(motion,np.arange(0,(len(motion)-1)*50/30)*30/50)
      reference_start=frame;planner_logs.append(dict(log,time_s=step/150));print('PLANNER',planner_logs[-1],flush=True)
     frame-=reference_start
    if len(ref[frame:frame+51])<51:raise RuntimeError('planner reference horizon too short')
