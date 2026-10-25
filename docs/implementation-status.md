@@ -88,3 +88,11 @@ Skill definitions now live in an embodiment registry. The Carter base profile dr
 Arena probe 003 never launched because the shell wrapper was not executable; probe 004 used bash explicitly. It revealed ground_usd_path = None/Isaac/Environments/Grid/default_environment.usd, with no loaded geometry. Isaac Lab reads /persistent/isaac/asset_root/cloud at import time; this setting was absent. Probe 005 explicitly supplies the 5.1 asset root found in the installed asset-browser configuration and is queued/running under the same GPU 7 lock (PID 828974). This is a configuration diagnosis, not proof of full Arena compatibility.
 
 Probe 005 completed its scoped checks successfully: environment/scene/registry imports and ten Isaac Lab simulation steps. Saved evidence: evidence/arena-probe-005.json. Full Carter Scene × Robot × Task execution remains unverified.
+
+### Authenticated CLI result and prompt-constrained pilot
+
+Live CLI smoke 001 authenticated successfully but the backend rejected gpt-6.1-sol with model_not_found / not supported for this ChatGPT account transport. No model action was returned or executed. No fallback model was selected. The user explicitly authorized a fresh-context gpt-6.1-sol + low subagent for the first prompt-constrained closed loop while strict tool isolation remains open.
+
+A mailbox-driven server pilot and coordinator-only SSH bridge were added. The policy sees RGB, semantic goal, skill bounds, own recent actions and wheel encoder readings. Target coordinates and poses are confined to the server's private logs/evaluation. The pilot uses a forward ray fan, not a full swept-volume collision certificate, and must not count toward batch safety acceptance. Queued on node43 with GPU 7 lock: ego-agent-001, PID 853804.
+
+Arena probe 005 completed its reported checks but its process remained alive in shutdown for over five minutes, retaining the GPU lock. The exact diagnostic child PID 830227 was verified and sent SIGTERM; the incident is recorded on NAS. Thus successful stepping does not establish clean runtime lifecycle compatibility.

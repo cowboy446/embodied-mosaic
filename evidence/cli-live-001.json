@@ -1,0 +1,8 @@
+{
+  "returncode": 1,
+  "tool_event_count": 0,
+  "simulator_action_executed": false,
+  "strict_no_tools_verified": false,
+  "status": "no_decision_or_tool_call",
+  "backend_error": "model_not_found: gpt-6.1-sol unavailable through this ChatGPT-account CLI transport"
+}
