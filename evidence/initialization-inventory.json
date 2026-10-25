@@ -1,0 +1,248 @@
+{
+  "runs": [
+    {
+      "run_id": "arena-g1-040",
+      "scene": "office",
+      "seed": 86,
+      "source_scene": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/rulegen-diverse40/runs/office-152000-0b1a60c48e/attempt-00/output/scene_initial.usda",
+      "terminal_report_present": true,
+      "status": "stepped",
+      "wall_seconds": 61.98304587230086,
+      "asset_keys": null,
+      "layout_check_passed": null,
+      "short_stability_passed": true,
+      "body_index_mapping_present": false,
+      "placement_trials": 0,
+      "phase": "rollout",
+      "runtime_acceptance_complete": false
+    },
+    {
+      "run_id": "arena-g1-041",
+      "scene": "hospital",
+      "seed": 86,
+      "source_scene": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/rulegen-diverse40/runs/hospital-152001-757e966d26/attempt-00/output/scene_initial.usda",
+      "terminal_report_present": true,
+      "status": "stepped",
+      "wall_seconds": 83.20112097635865,
+      "asset_keys": null,
+      "layout_check_passed": null,
+      "short_stability_passed": false,
+      "body_index_mapping_present": false,
+      "placement_trials": 0,
+      "phase": "rollout",
+      "runtime_acceptance_complete": false,
+      "rejection": {
+        "kind": "short_physical_stability",
+        "summary": {
+          "passed": false,
+          "translation_drift_m": [
+            0.1074681734211532,
+            0.00030248596153644624,
+            0.18846071512126047,
+            0.10940501125207422,
+            9.381006117562079e-05
+          ],
+          "max_tail_linear_speed_m_s": [
+            2.0574449346715293,
+            0.0004704828203861582,
+            7.76516821846524e-05,
+            2.058763014400284,
+            0.00033349246534548774
+          ],
+          "max_tail_angular_speed_rad_s": [
+            8.928646178749391,
+            9.025547096136233e-05,
+            0.00021727430286158075,
+            7.0423239484568185,
+            0.0008768860539924282
+          ],
+          "translation_limit_m": 0.05,
+          "speed_limit_m_s": 0.02,
+          "angular_speed_limit_rad_s": 0.05,
+          "scope": "2-second rigid-body drift and terminal velocity probe; contact penetration and material validation remain separate"
+        }
+      }
+    },
+    {
+      "run_id": "arena-g1-046",
+      "scene": "office",
+      "seed": 83,
+      "source_scene": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/rulegen-diverse40/runs/office-152000-0b1a60c48e/attempt-00/output/scene_initial.usda",
+      "terminal_report_present": true,
+      "status": "stepped",
+      "wall_seconds": 71.03403967991471,
+      "asset_keys": null,
+      "layout_check_passed": true,
+      "short_stability_passed": true,
+      "body_index_mapping_present": false,
+      "placement_trials": 8,
+      "phase": "rollout",
+      "runtime_acceptance_complete": false
+    },
+    {
+      "run_id": "arena-g1-047",
+      "scene": "hospital",
+      "seed": 83,
+      "source_scene": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/rulegen-diverse40/runs/hospital-152001-757e966d26/attempt-00/output/scene_initial.usda",
+      "terminal_report_present": true,
+      "status": "stepped",
+      "wall_seconds": 89.23753023333848,
+      "asset_keys": null,
+      "layout_check_passed": true,
+      "short_stability_passed": false,
+      "body_index_mapping_present": false,
+      "placement_trials": 26,
+      "phase": "rollout",
+      "runtime_acceptance_complete": false,
+      "rejection": {
+        "kind": "short_physical_stability",
+        "summary": {
+          "passed": false,
+          "duration_s": 2.0,
+          "translation_drift_m": [
+            0.10996710023345978,
+            0.00015723927847318962,
+            0.1887301276031523,
+            0.045586047460301336,
+            0.00011506315041994648
+          ],
+          "max_translation_excursion_m": [
+            0.10996710023345978,
+            0.00015723927847318962,
+            0.1887301276031523,
+            0.04668297537488867,
+            0.00011600419141252706
+          ],
+          "max_orientation_change_deg": [
+            93.34207259393749,
+            0.015476290441488516,
+            88.23104507682294,
+            49.05542361669744,
+            1.2281484117220516
+          ],
+          "max_tail_linear_speed_m_s": [
+            2.060136207291144,
+            0.0005936183446359344,
+            9.875447137496689e-05,
+            0.2685458624306038,
+            0.0003497301276117724
+          ],
+          "max_tail_angular_speed_rad_s": [
+            6.8178396915284,
+            0.0005881194426265444,
+            0.00015109583203108361,
+            3.852327981959394,
+            0.0008286143487588871
+          ],
+          "translation_limit_m": 0.05,
+          "orientation_limit_deg": 10.0,
+          "speed_limit_m_s": 0.02,
+          "angular_speed_limit_rad_s": 0.05,
+          "scope": "full recorded rigid-body drift/rotation and terminal velocity probe; contact penetration and material validation remain separate"
+        }
+      }
+    },
+    {
+      "run_id": "arena-g1-049",
+      "scene": "office",
+      "seed": 91,
+      "source_scene": "/mnt/nas/zhangrong/embodied-mosaic/assets/adapted/office-v1/scene.usda",
+      "terminal_report_present": true,
+      "status": "stepped",
+      "wall_seconds": 65.68429616093636,
+      "asset_keys": [
+        "hospital_chair_04a",
+        "office_plant02",
+        "hospital_medicalcabinet_01a",
+        "office_trashcan_02",
+        "warehouse_crateplastic_d_01",
+        "warehouse_crateplastic_e_01",
+        "office_boxportablea"
+      ],
+      "layout_check_passed": true,
+      "short_stability_passed": true,
+      "body_index_mapping_present": false,
+      "placement_trials": 18,
+      "phase": "rollout",
+      "runtime_acceptance_complete": false
+    },
+    {
+      "run_id": "arena-g1-050",
+      "scene": "hospital",
+      "seed": 92,
+      "source_scene": "/mnt/nas/zhangrong/embodied-mosaic/assets/adapted/hospital-v1/scene.usda",
+      "terminal_report_present": true,
+      "status": "failed",
+      "wall_seconds": 21.891578575596213,
+      "asset_keys": [
+        "office_boxportableb",
+        "office_chairoffice_a",
+        "office_plant02",
+        "office_plant01",
+        "warehouse_crateplastic_b_02"
+      ],
+      "layout_check_passed": null,
+      "short_stability_passed": null,
+      "body_index_mapping_present": false,
+      "placement_trials": 76,
+      "phase": "asset_preparation",
+      "runtime_acceptance_complete": false,
+      "rejection": {
+        "kind": "bounded_placement",
+        "object": "/World/Stock/item02"
+      }
+    },
+    {
+      "run_id": "arena-g1-051",
+      "scene": "hospital",
+      "seed": 92,
+      "source_scene": "/mnt/nas/zhangrong/embodied-mosaic/assets/adapted/hospital-v1/scene.usda",
+      "terminal_report_present": true,
+      "status": "failed",
+      "wall_seconds": 84.79239905625582,
+      "asset_keys": [
+        "office_boxportableb",
+        "office_chairoffice_a",
+        "office_plant02",
+        "office_plant01",
+        "warehouse_crateplastic_b_02"
+      ],
+      "layout_check_passed": false,
+      "short_stability_passed": false,
+      "body_index_mapping_present": true,
+      "placement_trials": 34,
+      "phase": "stock_initialization",
+      "runtime_acceptance_complete": false,
+      "rejection": {
+        "kind": "initial_geometry",
+        "objects": [
+          "/World/envs/env_0/hospital/Stock/item00",
+          "/World/envs/env_0/hospital/Stock/item04"
+        ]
+      }
+    }
+  ],
+  "observed_distinct_replacement_assets": [
+    "hospital_chair_04a",
+    "hospital_medicalcabinet_01a",
+    "office_boxportablea",
+    "office_boxportableb",
+    "office_chairoffice_a",
+    "office_plant01",
+    "office_plant02",
+    "office_trashcan_02",
+    "warehouse_crateplastic_b_02",
+    "warehouse_crateplastic_d_01",
+    "warehouse_crateplastic_e_01"
+  ],
+  "scope": "selected development trials; no unbiased success rate or full runtime certification",
+  "selected_run_ids": [
+    "arena-g1-040",
+    "arena-g1-041",
+    "arena-g1-046",
+    "arena-g1-047",
+    "arena-g1-049",
+    "arena-g1-050",
+    "arena-g1-051"
+  ]
+}
