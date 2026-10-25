@@ -49,6 +49,7 @@ class NavigateTask(TaskBase):
  def get_mimic_env_cfg(self,embodiment_name):raise NotImplementedError('Navigation is not a Mimic task')
  def get_metrics(self):return []
  def modify_env_cfg(self,cfg):
+  cfg.sim.enable_scene_query_support=True
   cfg.sim.dt=1/120;cfg.sim.render_interval=4;cfg.decimation=4
   return cfg
 
@@ -77,5 +78,6 @@ class G1SonicEmbodiment(EmbodimentBase):
    offset=CameraCfg.OffsetCfg(pos=(.15,0.,.30),rot=(.5,.5,-.5,-.5),convention='opengl')))
 
  def modify_env_cfg(self,cfg):
+  cfg.sim.enable_scene_query_support=True
   cfg.sim.dt=1/300;cfg.sim.render_interval=10;cfg.decimation=2;cfg.seed=42
   return cfg

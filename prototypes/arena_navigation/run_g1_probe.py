@@ -49,9 +49,14 @@ try:
   from grid_navigation import plan_grid
   from sonic_route_reference import RouteReference
   guard=BaseCollisionGuard(omni.physx.get_physx_scene_query_interface(),Envelope(.45,.45,.04,1.7,.10),'/World/envs/env_0/Robot')
+  if not cfg.sim.enable_scene_query_support:raise RuntimeError('scene queries disabled')
   start=robot.data.root_pos_w[0].cpu().numpy()
+  support=omni.physx.get_physx_scene_query_interface().raycast_closest((float(start[0])+.9,float(start[1]),2.),(0.,0.,-1.),4.)
+  (out/'scene-query-check.json').write_text(json.dumps({'enabled':bool(cfg.sim.enable_scene_query_support),'support_hit':bool(support.get('hit',False)),'support_rigid_body':str(support.get('rigidBody',''))},indent=2))
+  if not support.get('hit',False):raise RuntimeError('scene query self-check failed: nearby ground not detected')
   plan=plan_grid(start,lambda xy:guard.blocked(xy,0.,turning=True),seed=42,minimum_path=3.,maximum_path=5.)
   (out/'grid-plan.json').write_text(json.dumps(plan,indent=2))
+  if not plan['occupied']:raise RuntimeError('warehouse occupancy unexpectedly empty; verify collision queries and scene geometry')
   route_policy=RouteReference(sonic.session('planner_sonic.onnx'),plan['route'])
   term=env.termination_manager.get_term_cfg('success');term.params['target_xy']=list(plan['route'][-1]);env.termination_manager.set_term_cfg('success',term)
   qpos=np.r_[start,robot.data.root_quat_w[0].cpu().numpy(),robot.data.joint_pos[0,ids].cpu().numpy()]
@@ -65,6 +70,10 @@ try:
     if step%90==0 or (step>0 and len(ref)-(frame-reference_start)<51):
      planning_context=np.asarray(context) if step==0 else sonic.resample(ref,(frame-reference_start)+np.arange(4)*50/30)
      motion,log=route_policy.generate(planning_context,d.root_pos_w[0,:2].cpu().numpy());ref=sonic.resample(motion,np.arange(0,(len(motion)-1)*50/30)*30/50)
+     diagnostic_dir=out/'planner-predictions';diagnostic_dir.mkdir(exist_ok=True)
+     measured_xy=d.root_pos_w[0,:2].cpu().numpy().copy()
+     np.savez_compressed(diagnostic_dir/f'{step:06d}.npz',context=planning_context,motion=motion,measured_xy=measured_xy)
+     log.update(context_xy=planning_context[0,:2].tolist(),measured_xy=measured_xy.tolist(),reference_offset_m=float(np.linalg.norm(planning_context[0,:2]-measured_xy)),predicted_displacement_1s=(motion[min(30,len(motion)-1),:2]-motion[0,:2]).tolist(),predicted_frames=len(motion))
      reference_start=frame;planner_logs.append(dict(log,time_s=step/150));print('PLANNER',planner_logs[-1],flush=True)
     frame-=reference_start
    if len(ref[frame:frame+51])<51:raise RuntimeError('planner reference horizon too short')

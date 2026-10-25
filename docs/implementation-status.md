@@ -142,3 +142,26 @@ SONIC upstream localmotion_kplanner.hpp (UpdatePlanning/UpdateContextFromMotion)
 Probe011 completed 12 s without the reference-horizon exception. It advanced to waypoint2; final XY (-11.6053,30.2755), 0.7745 m from final goal; root height minimum 0.68230 m. Route acceptance remains false (budget exhausted). Added final-goal slowdown and a distinct 0.10 m final waypoint threshold instead of prematurely stopping at the intermediate 0.30 m radius. Next tests must also preserve terminal state across Arena automatic reset before claiming successful end-to-end recording. Future launchers snapshot prototype/scripts with SHA-256 manifest before starting.
 
 Probe012 launches a 30 s route budget with end-goal slowdown, explicit source snapshots and single-episode Arena execution. SingleEpisodeEnv subclasses the actual Isaac Lab manager environment and suppresses only the automatic terminal reset during step; explicit reset remains available, and stepping after terminal is rejected. Goal termination requires <0.15 m distance and <0.03 m/s horizontal speed for 0.3 s. Runtime termination preservation must be verified from the resulting report before claiming acceptance. Partial/failure recordings are retained. Existing phase scope remains broader than this navigation integration diagnostic.
+
+### Scene-query configuration correction (Arena probes 012–014)
+
+Probe 013 retained each planner prediction and confirmed that reference motion kept
+advancing while measured motion stopped near the wall. Visual inspection of frames
+0/90/180/270/360/450 showed normal warehouse views followed by a black frame and
+close wall views. Its grid had zero occupied cells. The pinned Isaac Lab 2.3.0
+`SimulationCfg.enable_scene_query_support` defaults to false; the Mosaic Arena
+adapter had not enabled it. Earlier occupancy-based clearance claims from these
+probes are invalid and those runs are not accepted navigation data.
+
+The adapter now enables scene queries before environment construction. The probe
+requires a nearby downward ground ray hit and rejects an unexpectedly empty
+warehouse occupancy grid. Probe 014 tests this correction using the same SONIC
+controller, with no navigation tolerance changes. These guards are diagnostic
+checks, not a complete collision-geometry/support certificate. Full random scene
+validation and navigation acceptance remain pending.
+
+Probe 014 startup confirmed scene queries enabled, a support ray hit on
+`/World/envs/env_0/warehouse/SceneCollision`, and 394 occupied cells out of 1681.
+The new 4.25 m route turns away from the previous wall-directed goal. Navigation
+is still running. The offline image audit now flags frames with >95% of pixels
+below luma 4/255; probe 013 has 263 such frames out of 900 and is rejected.
