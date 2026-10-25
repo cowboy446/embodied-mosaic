@@ -1,0 +1,137 @@
+{
+  "status": "passed",
+  "videos": [
+    {
+      "episode": "arena-g1-014",
+      "view": "ego",
+      "bytes": 1785481,
+      "sha256": "fe3ec250f4c18ea3f59373dd2c8273d65ec4b5c91a37292f56b863eebe1b259a",
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "duration": "9.800000",
+      "nb_frames": "294"
+    },
+    {
+      "episode": "arena-g1-014",
+      "view": "third-person",
+      "bytes": 1182121,
+      "sha256": "2ac527c010d04040695aa337733e852dc74f4443b938d2b29a913f6ef0d86da1",
+      "width": 960,
+      "height": 540,
+      "r_frame_rate": "30/1",
+      "duration": "9.800000",
+      "nb_frames": "294"
+    },
+    {
+      "episode": "arena-g1-015",
+      "view": "ego",
+      "bytes": 1426855,
+      "sha256": "ed09bd27db35f5b721f5f838958024059f8415a53bdf68746940b93a9494c472",
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "duration": "8.766667",
+      "nb_frames": "263"
+    },
+    {
+      "episode": "arena-g1-015",
+      "view": "third-person",
+      "bytes": 1007159,
+      "sha256": "04259dd6ebbf8b460ada3656a1e1536f00d06d9aa8280d027b3c0dfa23ada7f7",
+      "width": 960,
+      "height": 540,
+      "r_frame_rate": "30/1",
+      "duration": "8.766667",
+      "nb_frames": "263"
+    },
+    {
+      "episode": "arena-g1-016",
+      "view": "ego",
+      "bytes": 1306267,
+      "sha256": "dba487a2fd9200a9ae873d6b38b5017f6de9f7fa305a7669e6b2505f0dc5749d",
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "duration": "7.966667",
+      "nb_frames": "239"
+    },
+    {
+      "episode": "arena-g1-016",
+      "view": "third-person",
+      "bytes": 870260,
+      "sha256": "faf52abffec5508a1fad46b24d594319d6b7d4dcc02ebd2d2411f5058f12f587",
+      "width": 960,
+      "height": 540,
+      "r_frame_rate": "30/1",
+      "duration": "7.966667",
+      "nb_frames": "239"
+    },
+    {
+      "episode": "arena-g1-017",
+      "view": "ego",
+      "bytes": 1409173,
+      "sha256": "4301c396daa289936e4cd693dffd8f6986c2b31b64ddceb2c42fc16076434b24",
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "duration": "8.600000",
+      "nb_frames": "258"
+    },
+    {
+      "episode": "arena-g1-017",
+      "view": "third-person",
+      "bytes": 930083,
+      "sha256": "77b1c1b78232347dd8ccf4a686d24731ae98e20819f792ce9a89461bfdec06e7",
+      "width": 960,
+      "height": 540,
+      "r_frame_rate": "30/1",
+      "duration": "8.600000",
+      "nb_frames": "258"
+    },
+    {
+      "episode": "arena-g1-018",
+      "view": "ego",
+      "bytes": 1119386,
+      "sha256": "f5bb4fb042467add984513953608edc9930e5700f4b04328f03de4a6e73eff11",
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "duration": "6.366667",
+      "nb_frames": "191"
+    },
+    {
+      "episode": "arena-g1-018",
+      "view": "third-person",
+      "bytes": 758670,
+      "sha256": "69ad845a588191d6cca6be5dc2ac13b5e37a0aa61eafe38acbcc7ff3b6d10684",
+      "width": 960,
+      "height": 540,
+      "r_frame_rate": "30/1",
+      "duration": "6.366667",
+      "nb_frames": "191"
+    },
+    {
+      "episode": "arena-g1-019",
+      "view": "ego",
+      "bytes": 1360232,
+      "sha256": "0eef0f3a39a560d5dcb7461ed8e98c5f2f6cf08494801972b620ba6703dfc42f",
+      "width": 640,
+      "height": 480,
+      "r_frame_rate": "30/1",
+      "duration": "8.400000",
+      "nb_frames": "252"
+    },
+    {
+      "episode": "arena-g1-019",
+      "view": "third-person",
+      "bytes": 951743,
+      "sha256": "3d9e80979fa772d4fdf6f7adff0e11fcb727f1456bf9fd39db37c5bc425296b9",
+      "width": 960,
+      "height": 540,
+      "r_frame_rate": "30/1",
+      "duration": "8.400000",
+      "nb_frames": "252"
+    }
+  ]
+}

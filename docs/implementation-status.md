@@ -212,3 +212,17 @@ recheck actual runtime clearance/support and replan. Their extra initial yaw is
 4.07 cm / 3.12 cm; 191 / 252 frames. These are fixed-warehouse spawn/goal variation
 results. Complete collision/contact, asset dependency and randomized-layout
 acceptance remain open; `safety_certified` stays false.
+
+### Two-view review replay
+
+Runs 014–019 have original ego RGB and a new third-person kinematic replay.
+`render_replay.py` reconstructs 46 G1 rigid-body poses from the USD joint frames,
+the measured root pose, and all 43 recorded joint angles, including fingers.
+It does not rerun policy or physics. The first following-camera offset produced
+occluded/black frames and is preserved as `third-person-v1`; the corrected camera
+uses world offset (0, -1.4, +1.6) m and rejects >95%-black frames. Both views use
+30 fps and matching frame counts. Local review is under
+`runs/navigation-videos/index.html`; videos/large scene assets remain untracked.
+Probe 020 failed during body-envelope setup, before recording a trajectory, and
+is not included as a playable episode. Its failure requires follow-up; it does
+not invalidate the independently recorded joint-state replays.
