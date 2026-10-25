@@ -2,8 +2,10 @@
 import argparse,json,sys,traceback
 from pathlib import Path
 p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
+import site
+site.addsitedir('/mnt/nas/zhangrong/embodied-mosaic/runtime/ik-deps')
 from isaacsim import SimulationApp
-app=SimulationApp({'headless':True,'multi_gpu':False,'active_gpu':a.gpu,'extra_args':['--allow-root','--enable','isaacsim.sensors.camera']})
+app=SimulationApp({'headless':True,'multi_gpu':False,'active_gpu':a.gpu,'physics_gpu':a.gpu,'extra_args':['--allow-root','--enable','isaacsim.sensors.camera']})
 report={'status':'started','scope':'Arena G1 SONIC task integration, not navigation acceptance'}
 try:
  import carb,torch,numpy as np
@@ -40,6 +42,8 @@ try:
   if bool(terminated.any()|truncated.any()):raise RuntimeError('unexpected task termination')
  report.update(status='stepped',physics_dt=cfg.sim.dt,decimation=cfg.decimation,action_shape=list(env.action_manager.action.shape),joint_names=robot.joint_names,states=states)
  env.close()
-except BaseException:report.update(status='failed',traceback=traceback.format_exc());traceback.print_exc()
+except BaseException:
+ report.update(status='failed',traceback=traceback.format_exc());traceback.print_exc()
+ if 'env' in locals():env.close()
 finally:
  (out/'report.json').write_text(json.dumps(report,indent=2));print('REPORT',report['status'],flush=True);app.close()

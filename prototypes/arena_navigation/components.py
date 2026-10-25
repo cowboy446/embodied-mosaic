@@ -31,7 +31,7 @@ class CarterEmbodiment(EmbodimentBase):
   self.camera_config=config('CarterCameras',ego_camera=CameraCfg(
    prim_path='{ENV_REGEX_NS}/Robot/chassis_link/MosaicEgoCamera',height=480,width=640,data_types=['rgb'],update_period=1/30,
    spawn=sim.PinholeCameraCfg(focal_length=18.,horizontal_aperture=36.,vertical_aperture=27.,clipping_range=(.05,100.)),
-   offset=CameraCfg.OffsetCfg(pos=(.35,0.,.85),rot=(.5,-.5,.5,-.5),convention='opengl')))
+   offset=CameraCfg.OffsetCfg(pos=(.35,0.,.85),rot=(.5,.5,-.5,-.5),convention='opengl')))
 
 def reached(env,target_xy,tolerance):
  robot=env.scene['robot'];delta=robot.data.root_pos_w[:,:2]-torch.tensor(target_xy,device=env.device)
