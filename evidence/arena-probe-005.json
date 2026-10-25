@@ -1,0 +1,12 @@
+{
+  "status": "passed_scoped_probe",
+  "tests": [
+    "arena_environment_config_import",
+    "arena_scene_import",
+    "arena_asset_registry_construct",
+    "isaaclab_simulation_ten_steps"
+  ],
+  "scope": "imports_and_minimal_world_not_full_robot_task",
+  "configured_asset_root": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1",
+  "ground_usd_path": "https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1/Isaac/Environments/Grid/default_environment.usd"
+}
