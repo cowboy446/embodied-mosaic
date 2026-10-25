@@ -4,7 +4,7 @@ Uses simulator state intentionally; it is not a visual agent evaluation.
 import math,random
 from collections import deque
 
-def plan_grid(start, blocked, seed=0, resolution=.25, radius=5., minimum_path=4., maximum_path=8.):
+def plan_grid(start, blocked, seed=0, resolution=.25, radius=5., minimum_path=4., maximum_path=8., prefer_far=False):
  n=int(radius/resolution);origin=(start[0]-n*resolution,start[1]-n*resolution);size=2*n+1
  def xy(c):return (origin[0]+c[0]*resolution,origin[1]+c[1]*resolution)
  occupied={(i,j) for i in range(size) for j in range(size) if blocked(xy((i,j)))}
@@ -22,6 +22,8 @@ def plan_grid(start, blocked, seed=0, resolution=.25, radius=5., minimum_path=4.
    parents[t]=c;distance[t]=distance[c]+resolution;q.append(t)
  candidates=sorted(c for c,d in distance.items() if minimum_path<=d<=maximum_path)
  if not candidates:raise ValueError('no reachable goal within requested path length')
+ if prefer_far:
+  farthest=max(distance[c] for c in candidates);candidates=[c for c in candidates if distance[c]>=.9*farthest]
  target=random.Random(seed).choice(candidates);chain=[];c=target
  while c is not None:chain.append(c);c=parents[c]
  chain.reverse()

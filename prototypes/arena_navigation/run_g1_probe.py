@@ -1,7 +1,7 @@
 """Arena task-level G1/SONIC integration probe, not batch/navigation acceptance."""
 import argparse,json,sys,traceback,time,hashlib
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
+p=argparse.ArgumentParser();p.add_argument('--scene-source');p.add_argument('--scene-name',default='warehouse');p.add_argument('--grid-radius',type=float,default=5.);p.add_argument('--min-path',type=float,default=3.);p.add_argument('--max-path',type=float,default=5.);p.add_argument('--prefer-far',action='store_true');p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
 started_monotonic=time.monotonic();started_unix=time.time()
 (out/'run-config.json').write_text(json.dumps(vars(a),indent=2))
 import site
@@ -24,6 +24,7 @@ try:
  from isaaclab_arena.environments.isaaclab_arena_environment import IsaacLabArenaEnvironment
  from single_episode_env import SingleEpisodeBuilder
  src=root/'rulegen-diverse40/runs/warehouse-152002-2fc99598b2/attempt-02/output/scene_initial.usda'
+ if a.scene_source:src=Path(a.scene_source).resolve(strict=True)
  bg=Usd.Stage.CreateNew(str(out/'background.usda'));bg.GetRootLayer().subLayerPaths=[str(src)];bg.SetDefaultPrim(bg.GetPrimAtPath('/World'))
  for path in ['/World/Actors','/World/physicsScene','/World/PhysicsScene']:
   prim=bg.GetPrimAtPath(path)
@@ -54,7 +55,7 @@ try:
  initial[3:7]=(Rotation.from_euler('z',a.yaw_deg,degrees=True)*sonic.rot(initial[3:7])).as_quat()[[3,0,1,2]]
  emb=G1SonicEmbodiment(str(out/'robot.usda'),(*a.spawn_xy,float(initial[2])),initial[3:7],sonic,seed=a.seed)
  emb.scene_config.robot.init_state.joint_pos=dict(zip(sonic.NAMES,initial[7:].tolist()))
- descriptor=IsaacLabArenaEnvironment(name='Mosaic-G1-SONIC-Probe-v0',scene=Scene([Background(name='warehouse',usd_path=str(out/'background.usda'),object_min_z=0.)]),embodiment=emb,task=NavigateTask((-5.,29.)))
+ descriptor=IsaacLabArenaEnvironment(name='Mosaic-G1-SONIC-Probe-v0',scene=Scene([Background(name=a.scene_name,usd_path=str(out/'background.usda'),object_min_z=0.)]),embodiment=emb,task=NavigateTask((-5.,29.)))
  args=argparse.Namespace(mimic=False,device=f'cuda:{a.gpu}',num_envs=1,disable_fabric=False)
  env,cfg=SingleEpisodeBuilder(descriptor,args).make_registered_and_return_cfg();report['arena_environment_constructed']=True
  obs,_=env.reset();robot=env.scene['robot'];ids,_=robot.find_joints(sonic.NAMES,preserve_order=True);ctrl=sonic.Controller();states=[]
@@ -90,7 +91,7 @@ try:
   (out/'scene-query-check.json').write_text(json.dumps({'enabled':bool(cfg.sim.enable_scene_query_support),'support_hit':bool(support.get('hit',False)),'support_rigid_body':str(support.get('rigidBody',''))},indent=2))
   if not support.get('hit',False):raise RuntimeError('scene query self-check failed: nearby ground not detected')
   support_guard=GroundSupport(omni.physx.get_physx_scene_query_interface(),'/World/envs/env_0/Robot')
-  plan=plan_grid(start,lambda xy:guard.blocked(xy,0.,turning=True) or not support_guard.supported(xy),seed=a.seed,minimum_path=3.,maximum_path=5.)
+  plan=plan_grid(start,lambda xy:guard.blocked(xy,0.,turning=True) or not support_guard.supported(xy),seed=a.seed,radius=a.grid_radius,minimum_path=a.min_path,maximum_path=a.max_path,prefer_far=a.prefer_far)
   plan['support_checks']={'cached_positions':len(support_guard.cache),'rejected_positions':sum(not x for x in support_guard.cache.values()),'method':'5 downward rays; flat ground ±3cm; normal z >= 0.95','scope':'sampled support, not continuous surface proof'}
   (out/'grid-plan.json').write_text(json.dumps(plan,indent=2))
   if not plan['occupied']:raise RuntimeError('warehouse occupancy unexpectedly empty; verify collision queries and scene geometry')
