@@ -30,6 +30,8 @@ try:
   prim=bg.GetPrimAtPath(path)
   if prim:prim.SetActive(False)
  if a.native_scene_collision:
+  from scene_instances import make_environment_editable
+  instance_overrides=make_environment_editable(bg,'/World/Environment')
   authored=[]
   for path in ['/World/SceneCollision','/World/PhysicsFloor','/World/Environment/GroundPlane']:
    prim=bg.GetPrimAtPath(path)
@@ -41,7 +43,7 @@ try:
    UsdPhysics.MeshCollisionAPI.Apply(prim).CreateApproximationAttr('none')
    authored.append(str(prim.GetPath()))
   if not authored:raise RuntimeError('no native environment meshes')
-  (out/'scene-collision-authoring.json').write_text(json.dumps({'mode':'native_static_triangle_meshes','enabled_meshes':authored,'disabled_legacy_proxies':['/World/SceneCollision','/World/PhysicsFloor','/World/Environment/GroundPlane'],'scope':'full environment mesh collision authoring, runtime coverage still needs validation'},indent=2))
+  (out/'scene-collision-authoring.json').write_text(json.dumps({'mode':'native_static_triangle_meshes','instanceability_overrides':instance_overrides,'source_asset_files_modified':False,'enabled_meshes':authored,'disabled_legacy_proxies':['/World/SceneCollision','/World/PhysicsFloor','/World/Environment/GroundPlane'],'scope':'full environment mesh collision authoring, runtime coverage still needs validation'},indent=2))
  bg.GetRootLayer().Save()
  asset=root/'campaign20/assets/Assets/Isaac/5.1/Isaac/Robots/Unitree/G1/g1.usd'
  rs=Usd.Stage.CreateNew(str(out/'robot.usda'));rp=rs.DefinePrim('/Robot','Xform');rp.GetReferences().AddReference(str(asset));rs.SetDefaultPrim(rp)
