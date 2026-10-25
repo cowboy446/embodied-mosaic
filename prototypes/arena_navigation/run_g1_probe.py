@@ -180,6 +180,16 @@ except BaseException:
  if 'planner_logs' in locals():(out/'planner-log.json').write_text(json.dumps(planner_logs))
  if 'env' in locals():env.close()
 finally:
+ if 'states' in locals() and states:
+  report['states']=states
+  try:
+   sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'scripts'))
+   from trajectory_coverage import measure
+   coverage=measure(states)
+   report['trajectory_coverage']=coverage
+   (out/'trajectory-coverage.json').write_text(json.dumps(coverage,indent=2))
+  except Exception:
+   report['trajectory_coverage_error']=traceback.format_exc()
  if 'stock_state_rows' in locals() and stock_state_rows:
   from stock_dynamics import summarize
   (out/'stock-dynamics.json').write_text(json.dumps({'samples':stock_state_rows,'summary':summarize(stock_state_rows)},indent=2))
