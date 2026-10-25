@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+!*.example
+vendor/
+assets/
+runs/
+*.h5

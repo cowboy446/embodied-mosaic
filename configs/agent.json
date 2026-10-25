@@ -1,0 +1,9 @@
+{
+  "requested_model": "gpt6.1-sol-light",
+  "resolved_model": null,
+  "resolution_status": "pending_provider_verification",
+  "allow_model_fallback": false,
+  "tools": [],
+  "context_scope": "episode_only",
+  "max_own_actions_in_context": 8
+}

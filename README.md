@@ -45,7 +45,7 @@ The generator and evaluator can use simulator state to construct and verify task
 | Task | Visual navigation to a specified target |
 | Observation | Robot-mounted first-person RGB, 640 × 480 |
 | Recording | 30 fps; agent decisions occur at skill boundaries |
-| Agent | `gpt-6-luna` as the initial configured model |
+| Agent | `gpt6.1-sol-light` as the initial configured model |
 | Actions | Move forward, turn, wait, declare completion |
 | Termination | Completion, failure, or configured action/time budget |
 | Cameras | Fixed ego camera; external camera planning comes later |
