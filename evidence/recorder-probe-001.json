@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "frames": 85,
+  "joint_names": [
+    "left_wheel",
+    "right_wheel",
+    "rear_pivot",
+    "rear_axle"
+  ],
+  "duration_s": 2.8000001460313797,
+  "joint_position_ranges": {
+    "left_wheel": 0.3856060958933085,
+    "right_wheel": 0.38531218050047755,
+    "rear_pivot": 0.0007603117046528496,
+    "rear_axle": 1.2173994397744536
+  },
+  "scope": "recording consistency, not task or collision acceptance"
+}

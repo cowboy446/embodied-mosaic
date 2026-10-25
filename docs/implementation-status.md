@@ -112,3 +112,11 @@ The user confirmed the local harness rollback was accidental; the committed prop
 Node43 collision probe 001 passed thin off-axis, self-filter/clear-path, rotation-side and overhead obstacle cases using the installed PhysX query API. The pilot now derives a conservative envelope from the rendered robot world bound and uses overlap/sweep queries. This new integration has not run yet; the flat-ground exclusion below 2.5 cm and unverified contact dynamics mean it is not full safety certification.
 
 Existing batch manifest check: old 20 accepted; diverse40 has 9 accepted, 8 running, 22 pending and 1 rejected. This count is manifest-level evidence, not a fresh per-file revalidation.
+
+### Full robot recorder and rule-grid baseline
+
+Recorder probe 001 completed normally on node43: 85 RGB/state frames over 2.80000015 seconds, all four Carter joints, base pose/velocities, control targets and actual simulator clock. SHA-256 image and cadence audit passed. This was a scripted 0.1 m diagnostic, not an agent success. Original episode third-person kinematic replay is delivered locally; missing historical wheel states remain unavailable.
+
+User stopped diverse40 and deferred embodied-agent integration in favor of rule-based grid navigation. Stopped the identified diverse40 scheduler/workers and render processes, retained 9 accepted episodes and all artifacts, saved process snapshot and manifest backup on NAS. Disabled the old batch heartbeat to prevent automatic restart. Old20 is untouched.
+
+Added seeded grid baseline with full-turn-envelope occupancy and midpoint checks, reachable-goal BFS, collinear route compression and relative turn/drive skills. Runtime swept-envelope veto remains active. The baseline intentionally uses private simulator poses, so it must not be reported as visual agent performance. It currently assumes flat support ground and does not yet certify arbitrary multi-room terrain. Initial warehouse/Carter run grid-warehouse-001 launched on node43 GPU0, seed42. Realistic scene/asset diversity and support-surface checks remain required before batch deployment. New local unit suite: 12 passed. First rule-grid runtime validation is pending.

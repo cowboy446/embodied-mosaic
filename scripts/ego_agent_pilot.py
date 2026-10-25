@@ -4,7 +4,7 @@ accepted Carter episode, with every other robot removed in a new USD layer.
 """
 import argparse,json,os,time
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--source',required=True);p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--source',required=True);p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,required=True);p.add_argument('--rule-grid',action='store_true');p.add_argument('--seed',type=int,default=0);a=p.parse_args()
 source=Path(a.source);out=Path(a.output);out.mkdir(parents=True,exist_ok=False)
 from isaacsim import SimulationApp
 app=SimulationApp({'headless':True,'renderer':'RaytracedLighting','multi_gpu':False,'active_gpu':a.gpu,'extra_args':['--allow-root']})
@@ -52,13 +52,21 @@ try:
  marker.AddTranslateOp().Set(Gf.Vec3d(float(target[0]),float(target[1]),.6))
  marker.AddScaleOp().Set(Gf.Vec3f(1,1,4));marker.CreateDisplayColorAttr([Gf.Vec3f(.03,.3,1.)])
  goal='Approach the blue upright rectangular marker. Stop with the horizontal center of your robot base 0.6 to 0.8 meters from the marker center, then declare finish. This is base-center distance, not camera-to-marker distance. Avoid obstacles.'
- episode=Episode(goal,max_actions=16)
+ episode=Episode(goal,max_actions=128 if a.rule_grid else 16)
  records=[];actions=[];frame=0;terminal_reason='action_budget';wall_start=time.time()
+ from replay_recorder import ReplayRecorder
+ recorder=ReplayRecorder(out,names,indices.tolist())
+ capture_epoch=float(world.current_time);control_target=np.zeros(2)
  def capture():
+  path=out/f'{frame:06d}.png'
+  if path.exists():return path
   rep.orchestrator.step(rt_subframes=8 if frame==0 else 2,delta_time=0,pause_timeline=False)
   im=np.asarray(rgb.get_data())[...,:3].copy()
   if im.shape!=(480,640,3):raise RuntimeError('invalid observation shape')
-  path=out/f'{frame:06d}.png';Image.fromarray(im).save(path);return path
+  Image.fromarray(im).save(path)
+  pos,q=robot.get_world_pose()
+  recorder.append(frame=frame,sim_time=float(world.current_time)-capture_epoch,physics_step=int(world.current_time_step_index),position=pos.tolist(),quaternion_wxyz=q.tolist(),linear_velocity=robot.get_linear_velocity().tolist(),angular_velocity=robot.get_angular_velocity().tolist(),joint_position=robot.get_joint_positions().tolist(),joint_velocity=robot.get_joint_velocities().tolist(),control_velocity_target=control_target.tolist(),image_file=path.name)
+  return path
  def zero():robot.apply_action(ArticulationAction(joint_velocities=np.zeros(2),joint_indices=indices))
  from collision_guard import BaseCollisionGuard,Envelope
  from itertools import product
@@ -76,6 +84,13 @@ try:
  def blocked(speed,omega):
   xx,yy,angle=pose2()
   return guard.blocked((xx,yy),angle,travel_m=(abs(speed)*.5+speed*speed/(2*.5)+.05) if speed else 0.,turning=abs(omega)>.01)
+ if a.rule_grid:
+  from grid_navigation import plan_grid,GridPolicy
+  plan=plan_grid(pose2(),lambda xy:guard.blocked(xy,0.,turning=True),seed=a.seed)
+  (out/'private-grid-plan.json').write_text(json.dumps(plan,indent=2))
+  policy=GridPolicy(plan['route']);target=np.array(plan['route'][-1])
+  marker.GetPrim().GetAttribute('xformOp:translate').Set(Gf.Vec3d(float(target[0]),float(target[1]),.6))
+  (out/'policy-provenance.json').write_text(json.dumps({'policy':'privileged_rule_grid','agent_used':False,'seed':a.seed}))
  while not episode.closed:
   image_path=capture()
   sensor={'sample_time_s':frame/30,'joint_encoders':{'names':['left_wheel','right_wheel'],'position_rad':robot.get_joint_positions()[indices].tolist(),'velocity_rad_s':robot.get_joint_velocities()[indices].tolist()}}
@@ -86,6 +101,9 @@ try:
   (out/'observation.json').unlink(missing_ok=True);(out/'observation.tmp').rename(out/'observation.json')
   print('AWAIT_ACTION',episode.step,frame,flush=True)
   command_path=out/f'action-{episode.step:03d}.json';deadline=time.monotonic()+600
+  if a.rule_grid:
+   skill,args=policy.action(pose2())
+   command_path.write_text(json.dumps({'episode':public['input']['episode'],'observation_id':episode.step,'skill':skill,'arguments':args}))
   while not command_path.exists():
    zero()
    if time.monotonic()>deadline:raise TimeoutError('policy action timeout')
@@ -100,6 +118,7 @@ try:
    if status=='running' and result!='running':status=result;settle=12
    if status!='running':speed=omega=0
    wheels=np.array([(speed-omega*.53194/2)/.2408,(speed+omega*.53194/2)/.2408])
+   control_target=wheels.copy()
    for _ in range(4):robot.apply_action(ArticulationAction(joint_velocities=wheels,joint_indices=indices));world.step(render=False)
    frame+=1;capture()
    pos,q=robot.get_world_pose();records.append({'frame':frame,'sim_time':frame/30,'position':pos.tolist(),'quaternion_wxyz':q.tolist()})
@@ -109,9 +128,9 @@ try:
   zero();actions.append({'command':command,'execution_status':status});episode.executed(command)
   if status!='reached':terminal_reason='execution_'+status;break
  zero();distance=float(np.linalg.norm(np.array(pose2()[:2])-target))
- success=terminal_reason=='agent_finish' and .45<=distance<=.85
- (out/'result.json').write_text(json.dumps({'status':'prompt_constrained_pilot','strict_tool_isolation':False,'success':success,'termination':terminal_reason,'final_distance_m':distance,'target_xy':target.tolist(),'actions':actions,'frames':records,'wall_s':time.time()-wall_start,'safety_scope':'measured_world_bbox_envelope_sweep_flat_ground_only_not_full_collision_certification'},indent=2))
- episode.close();stage.GetRootLayer().Save()
+ success=terminal_reason=='agent_finish' and (distance<.15 if a.rule_grid else .6<=distance<=.8)
+ (out/'result.json').write_text(json.dumps({'status':'rule_grid_diagnostic' if a.rule_grid else 'prompt_constrained_pilot','strict_tool_isolation':False,'success':success,'termination':terminal_reason,'final_distance_m':distance,'target_xy':target.tolist(),'actions':actions,'frames':records,'wall_s':time.time()-wall_start,'safety_scope':'measured_world_bbox_envelope_sweep_flat_ground_only_not_full_collision_certification'},indent=2))
+ recorder.close();episode.close();stage.GetRootLayer().Save()
 except BaseException:
  import traceback
  traceback.print_exc();os._exit(1)
