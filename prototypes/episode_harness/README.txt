@@ -26,3 +26,30 @@ PNG 当前只检查格式签名和大小；真实传感器接入还需解码检�
 初始技能：move_forward 0.05–0.50m，turn -90–90deg，wait 0.1–1s，finish。
 决策按技能完成触发；30fps 为传感器记录频率。以任务结束或预算终止，不强制 10 秒。
 测试：python3 -m unittest discover -s isaac-rigidtrack-20261023/embodied-agent-harness -v
+
+Observation boundary (updated)
+------------------------------
+request(rgb_png, proprioception=None) supports explicitly validated joint encoder
+and body-frame IMU readings. It never merges a simulator-state dictionary.
+Producers must be audited: field names or source labels cannot prove a sensor
+reading came from a nonprivileged source. Global poses, task/evaluator outputs,
+object metadata and maps are not accepted. Odometry is not wired yet.
+
+Skill profiles
+--------------
+Episode(skill_profile='carter_base_v1') selects a private copy of the implemented
+skill contract. Unknown profiles fail closed. Public schema and action validation
+use that same selected contract. VLA and motion-tracking skills are NOT advertised
+until their backends are integrated and checked.
+
+Planned persistent controller interface (not implemented)
+---------------------------------------------------------
+A backend owns model weights; an episode owns mutable history, inference caches,
+goals and execution handles. Reset episode state at episode boundaries. Each
+execution handle is bound to one episode and a declared set of actuator resources.
+start/status/cancel/update are the intended lifecycle, with parameter schemas
+specific to each embodiment. Cancellation must reach a verified safe stop before
+releasing actuator ownership. Shared joints cannot be controlled by overlapping
+backends. Task success remains private to the independent evaluator.
+VLA input must pass the same observation boundary as the task agent. Private
+collision checks may veto execution but must not provide hidden target navigation.

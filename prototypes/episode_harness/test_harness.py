@@ -48,4 +48,10 @@ class BoundaryTests(unittest.TestCase):
  def test_cannot_replace_an_issued_observation(self):
   e=Episode('A');e.request(PNG)
   with self.assertRaises(ProtocolError):e.request(PNG)
+ def test_skill_profiles_are_isolated_and_fail_closed(self):
+  with self.assertRaises(ProtocolError):Episode('A',skill_profile='unimplemented_vla')
+  a,b=Episode('A'),Episode('B');payload=a.request(PNG)
+  payload['input']['skills']['move_forward']['distance_m'][1]=999
+  with self.assertRaises(ProtocolError):a.accept(self.cmd(a,arguments={'distance_m':999}))
+  self.assertEqual(b.request(PNG)['input']['skills']['move_forward']['distance_m'][1],.5)
 if __name__=='__main__':unittest.main()

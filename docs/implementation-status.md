@@ -78,3 +78,11 @@ The episode protocol now fully decodes PNG inputs, requires a single 640x480 RGB
 Offline CLI audit 010 executes path-visibility assertions inside the same bubblewrap namespace: host auth.json, the current project directory and /mnt/nas are absent. This verifies these specific filesystem exclusions; authenticated transport and complete tool removal remain unverified.
 
 Arena diagnostic 003 was queued on node43 under the existing GPU 7 lock (PID 804957). It records the ground asset URI and loaded prim types on failure. Revalidate its process/output before interpreting the result.
+
+### Body observations, skill profiles, and Arena asset diagnosis
+
+The user expanded allowed observations to nonprivileged proprioception. The protocol now accepts optional encoder and body-frame IMU channels with exact field validation; global poses and arbitrary simulator dictionaries remain excluded. No sensor-source provenance claim is made until the corresponding simulator adapter is audited.
+
+Skill definitions now live in an embodiment registry. The Carter base profile drives both public schema and action validation, with per-episode copies. Unknown/unimplemented profiles fail closed. Persistent VLA/motion-tracking lifecycle and actuator ownership requirements are documented but not implemented. Thirteen boundary tests pass.
+
+Arena probe 003 never launched because the shell wrapper was not executable; probe 004 used bash explicitly. It revealed ground_usd_path = None/Isaac/Environments/Grid/default_environment.usd, with no loaded geometry. Isaac Lab reads /persistent/isaac/asset_root/cloud at import time; this setting was absent. Probe 005 explicitly supplies the 5.1 asset root found in the installed asset-browser configuration and is queued/running under the same GPU 7 lock (PID 828974). This is a configuration diagnosis, not proof of full Arena compatibility.

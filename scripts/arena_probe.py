@@ -6,6 +6,11 @@ from isaacsim import SimulationApp
 app=SimulationApp({'headless':True,'multi_gpu':False,'active_gpu':a.gpu,'extra_args':['--allow-root']})
 report={'status':'started','tests':[],'scope':'imports_and_minimal_world_not_full_robot_task'}
 try:
+ import carb
+ settings=carb.settings.get_settings()
+ asset_root='https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1'
+ settings.set('/persistent/isaac/asset_root/cloud',asset_root)
+ report['configured_asset_root']=asset_root
  from isaaclab_arena.environments.isaaclab_arena_environment import IsaacLabArenaEnvironment
  report['tests'].append('arena_environment_config_import')
  from isaaclab_arena.scene.scene import Scene
