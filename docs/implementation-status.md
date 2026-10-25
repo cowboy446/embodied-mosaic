@@ -29,3 +29,12 @@ The new NAS workspace is `/mnt/nas/zhangrong/embodied-mosaic`, separate from exi
 ## Prototype
 
 `prototypes/episode_harness` contains the existing provider-independent protocol prototype. It has no model or simulator transport. See its README for the unimplemented runtime isolation and image validation requirements.
+
+### Native ego diagnostic queued
+
+A server-only `scripts/ego_smoke.py` diagnostic loads an accepted Carter scene in a new USD layer, disables the other robot actors, attaches a single RGB camera, and applies short native wheel commands. It is a sensor/control diagnostic, not an agent episode and not a task success result.
+
+Server output: `/mnt/nas/zhangrong/embodied-mosaic/runs/ego-smoke-001`.
+Latest queued lock process: PID 695642 on node43 (revalidate before acting). It uses the shared GPU 7 lock. The source was corrected before simulation launch to the explicit slot `source_episode`, rather than inferring provenance from the copied H5 path.
+
+Arena release/0.1.1 pins Isaac Lab commit `6acdd82a1633732d32bb575e3d792e34fdeb437e`, whose VERSION reports 2.3.0. Arena's default Docker base is Sim 5.0.0; compatibility with our 5.1 remains to be tested. Source was transferred to the NAS vendor directory. Current server driver is 580.65.06; no Arena or Sim 6.2 container was found in the local Docker image inventory.
