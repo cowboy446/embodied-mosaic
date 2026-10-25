@@ -15,7 +15,13 @@ try:
  from isaaclab.sim import SimulationContext,SimulationCfg
  sim=SimulationContext(SimulationCfg(dt=1/120,device=f'cuda:{a.gpu}'))
  import isaaclab.sim as sim_utils
- ground=sim_utils.GroundPlaneCfg();ground.func('/World/ground',ground)
+ ground=sim_utils.GroundPlaneCfg()
+ report['ground_usd_path']=ground.usd_path
+ try: ground.func('/World/ground',ground)
+ except Exception:
+  from pxr import Usd
+  report['ground_prims']=[{'path':str(p.GetPath()),'type':p.GetTypeName()} for p in sim.stage.Traverse() if str(p.GetPath()).startswith('/World/ground')]
+  raise
  sim.reset()
  for _ in range(10):sim.step()
  report['tests'].append('isaaclab_simulation_ten_steps');report['status']='passed_scoped_probe'

@@ -1,0 +1,11 @@
+{
+  "scope": "offline_transport_request_only",
+  "model_called": false,
+  "host_path_probe_passed": true,
+  "request_count": 1,
+  "returncode": 1,
+  "tools": [
+    "update_plan",
+    "view_image"
+  ]
+}

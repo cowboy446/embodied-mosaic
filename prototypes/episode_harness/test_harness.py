@@ -1,6 +1,7 @@
-import unittest,json
+import unittest,json,io,base64
+from PIL import Image,PngImagePlugin
 from harness import Episode,ProtocolError
-PNG=b'\x89PNG\r\n\x1a\n' # protocol fixture only, not a rendered observation
+buffer=io.BytesIO();Image.new('RGB',(640,480),(30,40,50)).save(buffer,format='PNG');PNG=buffer.getvalue()
 class BoundaryTests(unittest.TestCase):
  def cmd(self,e,**kw):
   d={'episode':e.token,'observation_id':e.step,'skill':'move_forward','arguments':{'distance_m':.2}};d.update(kw);return json.dumps(d)
@@ -34,4 +35,17 @@ class BoundaryTests(unittest.TestCase):
   with self.assertRaises(ProtocolError):e.accept(self.cmd(e))
   e.request(PNG);c=e.accept(self.cmd(e));c['arguments']['distance_m']=.4
   with self.assertRaises(ProtocolError):e.executed(c)
+ def test_image_decode_shape_and_metadata_boundary(self):
+  for blob in [PNG[:20],b'\x89PNG\r\n\x1a\n']:
+   with self.assertRaises(ProtocolError):Episode('A').request(blob)
+  for size,mode in [((640,479),'RGB'),((640,480),'RGBA')]:
+   b=io.BytesIO();Image.new(mode,size).save(b,format='PNG')
+   with self.assertRaises(ProtocolError):Episode('A').request(b.getvalue())
+  b=io.BytesIO();meta=PngImagePlugin.PngInfo();meta.add_text('private_pose','DO_NOT_LEAK')
+  Image.new('RGB',(640,480)).save(b,format='PNG',pnginfo=meta)
+  p=Episode('A').request(b.getvalue());clean=base64.b64decode(p['input']['image']['base64'])
+  self.assertNotIn(b'DO_NOT_LEAK',clean)
+ def test_cannot_replace_an_issued_observation(self):
+  e=Episode('A');e.request(PNG)
+  with self.assertRaises(ProtocolError):e.request(PNG)
 if __name__=='__main__':unittest.main()

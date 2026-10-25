@@ -3,7 +3,8 @@ A production transport must separately enforce tools=[] and isolated credentials
 """
 from dataclasses import dataclass, field
 from pathlib import Path
-import base64, json, math, secrets
+import base64, json, math, secrets, io
+from PIL import Image
 
 SKILLS = {
  'move_forward': {'distance_m': (0.05, 0.50)},
@@ -43,8 +44,20 @@ class Episode:
 
  def request(self,rgb_png:bytes):
   if self.closed or self.step>=self.max_actions: raise ProtocolError('episode closed or budget exhausted')
-  if self.pending: raise ProtocolError('action is awaiting execution receipt')
+  if self.pending or self.issued: raise ProtocolError('observation already issued or action awaiting execution')
   if not isinstance(rgb_png,bytes) or not rgb_png.startswith(b'\x89PNG\r\n\x1a\n') or len(rgb_png)>4_000_000: raise ProtocolError('expected bounded RGB PNG')
+  try:
+   with Image.open(io.BytesIO(rgb_png)) as im:
+    if im.format!='PNG' or im.size!=(640,480) or im.mode!='RGB' or getattr(im,'n_frames',1)!=1:
+     raise ProtocolError('expected one 640x480 RGB observation')
+    im.verify()
+   with Image.open(io.BytesIO(rgb_png)) as im:
+    im.load()
+    # Rebuild pixels so text chunks, EXIF and other nonvisual metadata cannot leak.
+    clean=Image.frombytes('RGB',im.size,im.tobytes())
+    buffer=io.BytesIO();clean.save(buffer,format='PNG');rgb_png=buffer.getvalue()
+  except (OSError,ValueError,SyntaxError) as exc:
+   raise ProtocolError('invalid RGB observation') from exc
   self.issued=True
   # Explicitly constructed public fields; never merge a simulator state dictionary.
   return {'model':'gpt-6.1-sol','reasoning_effort':'low','tools':[], 'instructions':Path(__file__).with_name('agent_instructions.txt').read_text(),

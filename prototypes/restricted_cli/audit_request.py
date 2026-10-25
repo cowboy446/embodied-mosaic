@@ -36,11 +36,16 @@ with tempfile.TemporaryDirectory(prefix='mosaic-cli-audit-') as td:
   binary=next(pathlib.Path(shutil.which('codex')).resolve().parents[1].glob('node_modules/@openai/codex-linux-x64/vendor/*/bin/codex'))
   sandbox=['bwrap','--die-with-parent','--unshare-user','--unshare-pid','--unshare-ipc','--unshare-uts','--new-session','--ro-bind','/usr','/usr','--ro-bind','/lib','/lib','--ro-bind','/lib64','/lib64','--proc','/proc','--dev','/dev','--tmpfs','/tmp','--dir',str(pathlib.Path.home()),'--ro-bind',td,td,'--ro-bind',str(binary),'/codex','--chdir',td]
   env={k:v for k,v in env.items() if k in ('HOME','USER','LANG','PATH','NO_PROXY')}
+  # Verify the actual mount namespace, independently of the model's compliance.
+  forbidden=[str(pathlib.Path.home()/'.codex/auth.json'),str(pathlib.Path.cwd()),'/mnt/nas']
+  check='; '.join('[ ! -e '+__import__('shlex').quote(x)+' ] || exit 42' for x in forbidden)
+  probe=subprocess.run(sandbox+['/usr/bin/bash','-c',check],capture_output=True,text=True)
+  if probe.returncode:raise RuntimeError('sandbox exposes a forbidden host path')
   cmd=sandbox+['/codex']+cmd[1:]
  try:r=subprocess.run(cmd,capture_output=True,text=True,timeout=50,env=env)
  except subprocess.TimeoutExpired as e:r=None
  server.shutdown()
  (out/'requests.json').write_text(json.dumps(requests,indent=2))
  if r:(out/'cli-output.txt').write_text(r.stdout+'\n'+r.stderr)
- summary={'scope':'offline_transport_request_only','model_called':False,'request_count':len(requests),'returncode':r.returncode if r else 'timeout','tools':[x.get('name',x.get('type')) for x in requests[0].get('tools',[])] if requests else None}
+ summary={'scope':'offline_transport_request_only','model_called':False,'host_path_probe_passed':bool(a.isolate),'request_count':len(requests),'returncode':r.returncode if r else 'timeout','tools':[x.get('name',x.get('type')) for x in requests[0].get('tools',[])] if requests else None}
  (out/'summary.json').write_text(json.dumps(summary,indent=2));print(json.dumps(summary,indent=2))

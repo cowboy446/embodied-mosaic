@@ -70,3 +70,11 @@ An actual request emitted by installed CLI 0.140.0 was captured by a dummy local
 Changing model transport metadata to direct tool mode and disabled multi-agent mode removed code execution and collaboration tools. A bubblewrap allowlist mounted system runtime directories plus the temporary request directory, excluding host home, project directories and NAS. Disabling automatic skills and permission instruction blocks produced a request containing only the CLI environment context and the explicit audit prompt. This verifies the captured context boundary for this offline configuration, not the live authenticated transport.
 
 Two tools remain registered: update_plan and view_image. Consequently strict no-tool acceptance remains open. Host authentication was deliberately not mounted during this test. Next: enforce an episode-only image surface, test outside-path rejection, and establish authenticated image/JSON transport without exposing credentials through tools.
+
+### Observation validation and filesystem probe
+
+The episode protocol now fully decodes PNG inputs, requires a single 640x480 RGB frame, and re-encodes only pixel data to strip nonvisual metadata. It rejects replacing an already issued observation. Eight boundary tests pass, including malformed images, dimensions/channels and metadata leakage checks. Pillow is now an explicit prototype dependency.
+
+Offline CLI audit 010 executes path-visibility assertions inside the same bubblewrap namespace: host auth.json, the current project directory and /mnt/nas are absent. This verifies these specific filesystem exclusions; authenticated transport and complete tool removal remain unverified.
+
+Arena diagnostic 003 was queued on node43 under the existing GPU 7 lock (PID 804957). It records the ground asset URI and loaded prim types on failure. Revalidate its process/output before interpreting the result.
