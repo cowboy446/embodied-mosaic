@@ -92,13 +92,15 @@ try:
   aligned=body_audit.sample(0.,robot.data.body_link_pos_w[0].cpu().numpy(),robot.data.body_link_quat_w[0].cpu().numpy(),robot.data.root_pos_w[0,:2].cpu().numpy())
   (out/'spawn-alignment.json').write_text(json.dumps({'flat_floor_z_m':0.,'clearance_m':.005,'lift_m':lift,'before':initial_envelope,'after':aligned},indent=2))
   if aligned['geometry_min_z_m']<0.:raise RuntimeError('spawn alignment did not clear floor')
- stock_state_rows=[];stock_view=None
+ stock_state_rows=[];stock_view=None;stock_body_paths=[]
  if a.dynamic_stock:
   import omni.physics.tensors.impl.api as physx
   from isaaclab.sim.utils import get_current_stage_id
   stock_sim_view=physx.create_simulation_view('torch',get_current_stage_id());stock_sim_view.set_subspace_roots('/')
   stock_view=stock_sim_view.create_rigid_body_view('/World/envs/env_0/'+a.scene_name+'/Stock/*')
   if stock_view.count<1:raise RuntimeError('no stock rigid bodies in PhysX view')
+  stock_body_paths=list(stock_view.prim_paths)
+  if len(stock_body_paths)!=stock_view.count or len(set(stock_body_paths))!=stock_view.count:raise RuntimeError('invalid stock body path mapping')
   stock_state_rows.append({'time_s':0.,'transforms':stock_view.get_transforms().cpu().tolist(),'velocities':stock_view.get_velocities().cpu().tolist()})
  camera=env.scene['ego_camera'];capture=[]
  for _ in range(8):env.sim.render()
@@ -208,7 +210,7 @@ finally:
    report['trajectory_coverage_error']=traceback.format_exc()
  if 'stock_state_rows' in locals() and stock_state_rows:
   from stock_dynamics import summarize
-  (out/'stock-dynamics.json').write_text(json.dumps({'samples':stock_state_rows,'summary':summarize(stock_state_rows)},indent=2))
+  (out/'stock-dynamics.json').write_text(json.dumps({'body_paths':stock_body_paths,'samples':stock_state_rows,'summary':summarize(stock_state_rows)},indent=2))
  if 'body_audit' in locals():(out/'body-envelope.json').write_text(json.dumps(body_audit.summary(),indent=2))
  report.update(wall_seconds=time.monotonic()-started_monotonic,started_unix=started_unix,seed=a.seed,gpu=a.gpu)
  (out/'report.json').write_text(json.dumps(report,indent=2));print('REPORT',report['status'],flush=True);app.close()

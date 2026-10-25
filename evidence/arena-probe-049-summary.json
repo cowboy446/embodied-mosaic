@@ -1,0 +1,169 @@
+{
+  "selection": {
+    "seed": 91,
+    "candidate_count": 31,
+    "assets": [
+      {
+        "path": "/World/Stock/item00",
+        "asset_key": "hospital_chair_04a",
+        "source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/campaign20/assets/Assets/Isaac/5.1/Isaac/Environments/Hospital/Props/SM_Chair_04a.usd",
+        "source_sha256": "9417dae8329a178166012fd15605a3e9aab25d57f87f5d9b8d015e8587e69f90",
+        "anchor_xy": [
+          -3.8493958223156457,
+          9.310388091638377
+        ],
+        "translation": [
+          -3.8493958223156457,
+          9.310388091638377,
+          0.0
+        ]
+      },
+      {
+        "path": "/World/Stock/item01",
+        "asset_key": "office_plant02",
+        "source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/campaign20/assets/Assets/Isaac/5.1/Isaac/Environments/Office/Props/SM_Plant02.usd",
+        "source_sha256": "fed457e8983da0aa75d913c1e025120f1573c0a2ce9608c12b2dd83cb012cc9d",
+        "anchor_xy": [
+          -2.6439822702834963,
+          9.209131352578154
+        ],
+        "translation": [
+          -2.6439822702834963,
+          9.209131352578154,
+          0.0
+        ]
+      },
+      {
+        "path": "/World/Stock/item02",
+        "asset_key": "hospital_medicalcabinet_01a",
+        "source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/campaign20/assets/Assets/Isaac/5.1/Isaac/Environments/Hospital/Props/SM_MedicalCabinet_01a.usd",
+        "source_sha256": "55261f2e5c99e57c5c8a9f1997160600ce1c960203db715d13db9c6d3a89f519",
+        "anchor_xy": [
+          -4.914134026163367,
+          9.507408908271302
+        ],
+        "translation": [
+          -4.914134026163367,
+          9.507408908271302,
+          0.0
+        ]
+      },
+      {
+        "path": "/World/Stock/item03",
+        "asset_key": "office_trashcan_02",
+        "source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/campaign20/assets/Assets/Isaac/5.1/Isaac/Environments/Office/Props/SM_TrashCan_02.usd",
+        "source_sha256": "7449c0d3fd1d12333a5d6861c4c9806c51b5e230ec03f0b47c3402bab2ef2b99",
+        "anchor_xy": [
+          -7.330193665051006,
+          6.051591080551168
+        ],
+        "translation": [
+          -7.330193665051006,
+          6.051591080551168,
+          0.0
+        ]
+      },
+      {
+        "path": "/World/Stock/item04",
+        "asset_key": "warehouse_crateplastic_d_01",
+        "source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/assets/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/Props/SM_CratePlastic_D_01.usd",
+        "source_sha256": "47c35b0c860fce7c92b8969e896a342e48f1f458d8687d41a35e39712fcefb58",
+        "anchor_xy": [
+          -1.9824708798383948,
+          5.104067548210157
+        ],
+        "translation": [
+          -1.9824708798383948,
+          5.104067548210157,
+          0.0
+        ]
+      },
+      {
+        "path": "/World/Stock/item05",
+        "asset_key": "warehouse_crateplastic_e_01",
+        "source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/assets/Assets/Isaac/5.1/Isaac/Environments/Simple_Warehouse/Props/SM_CratePlastic_E_01.usd",
+        "source_sha256": "1f10b583e94d755ab36a3630c63f0e8e3c5e01fd11afabe08e2f7c815df9c38a",
+        "anchor_xy": [
+          -4.8614022279335165,
+          5.8290506310171395
+        ],
+        "translation": [
+          -4.8614022279335165,
+          5.8290506310171395,
+          0.0
+        ]
+      },
+      {
+        "path": "/World/Stock/item06",
+        "asset_key": "office_boxportablea",
+        "source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/campaign20/assets/Assets/Isaac/5.1/Isaac/Environments/Office/Props/SM_BoxPortableA.usd",
+        "source_sha256": "6da21045827e1eef4608dfd3c5675ec5ff898333f227c56cbeb8fd294ff8485b",
+        "anchor_xy": [
+          -3.147700786318717,
+          5.738679126278688
+        ],
+        "translation": [
+          -3.147700786318717,
+          5.738679126278688,
+          0.0
+        ]
+      }
+    ],
+    "scope": "seeded composition; placement and runtime stability not yet validated"
+  },
+  "stability": {
+    "passed": true,
+    "duration_s": 2.0,
+    "translation_drift_m": [
+      5.331201499700045e-07,
+      3.7504538388183027e-05,
+      9.535819247314096e-05,
+      4.470348358154297e-08,
+      4.920204574197249e-07,
+      8.792556400282186e-06,
+      4.76837158203125e-07
+    ],
+    "max_translation_excursion_m": [
+      5.331201499700045e-07,
+      3.951751987874779e-05,
+      9.535819247314096e-05,
+      4.881125496077299e-07,
+      4.924151790695877e-07,
+      8.793250849680914e-06,
+      4.851466594964178e-07
+    ],
+    "max_orientation_change_deg": [
+      0.00020312636945280324,
+      0.0004053725903637072,
+      0.01519714539711422,
+      0.00010541252472373073,
+      0.00011856085063092256,
+      0.0018284522930382804,
+      4.26545176954123e-05
+    ],
+    "max_tail_linear_speed_m_s": [
+      0.000365969977287196,
+      0.0024129864920737413,
+      0.0004964861589398199,
+      8.873221608538402e-05,
+      1.1154044916021052e-05,
+      0.00030333774486013764,
+      6.025859525233664e-05
+    ],
+    "max_tail_angular_speed_rad_s": [
+      0.0004226621851419303,
+      0.003713388990400608,
+      0.0005102472483652875,
+      0.0004335998990687414,
+      7.964143894857556e-06,
+      0.001035775291077034,
+      6.711918084253354e-05
+    ],
+    "translation_limit_m": 0.05,
+    "orientation_limit_deg": 10.0,
+    "speed_limit_m_s": 0.02,
+    "angular_speed_limit_rad_s": 0.05,
+    "scope": "full recorded rigid-body drift/rotation and terminal velocity probe; contact penetration and material validation remain separate"
+  },
+  "initialization": true
+}

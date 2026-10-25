@@ -19,6 +19,11 @@ class WrapperTests(unittest.TestCase):
             self.assertEqual(before,(p/'source.usda').read_bytes())
             self.assertEqual(r['stock_objects_added'],0)
             with self.assertRaises(FileExistsError):wrap(p/'source.usda',p/'out.usda')
+    def test_render_replacement_is_explicit(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d);s=self.make_source(p/'source.usda');s.DefinePrim('/Render/Settings','RenderSettings');s.GetRootLayer().Save()
+            with self.assertRaises(ValueError):wrap(p/'source.usda',p/'out.usda')
+            r=wrap(p/'source.usda',p/'out.usda',True);self.assertTrue(r['replaced_render_settings'])
     def test_rejects_silent_conversion_and_dropped_roots(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d);s=self.make_source(p/'source.usda')
