@@ -1,0 +1,33 @@
+{
+  "status": "failed",
+  "phase": "rollout",
+  "traceback": "Traceback (most recent call last):\n  File \"/mnt/nas/zhangrong/embodied-mosaic/runs/arena-g1-048.sources/prototypes/arena_navigation/run_g1_probe.py\", line 174, in <module>\n    if guard.blocked(pos[:2],0.,turning=True):raise RuntimeError('robot left conservative free corridor')\n                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: robot left conservative free corridor\n",
+  "ordered_route": {
+    "next_waypoint_index": 4,
+    "waypoint_count": 6,
+    "completed": false,
+    "corner_radius_m": 0.3,
+    "final_radius_m": 0.1,
+    "measurement": "robot root XY at environment steps"
+  },
+  "trajectory_coverage": {
+    "duration_s": 29.426666666666666,
+    "sample_count": 4415,
+    "executed_xy_length_m": 23.545395764280936,
+    "start_to_finish_m": 17.017880805597308,
+    "maximum_distance_from_start_m": 17.017880805597308,
+    "xy_extent_m": [
+      15.16034746170044,
+      8.169073104858398
+    ],
+    "visited_grid_cells": 60,
+    "grid_cell_size_m": 0.5,
+    "grid_origin_world_xy_m": [
+      0,
+      0
+    ],
+    "scope": "Observed root XY samples; no interpolation, free-space coverage or safety certification.",
+    "length_caveat": "Root sway and repeated travel contribute to length; compare extent and unique cells too."
+  },
+  "wall_seconds": 279.81269011087716
+}
