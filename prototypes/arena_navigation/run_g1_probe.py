@@ -1,14 +1,14 @@
 """Arena task-level G1/SONIC integration probe, not batch/navigation acceptance."""
 import argparse,json,sys,traceback,time,hashlib
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--scene-source');p.add_argument('--scene-name',default='warehouse');p.add_argument('--grid-radius',type=float,default=5.);p.add_argument('--min-path',type=float,default=3.);p.add_argument('--max-path',type=float,default=5.);p.add_argument('--prefer-far',action='store_true');p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
+p=argparse.ArgumentParser();p.add_argument('--scene-source');p.add_argument('--random-stock',action='store_true');p.add_argument('--scene-name',default='warehouse');p.add_argument('--grid-radius',type=float,default=5.);p.add_argument('--min-path',type=float,default=3.);p.add_argument('--max-path',type=float,default=5.);p.add_argument('--prefer-far',action='store_true');p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
 started_monotonic=time.monotonic();started_unix=time.time()
 (out/'run-config.json').write_text(json.dumps(vars(a),indent=2))
 import site
 site.addsitedir('/mnt/nas/zhangrong/embodied-mosaic/runtime/ik-deps')
 from isaacsim import SimulationApp
 app=SimulationApp({'headless':True,'multi_gpu':False,'active_gpu':a.gpu,'physics_gpu':a.gpu,'extra_args':['--allow-root','--enable','isaacsim.sensors.camera']})
-report={'status':'started','scope':'Arena G1 SONIC task integration, not navigation acceptance'}
+report={'phase':'asset_preparation','status':'started','scope':'Arena G1 SONIC task integration, not navigation acceptance'}
 try:
  import carb,torch,numpy as np
  from PIL import Image
@@ -26,7 +26,7 @@ try:
  src=root/'rulegen-diverse40/runs/warehouse-152002-2fc99598b2/attempt-02/output/scene_initial.usda'
  if a.scene_source:src=Path(a.scene_source).resolve(strict=True)
  bg=Usd.Stage.CreateNew(str(out/'background.usda'));bg.GetRootLayer().subLayerPaths=[str(src)];bg.SetDefaultPrim(bg.GetPrimAtPath('/World'))
- for path in ['/World/Actors','/World/physicsScene','/World/PhysicsScene']:
+ for path in ['/World/Actors','/World/G1Appearance','/World/physicsScene','/World/PhysicsScene']:
   prim=bg.GetPrimAtPath(path)
   if prim:prim.SetActive(False)
  if a.native_scene_collision:
@@ -44,6 +44,9 @@ try:
    authored.append(str(prim.GetPath()))
   if not authored:raise RuntimeError('no native environment meshes')
   (out/'scene-collision-authoring.json').write_text(json.dumps({'mode':'native_static_triangle_meshes','instanceability_overrides':instance_overrides,'source_asset_files_modified':False,'enabled_meshes':authored,'disabled_legacy_proxies':['/World/SceneCollision','/World/PhysicsFloor','/World/Environment/GroundPlane'],'scope':'full environment mesh collision authoring, runtime coverage still needs validation'},indent=2))
+ if a.random_stock:
+  from random_stock import randomize_stock
+  (out/'stock-randomization.json').write_text(json.dumps(randomize_stock(bg,a.seed),indent=2))
  bg.GetRootLayer().Save()
  asset=root/'campaign20/assets/Assets/Isaac/5.1/Isaac/Robots/Unitree/G1/g1.usd'
  rs=Usd.Stage.CreateNew(str(out/'robot.usda'));rp=rs.DefinePrim('/Robot','Xform');rp.GetReferences().AddReference(str(asset));rs.SetDefaultPrim(rp)
@@ -59,6 +62,7 @@ try:
  emb.scene_config.robot.init_state.joint_pos=dict(zip(sonic.NAMES,initial[7:].tolist()))
  descriptor=IsaacLabArenaEnvironment(name='Mosaic-G1-SONIC-Probe-v0',scene=Scene([Background(name=a.scene_name,usd_path=str(out/'background.usda'),object_min_z=0.)]),embodiment=emb,task=NavigateTask((-5.,29.)))
  args=argparse.Namespace(mimic=False,device=f'cuda:{a.gpu}',num_envs=1,disable_fabric=False)
+ report['phase']='arena_initialization'
  env,cfg=SingleEpisodeBuilder(descriptor,args).make_registered_and_return_cfg();report['arena_environment_constructed']=True
  obs,_=env.reset();robot=env.scene['robot'];ids,_=robot.find_joints(sonic.NAMES,preserve_order=True);ctrl=sonic.Controller();states=[]
  from body_envelope import BodyEnvelopeAudit
@@ -78,8 +82,18 @@ try:
  camera=env.scene['ego_camera'];capture=[]
  for _ in range(8):env.sim.render()
  camera.update(0.,force_recompute=True)
+ if a.random_stock:
+  import omni.physx
+  from random_stock import validate_stock
+  stock_roots=[str(p.GetPath()) for p in env.sim.stage.Traverse() if p.GetName()=='Stock']
+  if len(stock_roots)!=1:raise RuntimeError(f'expected one stock root: {stock_roots}')
+  report['phase']='stock_initialization'
+  stock_check=validate_stock(env.sim.stage,omni.physx.get_physx_scene_query_interface(),stock_roots[0])
+  (out/'stock-initialization.json').write_text(json.dumps(stock_check,indent=2))
+  if not stock_check['passed']:raise RuntimeError('random stock initialization rejected; see stock-initialization.json')
  route_policy=None;planner_logs=[];terminal_reason='budget_exhausted'
  if a.route:
+  report['phase']='route_generation'
   import collections,omni.physx
   sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'scripts'))
   from collision_guard import BaseCollisionGuard,Envelope
@@ -102,6 +116,7 @@ try:
   qpos=np.r_[start,robot.data.root_quat_w[0].cpu().numpy(),robot.data.joint_pos[0,ids].cpu().numpy()]
   context=collections.deque([qpos.copy() for _ in range(4)],maxlen=4)
   reference_start=0
+ report['phase']='rollout'
  for step in range(round(a.seconds*150) if a.route else 300):
   if step%3==0:
    d=robot.data;q=d.joint_pos[0,ids].cpu().numpy();dq=d.joint_vel[0,ids].cpu().numpy();quat=d.root_quat_w[0].cpu().numpy();ang=d.root_ang_vel_w[0].cpu().numpy()

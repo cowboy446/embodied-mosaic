@@ -1,0 +1,578 @@
+{
+  "032": {
+    "run-config.json": {
+      "scene_source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/rulegen-diverse40/runs/office-152000-0b1a60c48e/attempt-00/output/scene_initial.usda",
+      "random_stock": true,
+      "scene_name": "office",
+      "grid_radius": 15.0,
+      "min_path": 8.0,
+      "max_path": 30.0,
+      "prefer_far": true,
+      "output": "/mnt/nas/zhangrong/embodied-mosaic/runs/arena-g1-032",
+      "gpu": 6,
+      "route": true,
+      "native_scene_collision": true,
+      "align_spawn_floor": true,
+      "seed": 82,
+      "spawn_xy": [
+        -4.722265,
+        7.512265
+      ],
+      "yaw_deg": 0.0,
+      "seconds": 120.0
+    },
+    "stock-randomization.json": {
+      "seed": 82,
+      "translation_radius_m": 0.75,
+      "assets": [
+        {
+          "path": "/World/Stock/item00",
+          "before_xyz": [
+            -3.8493958223156457,
+            9.310388091638377,
+            -6.26971145349268e-07
+          ],
+          "after_xyz": [
+            -4.382314993365143,
+            9.295234079905562,
+            -6.26971145349268e-07
+          ],
+          "before_yaw_deg": 121.97193145751953,
+          "after_yaw_deg": 1.836053320513372
+        },
+        {
+          "path": "/World/Stock/item01",
+          "before_xyz": [
+            -2.6439822702834963,
+            9.209131352578154,
+            8.523718784564228e-09
+          ],
+          "after_xyz": [
+            -1.9407088790303781,
+            9.677112242326182,
+            8.523718784564228e-09
+          ],
+          "before_yaw_deg": -160.87318420410156,
+          "after_yaw_deg": 104.46029618467401
+        },
+        {
+          "path": "/World/Stock/item02",
+          "before_xyz": [
+            -4.914134026163367,
+            9.507408908271302,
+            -6.26971145349268e-07
+          ],
+          "after_xyz": [
+            -4.644066912592792,
+            8.992289658484728,
+            -6.26971145349268e-07
+          ],
+          "before_yaw_deg": -52.617252349853516,
+          "after_yaw_deg": 148.72489848743254
+        },
+        {
+          "path": "/World/Stock/item03",
+          "before_xyz": [
+            -7.330193665051006,
+            6.051591080551168,
+            1.0307741601242866e-07
+          ],
+          "after_xyz": [
+            -7.429969029991304,
+            6.175724896608736,
+            1.0307741601242866e-07
+          ],
+          "before_yaw_deg": -51.890525817871094,
+          "after_yaw_deg": -144.1888505875898
+        },
+        {
+          "path": "/World/Stock/item04",
+          "before_xyz": [
+            -1.9824708798383948,
+            5.104067548210157,
+            -3.7294600664106723e-07
+          ],
+          "after_xyz": [
+            -2.2717098778299167,
+            5.61673411787964,
+            -3.7294600664106723e-07
+          ],
+          "before_yaw_deg": -45.37648010253906,
+          "after_yaw_deg": -135.2608703566181
+        },
+        {
+          "path": "/World/Stock/item05",
+          "before_xyz": [
+            -4.8614022279335165,
+            5.8290506310171395,
+            7.849607011019592e-09
+          ],
+          "after_xyz": [
+            -5.483417063843916,
+            5.567515166895721,
+            7.849607011019592e-09
+          ],
+          "before_yaw_deg": -123.6771469116211,
+          "after_yaw_deg": -54.22969909066711
+        },
+        {
+          "path": "/World/Stock/item06",
+          "before_xyz": [
+            -3.147700786318717,
+            5.738679126278688,
+            3.729459111441257e-09
+          ],
+          "after_xyz": [
+            -3.1608738290726954,
+            5.7156769037582595,
+            3.729459111441257e-09
+          ],
+          "before_yaw_deg": 157.22601318359375,
+          "after_yaw_deg": -114.61476667614315
+        }
+      ],
+      "scope": "pose randomization; geometry validation required before rollout"
+    },
+    "stock-initialization.json": {
+      "passed": false,
+      "objects": [
+        {
+          "path": "/World/envs/env_0/office/Stock/item00",
+          "bounds": [
+            [
+              -4.731627425445972,
+              8.984863539527659,
+              0.0
+            ],
+            [
+              -4.1126432564312685,
+              9.603051627124543,
+              0.8772270603304672
+            ]
+          ],
+          "overlap_paths": [
+            "/World/envs/env_0/office/Stock/item02/Geometry/SM_Chair"
+          ],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": false
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item01",
+          "bounds": [
+            [
+              -2.1329786247765403,
+              9.44855266262191,
+              0.0
+            ],
+            [
+              -1.7484391570983273,
+              9.905671914376727,
+              0.30828399821506575
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item02",
+          "bounds": [
+            [
+              -5.022014774963312,
+              8.559745271366978,
+              0.0
+            ],
+            [
+              -4.198016406473939,
+              9.383467537264846,
+              0.8772270603304672
+            ]
+          ],
+          "overlap_paths": [
+            "/World/envs/env_0/office/Stock/item00/Geometry/SM_Chair"
+          ],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": false
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item03",
+          "bounds": [
+            [
+              -8.066718980773562,
+              5.5141332296969265,
+              0.0
+            ],
+            [
+              -6.793219495073274,
+              6.837316357546565,
+              0.7900000091255964
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item04",
+          "bounds": [
+            [
+              -2.5122846902313682,
+              5.376481246031887,
+              0.0
+            ],
+            [
+              -2.031135078976721,
+              5.856986976301946,
+              0.30000000181818887
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item05",
+          "bounds": [
+            [
+              -5.703013261912823,
+              5.337959434221317,
+              0.0
+            ],
+            [
+              -5.263835298307937,
+              5.796794651671475,
+              0.27600212265215857
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item06",
+          "bounds": [
+            [
+              -3.795522257919382,
+              5.009883629644603,
+              0.0
+            ],
+            [
+              -2.4888261060851096,
+              6.281882884759994,
+              1.554042937743892
+            ]
+          ],
+          "overlap_paths": [
+            "/World/envs/env_0/office/Stock/item04/Geometry/SM_BoxPortableC"
+          ],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": false
+        }
+      ],
+      "scope": "conservative initial AABB and five-ray flat-floor support checks; not contact/settling certification"
+    },
+    "report.json": {
+      "status": "failed",
+      "scope": "Arena G1 SONIC task integration, not navigation acceptance",
+      "arena_environment_constructed": true,
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/nas/zhangrong/embodied-mosaic/runs/arena-g1-032.sources/prototypes/arena_navigation/run_g1_probe.py\", line 91, in <module>\n    if not stock_check['passed']:raise RuntimeError('random stock initialization rejected; see stock-initialization.json')\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: random stock initialization rejected; see stock-initialization.json\n",
+      "wall_seconds": 47.23760340362787,
+      "started_unix": 1792922670.8656607,
+      "seed": 82,
+      "gpu": 6
+    }
+  },
+  "033": {
+    "run-config.json": {
+      "scene_source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/rulegen-diverse40/runs/hospital-152001-757e966d26/attempt-00/output/scene_initial.usda",
+      "random_stock": true,
+      "scene_name": "hospital",
+      "grid_radius": 15.0,
+      "min_path": 8.0,
+      "max_path": 30.0,
+      "prefer_far": true,
+      "output": "/mnt/nas/zhangrong/embodied-mosaic/runs/arena-g1-033",
+      "gpu": 7,
+      "route": true,
+      "native_scene_collision": true,
+      "align_spawn_floor": true,
+      "seed": 82,
+      "spawn_xy": [
+        -9.261082,
+        10.508025
+      ],
+      "yaw_deg": 0.0,
+      "seconds": 120.0
+    },
+    "stock-randomization.json": {
+      "seed": 82,
+      "translation_radius_m": 0.75,
+      "assets": [
+        {
+          "path": "/World/Stock/item00",
+          "before_xyz": [
+            -8.321041902325465,
+            9.195812456974274,
+            0.0009424900797943003
+          ],
+          "after_xyz": [
+            -8.853961073374963,
+            9.180658445241459,
+            0.0009424900797943003
+          ],
+          "before_yaw_deg": 102.84672546386719,
+          "after_yaw_deg": 1.836053320513372
+        },
+        {
+          "path": "/World/Stock/item01",
+          "before_xyz": [
+            -9.57484789102459,
+            8.103240769431403,
+            0.00027711986876011174
+          ],
+          "after_xyz": [
+            -8.871574499771471,
+            8.571221659179432,
+            0.00027711986876011174
+          ],
+          "before_yaw_deg": -38.00388717651367,
+          "after_yaw_deg": 104.46029618467401
+        },
+        {
+          "path": "/World/Stock/item02",
+          "before_xyz": [
+            -8.908313247106317,
+            11.96165463890888,
+            0.002719174860734308
+          ],
+          "after_xyz": [
+            -8.638246133535741,
+            11.446535389122307,
+            0.002719174860734308
+          ],
+          "before_yaw_deg": 121.34866333007812,
+          "after_yaw_deg": 148.72489848743254
+        },
+        {
+          "path": "/World/Stock/item03",
+          "before_xyz": [
+            -9.011295042291659,
+            9.13580922936745,
+            0.0009424900797943003
+          ],
+          "after_xyz": [
+            -9.111070407231956,
+            9.259943045425018,
+            0.0009424900797943003
+          ],
+          "before_yaw_deg": 129.61236572265625,
+          "after_yaw_deg": -144.1888505875898
+        },
+        {
+          "path": "/World/Stock/item04",
+          "before_xyz": [
+            -10.142193982561668,
+            15.150645948211448,
+            1.1718380808399429e-17
+          ],
+          "after_xyz": [
+            -10.43143298055319,
+            15.663312517880932,
+            1.1718380808399429e-17
+          ],
+          "before_yaw_deg": 152.50599670410156,
+          "after_yaw_deg": -135.2608703566181
+        }
+      ],
+      "scope": "pose randomization; geometry validation required before rollout"
+    },
+    "stock-initialization.json": {
+      "passed": false,
+      "objects": [
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item00",
+          "bounds": [
+            [
+              -8.945170106138317,
+              9.107257837103472,
+              0.0
+            ],
+            [
+              -8.763858625542781,
+              9.288569437640808,
+              0.9227987774580986
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item01",
+          "bounds": [
+            [
+              -9.69555534148887,
+              8.393815983285366,
+              0.0
+            ],
+            [
+              -8.84336033816823,
+              9.401971635120523,
+              1.9677354193984986
+            ]
+          ],
+          "overlap_paths": [
+            "/World/envs/env_0/hospital/Environment/SM_Door_01b5_8/SM_Door_02b",
+            "/World/envs/env_0/hospital/Stock/item00/Geometry/SM_GasCart_01c",
+            "/World/envs/env_0/hospital/Stock/item03/Geometry/SM_GasCart_01c"
+          ],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": false
+        },
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item02",
+          "bounds": [
+            [
+              -8.86345474364811,
+              11.211254584241894,
+              0.0
+            ],
+            [
+              -8.43819547547933,
+              11.640398040270112,
+              1.0926642188579385
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item03",
+          "bounds": [
+            [
+              -9.223662127487703,
+              9.123249517342472,
+              0.0
+            ],
+            [
+              -8.978275496787303,
+              9.368636176041324,
+              0.9227987774580986
+            ]
+          ],
+          "overlap_paths": [
+            "/World/envs/env_0/hospital/Stock/item01/Geometry/SM_MedicalCabinet_01a/Section0"
+          ],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": false
+        },
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item04",
+          "bounds": [
+            [
+              -10.890941391907733,
+              15.205047998986744,
+              0.0
+            ],
+            [
+              -9.971924569198643,
+              16.121577036775115,
+              0.7820838753413284
+            ]
+          ],
+          "overlap_paths": [
+            "/World/envs/env_0/hospital/Environment/Geo_M2_BaseWall4/Geo_M2_BaseWall/Geo_M2_BaseWall/Section0",
+            "/World/envs/env_0/hospital/Environment/Geo_M2_BaseWall4/Geo_M2_BaseWall/Geo_M2_BaseWall/Section1",
+            "/World/envs/env_0/hospital/Environment/Geo_M2_TrimStrateINside15_238/Geo_M2_TrimStrateINside/Geo_M2_TrimStrateINside"
+          ],
+          "support_samples": [
+            true,
+            true,
+            false,
+            true,
+            false
+          ],
+          "passed": false
+        }
+      ],
+      "scope": "conservative initial AABB and five-ray flat-floor support checks; not contact/settling certification"
+    },
+    "report.json": {
+      "status": "failed",
+      "scope": "Arena G1 SONIC task integration, not navigation acceptance",
+      "arena_environment_constructed": true,
+      "traceback": "Traceback (most recent call last):\n  File \"/mnt/nas/zhangrong/embodied-mosaic/runs/arena-g1-033.sources/prototypes/arena_navigation/run_g1_probe.py\", line 91, in <module>\n    if not stock_check['passed']:raise RuntimeError('random stock initialization rejected; see stock-initialization.json')\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nRuntimeError: random stock initialization rejected; see stock-initialization.json\n",
+      "wall_seconds": 72.38053360022604,
+      "started_unix": 1792922670.9374506,
+      "seed": 82,
+      "gpu": 7
+    }
+  }
+}
