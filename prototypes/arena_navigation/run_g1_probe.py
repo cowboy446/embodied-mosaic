@@ -1,7 +1,7 @@
 """Arena task-level G1/SONIC integration probe, not batch/navigation acceptance."""
 import argparse,json,sys,traceback,time,hashlib
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--scene-source');p.add_argument('--random-stock',action='store_true');p.add_argument('--dynamic-stock',action='store_true');p.add_argument('--scene-name',default='warehouse');p.add_argument('--grid-radius',type=float,default=5.);p.add_argument('--min-path',type=float,default=3.);p.add_argument('--max-path',type=float,default=5.);p.add_argument('--prefer-far',action='store_true');p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
+p=argparse.ArgumentParser();p.add_argument('--tour-stops',type=int,default=1);p.add_argument('--scene-source');p.add_argument('--random-stock',action='store_true');p.add_argument('--dynamic-stock',action='store_true');p.add_argument('--scene-name',default='warehouse');p.add_argument('--grid-radius',type=float,default=5.);p.add_argument('--min-path',type=float,default=3.);p.add_argument('--max-path',type=float,default=5.);p.add_argument('--prefer-far',action='store_true');p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
 started_monotonic=time.monotonic();started_unix=time.time()
 (out/'run-config.json').write_text(json.dumps(vars(a),indent=2))
 import site
@@ -121,7 +121,14 @@ try:
   (out/'scene-query-check.json').write_text(json.dumps({'enabled':bool(cfg.sim.enable_scene_query_support),'support_hit':bool(support.get('hit',False)),'support_rigid_body':str(support.get('rigidBody',''))},indent=2))
   if not support.get('hit',False):raise RuntimeError('scene query self-check failed: nearby ground not detected')
   support_guard=GroundSupport(omni.physx.get_physx_scene_query_interface(),'/World/envs/env_0/Robot')
-  plan=plan_grid(start,lambda xy:guard.blocked(xy,0.,turning=True) or not support_guard.supported(xy),seed=a.seed,radius=a.grid_radius,minimum_path=a.min_path,maximum_path=a.max_path,prefer_far=a.prefer_far)
+  blocked=lambda xy:guard.blocked(xy,0.,turning=True) or not support_guard.supported(xy)
+  if a.tour_stops>1:
+   from coverage_navigation import plan_coverage
+   plan=plan_coverage(start,blocked,seed=a.seed,radius=a.grid_radius,minimum_path=a.min_path,maximum_path=a.max_path,stops=a.tour_stops)
+  else:
+   plan=plan_grid(start,blocked,seed=a.seed,radius=a.grid_radius,minimum_path=a.min_path,maximum_path=a.max_path,prefer_far=a.prefer_far)
+  from ordered_route import OrderedRoute
+  env._mosaic_ordered_route=OrderedRoute(plan['route'])
   plan['support_checks']={'cached_positions':len(support_guard.cache),'rejected_positions':sum(not x for x in support_guard.cache.values()),'method':'5 downward rays; flat ground ±3cm; normal z >= 0.95','scope':'sampled support, not continuous surface proof'}
   (out/'grid-plan.json').write_text(json.dumps(plan,indent=2))
   if not plan['occupied']:raise RuntimeError('warehouse occupancy unexpectedly empty; verify collision queries and scene geometry')
@@ -180,6 +187,8 @@ except BaseException:
  if 'planner_logs' in locals():(out/'planner-log.json').write_text(json.dumps(planner_logs))
  if 'env' in locals():env.close()
 finally:
+ if 'env' in locals() and hasattr(env,'_mosaic_ordered_route'):
+  report['ordered_route']=env._mosaic_ordered_route.summary()
  if 'states' in locals() and states:
   report['states']=states
   try:
