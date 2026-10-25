@@ -53,7 +53,7 @@ try:
   (out/'stock-selection.json').write_text(json.dumps(selection,indent=2))
  if a.random_stock:
   from random_stock import randomize_stock,PlacementRejected
-  try:stock_recipe=randomize_stock(bg,a.seed,reserved_xy=[a.spawn_xy])
+  try:stock_recipe=randomize_stock(bg,a.seed,reserved_xy=[a.spawn_xy],placement_regions=spec.get('placement_regions') if a.stock_spec else None)
   except PlacementRejected as exc:
    (out/'stock-randomization-rejected.json').write_text(json.dumps(exc.evidence,indent=2));raise
   (out/'stock-randomization.json').write_text(json.dumps(stock_recipe,indent=2))

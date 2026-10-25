@@ -2,7 +2,7 @@
 Existing textured assets retain their material/geometry and static/dynamic status.
 This does not add grasp annotations or certify rigid-body settling.
 """
-import random
+import random,math
 from pxr import Usd,UsdGeom,UsdPhysics,Gf
 
 
@@ -10,9 +10,12 @@ class PlacementRejected(ValueError):
     def __init__(self,message,evidence):
         super().__init__(message);self.evidence=evidence
 
-def randomize_stock(stage,seed,translation_radius=.75,max_trials_per_object=64,reserved_xy=()):
+def randomize_stock(stage,seed,translation_radius=.75,max_trials_per_object=64,reserved_xy=(),placement_regions=None):
     stock=stage.GetPrimAtPath('/World/Stock')
     if not stock:raise ValueError('scene has no reusable stock assets')
+    if placement_regions is not None:
+        if not placement_regions or any(len(r)!=4 or not all(math.isfinite(v) for v in r) or r[0]>=r[2] or r[1]>=r[3] for r in placement_regions):
+            raise ValueError('regions must be finite [xmin,ymin,xmax,ymax] rectangles')
     rng=random.Random(seed);records=[];accepted=[];attempts=[]
     cache=UsdGeom.BBoxCache(Usd.TimeCode.Default(),['default','render','proxy'],False,True)
     environment=stage.GetPrimAtPath('/World/Environment');obstacles=[]
@@ -30,8 +33,25 @@ def randomize_stock(stage,seed,translation_radius=.75,max_trials_per_object=64,r
         if translate is None or rotate is None:raise ValueError(f'unsupported stock transform {prim.GetPath()}')
         before=list(translate.Get());yaw=float(rotate.Get());path=str(prim.GetPath())
         for trial in range(max_trials_per_object):
-            after=[before[0]+rng.uniform(-translation_radius,translation_radius),before[1]+rng.uniform(-translation_radius,translation_radius),before[2]]
-            heading=rng.uniform(-180,180);translate.Set(Gf.Vec3d(*after));rotate.Set(heading)
+            region_index=None
+            if placement_regions is None:
+                after=[before[0]+rng.uniform(-translation_radius,translation_radius),before[1]+rng.uniform(-translation_radius,translation_radius),before[2]]
+                heading=rng.uniform(-180,180);translate.Set(Gf.Vec3d(*after));rotate.Set(heading)
+            else:
+                heading=rng.uniform(-180,180);rotate.Set(heading);translate.Set(Gf.Vec3d(*before))
+                cache.Clear();rotated=cache.ComputeWorldBound(prim).ComputeAlignedRange()
+                if rotated.IsEmpty():raise ValueError(f'empty stock bounds {path}')
+                low,high=rotated.GetMin(),rotated.GetMax();half=[(high[i]-low[i])/2 for i in (0,1)]
+                center=[(high[i]+low[i])/2 for i in (0,1)];options=[]
+                for region_index,r in enumerate(placement_regions):
+                    bounds=[r[0]+half[0]+.05,r[1]+half[1]+.05,r[2]-half[0]-.05,r[3]-half[1]-.05]
+                    if bounds[0]<=bounds[2] and bounds[1]<=bounds[3]:options.append((region_index,bounds))
+                if not options:
+                    attempts.append({'path':path,'trial':trial,'yaw_deg':heading,'conflicts':['no_region_fits_rotated_bounds']});continue
+                region_index,bounds=rng.choice(options)
+                desired=[rng.uniform(bounds[0],bounds[2]),rng.uniform(bounds[1],bounds[3])]
+                after=[before[i]+desired[i]-center[i] for i in (0,1)]+[before[2]]
+                translate.Set(Gf.Vec3d(*after))
             cache.Clear();bound=cache.ComputeWorldBound(prim).ComputeAlignedRange()
             if bound.IsEmpty():raise ValueError(f'empty stock bounds {path}')
             lo=list(bound.GetMin());hi=list(bound.GetMax())
@@ -40,13 +60,13 @@ def randomize_stock(stage,seed,translation_radius=.75,max_trials_per_object=64,r
             conflicts.extend(other for other,a,b in obstacles if all(clipped_lo[i]<b[i]+.05 and hi[i]>a[i]-.05 for i in range(3)))
             for x,y in reserved_xy:
                 if lo[0]<x+.9 and hi[0]>x-.9 and lo[1]<y+.9 and hi[1]>y-.9:conflicts.append('reserved_robot_spawn')
-            attempts.append({'path':path,'trial':trial,'xyz':after,'yaw_deg':heading,'conflicts':conflicts})
+            attempts.append({'path':path,'trial':trial,'xyz':after,'yaw_deg':heading,'region_index':region_index,'conflicts':conflicts})
             if conflicts:continue
             accepted.append((path,lo,hi));records.append({'path':path,'before_xyz':before,'after_xyz':after,'before_yaw_deg':yaw,'after_yaw_deg':heading,'trials':trial+1});break
         else:
             raise PlacementRejected(f'bounded stock placement exhausted for {path}',{'seed':seed,'assets':records,'attempts':attempts,'failed_object':path,'max_trials_per_object':max_trials_per_object})
     if not records:raise ValueError('empty stock collection')
-    return {'seed':seed,'translation_radius_m':translation_radius,'assets':records,'attempts':attempts,'max_trials_per_object':max_trials_per_object,'pair_clearance_m':.05,'environment_obstacle_count':len(obstacles),'reserved_xy':list(reserved_xy),'scope':'sequential stock/environment AABB separation; exact geometry and support require runtime validation'}
+    return {'seed':seed,'translation_radius_m':translation_radius,'assets':records,'attempts':attempts,'max_trials_per_object':max_trials_per_object,'pair_clearance_m':.05,'environment_obstacle_count':len(obstacles),'reserved_xy':list(reserved_xy),'placement_regions':placement_regions,'scope':'sequential stock/environment AABB separation; exact geometry and support require runtime validation'}
 
 
 def validate_stock(stage,query,stock_root):
