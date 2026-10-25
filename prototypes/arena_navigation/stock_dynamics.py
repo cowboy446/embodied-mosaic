@@ -22,11 +22,18 @@ def enable_stock_dynamics(stage,mass_kg=5.):
 
 def summarize(rows,translation_limit=.05,speed_limit=.02):
     import numpy as np
-    if len(rows)<2:return {'passed':False,'reason':'insufficient_samples'}
-    pos=np.asarray([r['transforms'] for r in rows]);vel=np.asarray([r['velocities'] for r in rows])
-    if not np.isfinite(pos).all() or not np.isfinite(vel).all():return {'passed':False,'reason':'nonfinite_states'}
+    if len(rows)<61:return {'passed':False,'reason':'insufficient_samples_for_two_seconds'}
+    times=np.asarray([r['time_s'] for r in rows]);pos=np.asarray([r['transforms'] for r in rows]);vel=np.asarray([r['velocities'] for r in rows])
+    if not np.isfinite(times).all() or not np.isfinite(pos).all() or not np.isfinite(vel).all():return {'passed':False,'reason':'nonfinite_states'}
+    if pos.ndim!=3 or pos.shape[1]<1 or pos.shape[2]!=7 or vel.shape!=(*pos.shape[:2],6):return {'passed':False,'reason':'invalid_state_shapes'}
+    if abs(times[0])>1e-6 or times[-1]<2.-1e-6 or not np.allclose(np.diff(times),1/30,atol=1e-6):return {'passed':False,'reason':'incomplete_or_discontinuous_clock'}
+    norms=np.linalg.norm(pos[:,:,3:],axis=-1)
+    if np.max(np.abs(norms-1))>.001:return {'passed':False,'reason':'invalid_quaternion'}
     drift=np.linalg.norm(pos[-1,:,:3]-pos[0,:,:3],axis=1)
-    tail=vel[max(0,len(rows)-15):]
+    peak=np.linalg.norm(pos[:,:,:3]-pos[0,:,:3],axis=-1).max(axis=0)
+    q=pos[:,:,3:]/norms[:,:,None]
+    angle=np.degrees(2*np.arccos(np.clip(np.abs((q*q[0]).sum(axis=-1)),0,1))).max(axis=0)
+    tail=vel[times>=times[-1]-.5]
     speed=np.linalg.norm(tail[:,:,:3],axis=-1).max(axis=0)
     angular=np.linalg.norm(tail[:,:,3:],axis=-1).max(axis=0)
-    return {'passed':bool((drift<=translation_limit).all() and (speed<=speed_limit).all() and (angular<=.05).all()),'translation_drift_m':drift.tolist(),'max_tail_linear_speed_m_s':speed.tolist(),'max_tail_angular_speed_rad_s':angular.tolist(),'translation_limit_m':translation_limit,'speed_limit_m_s':speed_limit,'angular_speed_limit_rad_s':.05,'scope':'2-second rigid-body drift and terminal velocity probe; contact penetration and material validation remain separate'}
+    return {'passed':bool((peak<=translation_limit).all() and (angle<=10.).all() and (speed<=speed_limit).all() and (angular<=.05).all()),'duration_s':float(times[-1]),'translation_drift_m':drift.tolist(),'max_translation_excursion_m':peak.tolist(),'max_orientation_change_deg':angle.tolist(),'max_tail_linear_speed_m_s':speed.tolist(),'max_tail_angular_speed_rad_s':angular.tolist(),'translation_limit_m':translation_limit,'orientation_limit_deg':10.,'speed_limit_m_s':speed_limit,'angular_speed_limit_rad_s':.05,'scope':'full recorded rigid-body drift/rotation and terminal velocity probe; contact penetration and material validation remain separate'}
