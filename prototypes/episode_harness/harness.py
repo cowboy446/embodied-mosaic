@@ -8,6 +8,7 @@ from PIL import Image
 from proprioception import validate_proprioception
 
 from skill_registry import get_profile
+from robot_model import robot_model
 
 class ProtocolError(ValueError): pass
 
@@ -67,7 +68,7 @@ class Episode:
   # Explicitly constructed public fields; never merge a simulator state dictionary.
   return {'model':'gpt-6.1-sol','reasoning_effort':'low','tools':[], 'instructions':Path(__file__).with_name('agent_instructions.txt').read_text(),
    'input':{'episode':self.token,'observation_id':self.step,'goal':self.goal,
-     'skills':json.loads(json.dumps(self._skills)),**sensor_fields,
+     'skills':json.loads(json.dumps(self._skills)),'robot_model':robot_model(self.skill_profile),**sensor_fields,
      'recent_own_actions':json.loads(json.dumps(self.history[-8:])),
      'image':{'mime_type':'image/png','base64':base64.b64encode(rgb_png).decode()}},
    'validation_schema':response_schema(self._skills), 'session_scope':self.token, 'new_session':self.step==0}

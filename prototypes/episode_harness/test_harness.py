@@ -7,7 +7,7 @@ class BoundaryTests(unittest.TestCase):
   d={'episode':e.token,'observation_id':e.step,'skill':'move_forward','arguments':{'distance_m':.2}};d.update(kw);return json.dumps(d)
  def test_payload_whitelist(self):
   e=Episode('到达可见的红色标记');p=e.request(PNG)
-  self.assertEqual(set(p['input']),{'episode','observation_id','goal','skills','recent_own_actions','image'})
+  self.assertEqual(set(p['input']),{'episode','observation_id','goal','skills','recent_own_actions','image','robot_model'})
   self.assertEqual(p['reasoning_effort'],'low');self.assertEqual(p['tools'],[]);self.assertEqual(p['model'],'gpt-6.1-sol')
  def test_cross_episode_and_stale(self):
   a,b=Episode('A'),Episode('B');a.request(PNG);b.request(PNG)
@@ -54,4 +54,10 @@ class BoundaryTests(unittest.TestCase):
   payload['input']['skills']['move_forward']['distance_m'][1]=999
   with self.assertRaises(ProtocolError):a.accept(self.cmd(a,arguments={'distance_m':999}))
   self.assertEqual(b.request(PNG)['input']['skills']['move_forward']['distance_m'][1],.5)
+ def test_robot_model_is_static_and_not_shared(self):
+  p=Episode('A').request(PNG)['input']['robot_model']
+  self.assertEqual(p['camera']['translation_in_base_m'],[.35,0.,.85])
+  p['camera']['translation_in_base_m'][0]=999
+  self.assertEqual(Episode('B').request(PNG)['input']['robot_model']['camera']['translation_in_base_m'][0],.35)
+  self.assertNotIn('world_pose',p)
 if __name__=='__main__':unittest.main()

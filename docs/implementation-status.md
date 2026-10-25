@@ -104,3 +104,11 @@ Episode ego-agent-001 ran on node43 GPU 7 and exited normally. A fresh-context g
 A scheduling attempt to move the waiting pilot to GPU 3 raced with the original GPU 7 start. Its precondition correctly detected an existing child, but the surrounding shell lacked fail-fast behavior and continued. The duplicate failed at exclusive output-directory creation before SimulationApp initialization. The original run remained active; its PID file was restored. Future scheduling scripts must fail closed on prerequisite checks.
 
 Local harness.py was observed changed back to an older interface outside this edit sequence. Its contents were preserved under runs/external-edits and not overwritten. Server pilot used the previously uploaded proprioception/skill-registry version. Reconcile the local edit before deploying subsequent episodes.
+
+### Calibrated observations and volume query tests
+
+The user confirmed the local harness rollback was accidental; the committed proprioception/profile interface was restored. Public observations now include fixed camera intrinsics, mounting transform and drive dimensions from one robot_model definition also consumed by the renderer. The goal explicitly measures horizontal distance from the base center. No live target distance or world pose is supplied. Fourteen protocol tests pass.
+
+Node43 collision probe 001 passed thin off-axis, self-filter/clear-path, rotation-side and overhead obstacle cases using the installed PhysX query API. The pilot now derives a conservative envelope from the rendered robot world bound and uses overlap/sweep queries. This new integration has not run yet; the flat-ground exclusion below 2.5 cm and unverified contact dynamics mean it is not full safety certification.
+
+Existing batch manifest check: old 20 accepted; diverse40 has 9 accepted, 8 running, 22 pending and 1 rejected. This count is manifest-level evidence, not a fresh per-file revalidation.

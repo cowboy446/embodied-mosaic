@@ -1,0 +1,9 @@
+{
+  "tests": [
+    "thin_off_axis_obstacle_detected",
+    "own_body_filtered_and_clear_path",
+    "rotation_envelope_detects_side_obstacle",
+    "overhead_obstacle_detected"
+  ],
+  "status": "passed_query_tests"
+}
