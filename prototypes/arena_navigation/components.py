@@ -35,7 +35,12 @@ class CarterEmbodiment(EmbodimentBase):
 
 def reached(env,target_xy,tolerance):
  robot=env.scene['robot'];delta=robot.data.root_pos_w[:,:2]-torch.tensor(target_xy,device=env.device)
- valid=(torch.linalg.vector_norm(delta,dim=-1)<tolerance)&(torch.linalg.vector_norm(robot.data.root_lin_vel_w[:,:2],dim=-1)<.03)
+ pos=robot.data.root_pos_w[:,:2]
+ if hasattr(env,'_mosaic_previous_xy'):
+  measured_speed=torch.linalg.vector_norm(pos-env._mosaic_previous_xy,dim=-1)/env.step_dt
+ else:measured_speed=torch.full((env.num_envs,),float('inf'),device=env.device)
+ env._mosaic_previous_xy=pos.clone()
+ valid=(torch.linalg.vector_norm(delta,dim=-1)<tolerance)&(torch.linalg.vector_norm(robot.data.root_lin_vel_w[:,:2],dim=-1)<.03)&(measured_speed<.03)
  if not hasattr(env,'_mosaic_settle'):env._mosaic_settle=torch.zeros(env.num_envs,device=env.device)
  env._mosaic_settle=torch.where(valid,env._mosaic_settle+env.step_dt,torch.zeros_like(env._mosaic_settle))
  return env._mosaic_settle>=.3

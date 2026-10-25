@@ -1,0 +1,34 @@
+{
+  "config": {
+    "output": "/mnt/nas/zhangrong/embodied-mosaic/runs/arena-g1-018",
+    "gpu": 1,
+    "route": true,
+    "seed": 45,
+    "spawn_xy": [
+      -9.100000381469727,
+      28.299999237060547
+    ],
+    "yaw_deg": 90.0,
+    "seconds": 30.0
+  },
+  "route": [
+    [
+      -9.100000381469727,
+      28.30000114440918
+    ],
+    [
+      -7.850000381469727,
+      28.30000114440918
+    ],
+    [
+      -7.850000381469727,
+      26.05000114440918
+    ]
+  ],
+  "support_checks": {
+    "cached_positions": 2573,
+    "rejected_positions": 0,
+    "method": "5 downward rays; flat ground \u00b13cm; normal z >= 0.95",
+    "scope": "sampled support, not continuous surface proof"
+  }
+}

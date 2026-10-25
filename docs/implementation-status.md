@@ -195,3 +195,20 @@ Probes 015/016 add five-ray flat-floor support checks and use seeds 43/44 on
 GPUs 1/2. These are target-path variation tests within one fixed warehouse and
 spawn; they are not yet the scene/asset randomization batch. No acceptance
 thresholds were relaxed.
+
+### Independent settling check and spawn variation
+
+Probe 016 was rejected by the offline positional-speed check (0.0321 m/s vs the
+unchanged 0.03 m/s limit), despite its online physical-velocity success. Online
+termination now requires both physical velocity and successive root-position
+speed below the limit throughout settling. Probe 017 repeats seed 44 and passes
+both checks (5.13 cm final error; 0.0287 m/s maximum settling speed).
+
+The adapter now accepts explicit spawn XY and an additional initial yaw. The
+candidate recipe selection is saved in `evidence/spawn-pilot-recipes.json`.
+Probes 018/019 use two previously free candidate cells separated by >1.5 m, then
+recheck actual runtime clearance/support and replan. Their extra initial yaw is
+90°/180°. Independent distance, settling and RGB checks pass: final errors
+4.07 cm / 3.12 cm; 191 / 252 frames. These are fixed-warehouse spawn/goal variation
+results. Complete collision/contact, asset dependency and randomized-layout
+acceptance remain open; `safety_certified` stays false.

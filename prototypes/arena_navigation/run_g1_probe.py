@@ -1,7 +1,7 @@
 """Arena task-level G1/SONIC integration probe, not batch/navigation acceptance."""
 import argparse,json,sys,traceback,time,hashlib
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
+p=argparse.ArgumentParser();p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
 started_monotonic=time.monotonic();started_unix=time.time()
 (out/'run-config.json').write_text(json.dumps(vars(a),indent=2))
 import site
@@ -35,7 +35,11 @@ try:
   if key in rp.GetVariantSets().GetNames():rp.GetVariantSet(key).SetVariantSelection(val)
  rs.GetRootLayer().Save()
  (out/'input-entrypoints.json').write_text(json.dumps({'scope':'entrypoint file hashes; full transitive asset dependency manifest remains pending','files':{str(path):hashlib.sha256(path.read_bytes()).hexdigest() for path in [src,asset,sonic_root/'output/reference.npz',sonic_root/'scripts/sonic_control.py']}},indent=2))
- ref=np.load(sonic_root/'output/reference.npz')['qpos'];initial=ref[0];emb=G1SonicEmbodiment(str(out/'robot.usda'),(-9.1,29.05,float(initial[2])),initial[3:7],sonic,seed=a.seed)
+ ref=np.load(sonic_root/'output/reference.npz')['qpos'];initial=ref[0].copy()
+ if not np.isfinite([*a.spawn_xy,a.yaw_deg]).all():raise ValueError('non-finite initial pose')
+ from scipy.spatial.transform import Rotation
+ initial[3:7]=(Rotation.from_euler('z',a.yaw_deg,degrees=True)*sonic.rot(initial[3:7])).as_quat()[[3,0,1,2]]
+ emb=G1SonicEmbodiment(str(out/'robot.usda'),(*a.spawn_xy,float(initial[2])),initial[3:7],sonic,seed=a.seed)
  emb.scene_config.robot.init_state.joint_pos=dict(zip(sonic.NAMES,initial[7:].tolist()))
  descriptor=IsaacLabArenaEnvironment(name='Mosaic-G1-SONIC-Probe-v0',scene=Scene([Background(name='warehouse',usd_path=str(out/'background.usda'),object_min_z=0.)]),embodiment=emb,task=NavigateTask((-5.,29.)))
  args=argparse.Namespace(mimic=False,device=f'cuda:{a.gpu}',num_envs=1,disable_fabric=False)

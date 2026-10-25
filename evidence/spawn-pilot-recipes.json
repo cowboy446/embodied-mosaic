@@ -1,0 +1,34 @@
+{
+  "source_grid": "arena-g1-014/grid-plan.json",
+  "selection_seed": 20261025,
+  "candidate_bounds": [
+    -11.5,
+    -8,
+    27.5,
+    29
+  ],
+  "minimum_spawn_separation_m": 1.5,
+  "runtime_support_and_clearance_required": true,
+  "recipes": [
+    {
+      "run": "arena-g1-018",
+      "gpu": 1,
+      "seed": 45,
+      "spawn_xy": [
+        -9.100000381469727,
+        28.299999237060547
+      ],
+      "yaw_deg": 90
+    },
+    {
+      "run": "arena-g1-019",
+      "gpu": 3,
+      "seed": 46,
+      "spawn_xy": [
+        -10.850000381469727,
+        28.299999237060547
+      ],
+      "yaw_deg": 180
+    }
+  ]
+}

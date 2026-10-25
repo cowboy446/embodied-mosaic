@@ -5,13 +5,21 @@
     "commit": "f479817431f6a02a6e40e4ea76d89203b59146d4",
     "isaaclab_submodule": "6acdd82a1633732d32bb575e3d792e34fdeb437e",
     "docker_default_sim": "5.0.0",
-    "status": "candidate_not_runtime_validated"
+    "status": "runtime_integration_validated_with_isolated_overlay",
+    "evidence": [
+      "evidence/arena-probe-014-audit.json"
+    ],
+    "patches": [
+      "patches/arena-0.1.1-lazy-lightwheel.patch"
+    ],
+    "scope": "single-environment Arena G1/SONIC integration; full task safety and batch stability not certified"
   },
   "target_sim": "5.1.0",
   "observed_server_python": "3.11.13",
-  "observed_isaaclab_importable": false,
+  "observed_isaaclab_importable": true,
   "rejected_direct_install_candidates": {
     "main": "requires Sim 6.2 / Lab 3.0 per AGENTS.md",
     "release/0.2.0": "Docker default Sim 6.0.0-dev2"
-  }
+  },
+  "isaaclab_import_scope": "pinned server PYTHONPATH and isolated IK dependencies, not global installation"
 }

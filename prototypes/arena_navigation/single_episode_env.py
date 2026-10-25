@@ -8,6 +8,7 @@ class SingleEpisodeEnv(ManagerBasedRLEnv):
  def reset(self,*args,**kwargs):
   self._terminal_hold=False;self._inside_step=False
   if hasattr(self,'_mosaic_settle'):del self._mosaic_settle
+  if hasattr(self,'_mosaic_previous_xy'):del self._mosaic_previous_xy
   return super().reset(*args,**kwargs)
  def step(self,action):
   if getattr(self,'_terminal_hold',False):raise RuntimeError('episode ended; explicit reset required')
