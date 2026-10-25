@@ -6,20 +6,34 @@ import random
 from pxr import Usd,UsdGeom,UsdPhysics,Gf
 
 
-def randomize_stock(stage,seed,translation_radius=.75):
+class PlacementRejected(ValueError):
+    def __init__(self,message,evidence):
+        super().__init__(message);self.evidence=evidence
+
+def randomize_stock(stage,seed,translation_radius=.75,max_trials_per_object=64):
     stock=stage.GetPrimAtPath('/World/Stock')
     if not stock:raise ValueError('scene has no reusable stock assets')
-    rng=random.Random(seed);records=[]
+    rng=random.Random(seed);records=[];accepted=[];attempts=[]
+    cache=UsdGeom.BBoxCache(Usd.TimeCode.Default(),['default','render','proxy'],False,True)
     for prim in sorted(stock.GetChildren(),key=lambda p:str(p.GetPath())):
         ops={op.GetOpType():op for op in UsdGeom.Xformable(prim).GetOrderedXformOps()}
         translate=ops.get(UsdGeom.XformOp.TypeTranslate);rotate=ops.get(UsdGeom.XformOp.TypeRotateZ)
         if translate is None or rotate is None:raise ValueError(f'unsupported stock transform {prim.GetPath()}')
-        before=list(translate.Get());yaw=float(rotate.Get())
-        after=[before[0]+rng.uniform(-translation_radius,translation_radius),before[1]+rng.uniform(-translation_radius,translation_radius),before[2]]
-        heading=rng.uniform(-180,180);translate.Set(Gf.Vec3d(*after));rotate.Set(heading)
-        records.append({'path':str(prim.GetPath()),'before_xyz':before,'after_xyz':after,'before_yaw_deg':yaw,'after_yaw_deg':heading})
+        before=list(translate.Get());yaw=float(rotate.Get());path=str(prim.GetPath())
+        for trial in range(max_trials_per_object):
+            after=[before[0]+rng.uniform(-translation_radius,translation_radius),before[1]+rng.uniform(-translation_radius,translation_radius),before[2]]
+            heading=rng.uniform(-180,180);translate.Set(Gf.Vec3d(*after));rotate.Set(heading)
+            cache.Clear();bound=cache.ComputeWorldBound(prim).ComputeAlignedRange()
+            if bound.IsEmpty():raise ValueError(f'empty stock bounds {path}')
+            lo=list(bound.GetMin());hi=list(bound.GetMax())
+            conflicts=[other for other,a,b in accepted if all(lo[i]<b[i]+.05 and hi[i]>a[i]-.05 for i in range(3))]
+            attempts.append({'path':path,'trial':trial,'xyz':after,'yaw_deg':heading,'conflicts':conflicts})
+            if conflicts:continue
+            accepted.append((path,lo,hi));records.append({'path':path,'before_xyz':before,'after_xyz':after,'before_yaw_deg':yaw,'after_yaw_deg':heading,'trials':trial+1});break
+        else:
+            raise PlacementRejected(f'bounded stock placement exhausted for {path}',{'seed':seed,'assets':records,'attempts':attempts,'failed_object':path,'max_trials_per_object':max_trials_per_object})
     if not records:raise ValueError('empty stock collection')
-    return {'seed':seed,'translation_radius_m':translation_radius,'assets':records,'scope':'pose randomization; geometry validation required before rollout'}
+    return {'seed':seed,'translation_radius_m':translation_radius,'assets':records,'attempts':attempts,'max_trials_per_object':max_trials_per_object,'pair_clearance_m':.05,'scope':'sequential stock AABB separation; environment geometry and support require runtime validation'}
 
 
 def validate_stock(stage,query,stock_root):

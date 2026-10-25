@@ -1,7 +1,7 @@
 """Arena task-level G1/SONIC integration probe, not batch/navigation acceptance."""
 import argparse,json,sys,traceback,time,hashlib
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--scene-source');p.add_argument('--random-stock',action='store_true');p.add_argument('--scene-name',default='warehouse');p.add_argument('--grid-radius',type=float,default=5.);p.add_argument('--min-path',type=float,default=3.);p.add_argument('--max-path',type=float,default=5.);p.add_argument('--prefer-far',action='store_true');p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
+p=argparse.ArgumentParser();p.add_argument('--scene-source');p.add_argument('--random-stock',action='store_true');p.add_argument('--dynamic-stock',action='store_true');p.add_argument('--scene-name',default='warehouse');p.add_argument('--grid-radius',type=float,default=5.);p.add_argument('--min-path',type=float,default=3.);p.add_argument('--max-path',type=float,default=5.);p.add_argument('--prefer-far',action='store_true');p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
 started_monotonic=time.monotonic();started_unix=time.time()
 (out/'run-config.json').write_text(json.dumps(vars(a),indent=2))
 import site
@@ -45,8 +45,14 @@ try:
   if not authored:raise RuntimeError('no native environment meshes')
   (out/'scene-collision-authoring.json').write_text(json.dumps({'mode':'native_static_triangle_meshes','instanceability_overrides':instance_overrides,'source_asset_files_modified':False,'enabled_meshes':authored,'disabled_legacy_proxies':['/World/SceneCollision','/World/PhysicsFloor','/World/Environment/GroundPlane'],'scope':'full environment mesh collision authoring, runtime coverage still needs validation'},indent=2))
  if a.random_stock:
-  from random_stock import randomize_stock
-  (out/'stock-randomization.json').write_text(json.dumps(randomize_stock(bg,a.seed),indent=2))
+  from random_stock import randomize_stock,PlacementRejected
+  try:stock_recipe=randomize_stock(bg,a.seed)
+  except PlacementRejected as exc:
+   (out/'stock-randomization-rejected.json').write_text(json.dumps(exc.evidence,indent=2));raise
+  (out/'stock-randomization.json').write_text(json.dumps(stock_recipe,indent=2))
+ if a.dynamic_stock:
+  from stock_dynamics import enable_stock_dynamics
+  (out/'stock-physics-authoring.json').write_text(json.dumps(enable_stock_dynamics(bg),indent=2))
  bg.GetRootLayer().Save()
  asset=root/'campaign20/assets/Assets/Isaac/5.1/Isaac/Robots/Unitree/G1/g1.usd'
  rs=Usd.Stage.CreateNew(str(out/'robot.usda'));rp=rs.DefinePrim('/Robot','Xform');rp.GetReferences().AddReference(str(asset));rs.SetDefaultPrim(rp)
@@ -79,6 +85,14 @@ try:
   aligned=body_audit.sample(0.,robot.data.body_link_pos_w[0].cpu().numpy(),robot.data.body_link_quat_w[0].cpu().numpy(),robot.data.root_pos_w[0,:2].cpu().numpy())
   (out/'spawn-alignment.json').write_text(json.dumps({'flat_floor_z_m':0.,'clearance_m':.005,'lift_m':lift,'before':initial_envelope,'after':aligned},indent=2))
   if aligned['geometry_min_z_m']<0.:raise RuntimeError('spawn alignment did not clear floor')
+ stock_state_rows=[];stock_view=None
+ if a.dynamic_stock:
+  import omni.physics.tensors.impl.api as physx
+  from isaaclab.sim.utils import get_current_stage_id
+  stock_sim_view=physx.create_simulation_view('torch',get_current_stage_id());stock_sim_view.set_subspace_roots('/')
+  stock_view=stock_sim_view.create_rigid_body_view('/World/envs/env_0/'+a.scene_name+'/Stock/*')
+  if stock_view.count<1:raise RuntimeError('no stock rigid bodies in PhysX view')
+  stock_state_rows.append({'time_s':0.,'transforms':stock_view.get_transforms().cpu().tolist(),'velocities':stock_view.get_velocities().cpu().tolist()})
  camera=env.scene['ego_camera'];capture=[]
  for _ in range(8):env.sim.render()
  camera.update(0.,force_recompute=True)
@@ -141,6 +155,7 @@ try:
    d=robot.data
    if route_policy:context.append(np.r_[d.root_pos_w[0].cpu().numpy(),d.root_quat_w[0].cpu().numpy(),d.joint_pos[0,ids].cpu().numpy()])
    capture.append({'time_s':(step+1)/150,'image':image_name,'position':d.root_pos_w[0].cpu().tolist(),'quaternion_wxyz':d.root_quat_w[0].cpu().tolist(),'joint_position':d.joint_pos[0].cpu().tolist(),'joint_velocity':d.joint_vel[0].cpu().tolist(),'control_target':target.tolist(),'camera_position':camera.data.pos_w[0].cpu().tolist(),'camera_quaternion_wxyz':camera.data.quat_w_world[0].cpu().tolist()})
+  if stock_view is not None and (step+1)%5==0:stock_state_rows.append({'time_s':(step+1)/150,'transforms':stock_view.get_transforms().cpu().tolist(),'velocities':stock_view.get_velocities().cpu().tolist()})
   states.append({'time_s':(step+1)/150,'position':robot.data.root_pos_w[0].cpu().tolist(),'joint_position':robot.data.joint_pos[0].cpu().tolist()})
   if float(robot.data.root_pos_w[0,2])<.45:raise RuntimeError('fall detected')
   if route_policy and (step+1)%5==0:
@@ -165,6 +180,9 @@ except BaseException:
  if 'planner_logs' in locals():(out/'planner-log.json').write_text(json.dumps(planner_logs))
  if 'env' in locals():env.close()
 finally:
+ if 'stock_state_rows' in locals() and stock_state_rows:
+  from stock_dynamics import summarize
+  (out/'stock-dynamics.json').write_text(json.dumps({'samples':stock_state_rows,'summary':summarize(stock_state_rows)},indent=2))
  if 'body_audit' in locals():(out/'body-envelope.json').write_text(json.dumps(body_audit.summary(),indent=2))
  report.update(wall_seconds=time.monotonic()-started_monotonic,started_unix=started_unix,seed=a.seed,gpu=a.gpu)
  (out/'report.json').write_text(json.dumps(report,indent=2));print('REPORT',report['status'],flush=True);app.close()

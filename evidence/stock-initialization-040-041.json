@@ -1,0 +1,440 @@
+{
+  "040": {
+    "summary": {
+      "passed": true,
+      "translation_drift_m": [
+        0.00038871675427128177,
+        1.4901161193847656e-08,
+        0.0003983658953895384,
+        0.0,
+        1.2013700229374393e-07,
+        2.9802322387695312e-08,
+        3.414154885201379e-06
+      ],
+      "max_tail_linear_speed_m_s": [
+        0.00011283642787253356,
+        7.939448917075649e-06,
+        9.356632742124735e-05,
+        3.7932006227277786e-06,
+        5.491360773562432e-05,
+        6.807280383749216e-05,
+        0.002533379184629878
+      ],
+      "max_tail_angular_speed_rad_s": [
+        0.00020543055544444572,
+        2.665465226396386e-05,
+        0.00016519546049833356,
+        2.702472305163151e-06,
+        0.00022886649654779405,
+        0.00010191124780917626,
+        0.0030336152913062967
+      ],
+      "translation_limit_m": 0.05,
+      "speed_limit_m_s": 0.02,
+      "angular_speed_limit_rad_s": 0.05,
+      "scope": "2-second rigid-body drift and terminal velocity probe; contact penetration and material validation remain separate"
+    },
+    "physics": [
+      {
+        "path": "/World/Stock/item00",
+        "mass_kg": 5.0,
+        "collision_approximation": "convexHull",
+        "mass_source": "synthetic initialization-test assumption"
+      },
+      {
+        "path": "/World/Stock/item01",
+        "mass_kg": 5.0,
+        "collision_approximation": "convexHull",
+        "mass_source": "synthetic initialization-test assumption"
+      },
+      {
+        "path": "/World/Stock/item02",
+        "mass_kg": 5.0,
+        "collision_approximation": "convexHull",
+        "mass_source": "synthetic initialization-test assumption"
+      },
+      {
+        "path": "/World/Stock/item03",
+        "mass_kg": 5.0,
+        "collision_approximation": "convexHull",
+        "mass_source": "synthetic initialization-test assumption"
+      },
+      {
+        "path": "/World/Stock/item04",
+        "mass_kg": 5.0,
+        "collision_approximation": "convexHull",
+        "mass_source": "synthetic initialization-test assumption"
+      },
+      {
+        "path": "/World/Stock/item05",
+        "mass_kg": 5.0,
+        "collision_approximation": "convexHull",
+        "mass_source": "synthetic initialization-test assumption"
+      },
+      {
+        "path": "/World/Stock/item06",
+        "mass_kg": 5.0,
+        "collision_approximation": "convexHull",
+        "mass_source": "synthetic initialization-test assumption"
+      }
+    ],
+    "report": {
+      "phase": "rollout",
+      "status": "stepped",
+      "scope": "Arena G1 SONIC task integration, not navigation acceptance",
+      "arena_environment_constructed": true,
+      "physics_dt": 0.0033333333333333335,
+      "decimation": 2,
+      "control_hz": 50,
+      "recording_hz": 30,
+      "capture_frames": 60,
+      "action_shape": [
+        1,
+        29
+      ],
+      "joint_names": [
+        "left_hip_pitch_joint",
+        "right_hip_pitch_joint",
+        "waist_yaw_joint",
+        "left_hip_roll_joint",
+        "right_hip_roll_joint",
+        "waist_roll_joint",
+        "left_hip_yaw_joint",
+        "right_hip_yaw_joint",
+        "waist_pitch_joint",
+        "left_knee_joint",
+        "right_knee_joint",
+        "left_shoulder_pitch_joint",
+        "right_shoulder_pitch_joint",
+        "left_ankle_pitch_joint",
+        "right_ankle_pitch_joint",
+        "left_shoulder_roll_joint",
+        "right_shoulder_roll_joint",
+        "left_ankle_roll_joint",
+        "right_ankle_roll_joint",
+        "left_shoulder_yaw_joint",
+        "right_shoulder_yaw_joint",
+        "left_elbow_joint",
+        "right_elbow_joint",
+        "left_wrist_roll_joint",
+        "right_wrist_roll_joint",
+        "left_wrist_pitch_joint",
+        "right_wrist_pitch_joint",
+        "left_wrist_yaw_joint",
+        "right_wrist_yaw_joint",
+        "left_hand_index_0_joint",
+        "left_hand_middle_0_joint",
+        "left_hand_thumb_0_joint",
+        "right_hand_index_0_joint",
+        "right_hand_middle_0_joint",
+        "right_hand_thumb_0_joint",
+        "left_hand_index_1_joint",
+        "left_hand_middle_1_joint",
+        "left_hand_thumb_1_joint",
+        "right_hand_index_1_joint",
+        "right_hand_middle_1_joint",
+        "right_hand_thumb_1_joint",
+        "left_hand_thumb_2_joint",
+        "right_hand_thumb_2_joint"
+      ],
+      "wall_seconds": 61.98304587230086,
+      "started_unix": 1792923071.7123322,
+      "seed": 86,
+      "gpu": 0
+    }
+  },
+  "041": {
+    "summary": {
+      "passed": false,
+      "translation_drift_m": [
+        0.1074681734211532,
+        0.00030248596153644624,
+        0.18846071512126047,
+        0.10940501125207422,
+        9.381006117562079e-05
+      ],
+      "max_tail_linear_speed_m_s": [
+        2.0574449346715293,
+        0.0004704828203861582,
+        7.76516821846524e-05,
+        2.058763014400284,
+        0.00033349246534548774
+      ],
+      "max_tail_angular_speed_rad_s": [
+        8.928646178749391,
+        9.025547096136233e-05,
+        0.00021727430286158075,
+        7.0423239484568185,
+        0.0008768860539924282
+      ],
+      "translation_limit_m": 0.05,
+      "speed_limit_m_s": 0.02,
+      "angular_speed_limit_rad_s": 0.05,
+      "scope": "2-second rigid-body drift and terminal velocity probe; contact penetration and material validation remain separate"
+    },
+    "physics": [
+      {
+        "path": "/World/Stock/item00",
+        "mass_kg": 5.0,
+        "collision_approximation": "convexHull",
+        "mass_source": "synthetic initialization-test assumption"
+      },
+      {
+        "path": "/World/Stock/item01",
+        "mass_kg": 5.0,
+        "collision_approximation": "convexHull",
+        "mass_source": "synthetic initialization-test assumption"
+      },
+      {
+        "path": "/World/Stock/item02",
+        "mass_kg": 5.0,
+        "collision_approximation": "convexHull",
+        "mass_source": "synthetic initialization-test assumption"
+      },
+      {
+        "path": "/World/Stock/item03",
+        "mass_kg": 5.0,
+        "collision_approximation": "convexHull",
+        "mass_source": "synthetic initialization-test assumption"
+      },
+      {
+        "path": "/World/Stock/item04",
+        "mass_kg": 5.0,
+        "collision_approximation": "convexHull",
+        "mass_source": "synthetic initialization-test assumption"
+      }
+    ],
+    "report": {
+      "phase": "rollout",
+      "status": "stepped",
+      "scope": "Arena G1 SONIC task integration, not navigation acceptance",
+      "arena_environment_constructed": true,
+      "physics_dt": 0.0033333333333333335,
+      "decimation": 2,
+      "control_hz": 50,
+      "recording_hz": 30,
+      "capture_frames": 60,
+      "action_shape": [
+        1,
+        29
+      ],
+      "joint_names": [
+        "left_hip_pitch_joint",
+        "right_hip_pitch_joint",
+        "waist_yaw_joint",
+        "left_hip_roll_joint",
+        "right_hip_roll_joint",
+        "waist_roll_joint",
+        "left_hip_yaw_joint",
+        "right_hip_yaw_joint",
+        "waist_pitch_joint",
+        "left_knee_joint",
+        "right_knee_joint",
+        "left_shoulder_pitch_joint",
+        "right_shoulder_pitch_joint",
+        "left_ankle_pitch_joint",
+        "right_ankle_pitch_joint",
+        "left_shoulder_roll_joint",
+        "right_shoulder_roll_joint",
+        "left_ankle_roll_joint",
+        "right_ankle_roll_joint",
+        "left_shoulder_yaw_joint",
+        "right_shoulder_yaw_joint",
+        "left_elbow_joint",
+        "right_elbow_joint",
+        "left_wrist_roll_joint",
+        "right_wrist_roll_joint",
+        "left_wrist_pitch_joint",
+        "right_wrist_pitch_joint",
+        "left_wrist_yaw_joint",
+        "right_wrist_yaw_joint",
+        "left_hand_index_0_joint",
+        "left_hand_middle_0_joint",
+        "left_hand_thumb_0_joint",
+        "right_hand_index_0_joint",
+        "right_hand_middle_0_joint",
+        "right_hand_thumb_0_joint",
+        "left_hand_index_1_joint",
+        "left_hand_middle_1_joint",
+        "left_hand_thumb_1_joint",
+        "right_hand_index_1_joint",
+        "right_hand_middle_1_joint",
+        "right_hand_thumb_1_joint",
+        "left_hand_thumb_2_joint",
+        "right_hand_thumb_2_joint"
+      ],
+      "wall_seconds": 83.20112097635865,
+      "started_unix": 1792923071.7901437,
+      "seed": 86,
+      "gpu": 1
+    }
+  },
+  "stock_campaign": {
+    "started_unix": 1792922893.762573,
+    "recipes": [
+      {
+        "scene": "office",
+        "source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/rulegen-diverse40/runs/office-152000-0b1a60c48e/attempt-00/output/scene_initial.usda",
+        "spawn_xy": [
+          -4.722265,
+          7.512265
+        ],
+        "gpu": 6,
+        "attempts": [
+          {
+            "run_id": "arena-g1-034",
+            "seed": 83
+          },
+          {
+            "run_id": "arena-g1-036",
+            "seed": 84
+          },
+          {
+            "run_id": "arena-g1-038",
+            "seed": 85
+          }
+        ]
+      },
+      {
+        "scene": "hospital",
+        "source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/rulegen-diverse40/runs/hospital-152001-757e966d26/attempt-00/output/scene_initial.usda",
+        "spawn_xy": [
+          -9.261082,
+          10.508025
+        ],
+        "gpu": 7,
+        "attempts": [
+          {
+            "run_id": "arena-g1-035",
+            "seed": 83
+          },
+          {
+            "run_id": "arena-g1-037",
+            "seed": 84
+          },
+          {
+            "run_id": "arena-g1-039",
+            "seed": 85
+          }
+        ]
+      }
+    ],
+    "attempts": [
+      {
+        "scene": "office",
+        "run_id": "arena-g1-034",
+        "seed": 83,
+        "status": "terminal",
+        "started_unix": 1792922893.7636395,
+        "pid": 1244314,
+        "finished_unix": 1792922944.6685245,
+        "result": {
+          "decision": "retry_layout",
+          "initial_geometry_passed": false,
+          "rejected_objects": [
+            "/World/envs/env_0/office/Stock/item06"
+          ],
+          "returncode": 0
+        }
+      },
+      {
+        "scene": "hospital",
+        "run_id": "arena-g1-035",
+        "seed": 83,
+        "status": "terminal",
+        "started_unix": 1792922893.7639632,
+        "pid": 1244315,
+        "finished_unix": 1792922967.501944,
+        "result": {
+          "decision": "retry_layout",
+          "initial_geometry_passed": false,
+          "rejected_objects": [
+            "/World/envs/env_0/hospital/Stock/item01",
+            "/World/envs/env_0/hospital/Stock/item03",
+            "/World/envs/env_0/hospital/Stock/item04"
+          ],
+          "returncode": 0
+        }
+      },
+      {
+        "scene": "office",
+        "run_id": "arena-g1-036",
+        "seed": 84,
+        "status": "terminal",
+        "started_unix": 1792922944.6694121,
+        "pid": 1247818,
+        "finished_unix": 1792922998.9006648,
+        "result": {
+          "decision": "retry_layout",
+          "initial_geometry_passed": false,
+          "rejected_objects": [
+            "/World/envs/env_0/office/Stock/item00",
+            "/World/envs/env_0/office/Stock/item01",
+            "/World/envs/env_0/office/Stock/item06"
+          ],
+          "returncode": 0
+        }
+      },
+      {
+        "scene": "hospital",
+        "run_id": "arena-g1-037",
+        "seed": 84,
+        "status": "terminal",
+        "started_unix": 1792922967.5076525,
+        "pid": 1249344,
+        "finished_unix": 1792923047.0836213,
+        "result": {
+          "decision": "retry_layout",
+          "initial_geometry_passed": false,
+          "rejected_objects": [
+            "/World/envs/env_0/hospital/Stock/item01"
+          ],
+          "returncode": 0
+        }
+      },
+      {
+        "scene": "office",
+        "run_id": "arena-g1-038",
+        "seed": 85,
+        "status": "terminal",
+        "started_unix": 1792922998.906566,
+        "pid": 1251340,
+        "finished_unix": 1792923045.1946368,
+        "result": {
+          "decision": "retry_layout",
+          "initial_geometry_passed": false,
+          "rejected_objects": [
+            "/World/envs/env_0/office/Stock/item00",
+            "/World/envs/env_0/office/Stock/item02",
+            "/World/envs/env_0/office/Stock/item06"
+          ],
+          "returncode": 0
+        }
+      },
+      {
+        "scene": "hospital",
+        "run_id": "arena-g1-039",
+        "seed": 85,
+        "status": "terminal",
+        "started_unix": 1792923047.090009,
+        "pid": 1253987,
+        "finished_unix": 1792923117.015922,
+        "result": {
+          "decision": "retry_layout",
+          "initial_geometry_passed": false,
+          "rejected_objects": [
+            "/World/envs/env_0/hospital/Stock/item00",
+            "/World/envs/env_0/hospital/Stock/item01",
+            "/World/envs/env_0/hospital/Stock/item02",
+            "/World/envs/env_0/hospital/Stock/item03",
+            "/World/envs/env_0/hospital/Stock/item04"
+          ],
+          "returncode": 0
+        }
+      }
+    ],
+    "scope": "bounded initial geometry trials plus navigation; physical settling not certified",
+    "finished_unix": 1792923117.0220163,
+    "status": "finished"
+  }
+}
