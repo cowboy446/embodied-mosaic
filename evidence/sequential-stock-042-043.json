@@ -1,0 +1,743 @@
+{
+  "042": {
+    "stock-randomization.json": {
+      "seed": 83,
+      "translation_radius_m": 0.75,
+      "assets": [
+        {
+          "path": "/World/Stock/item00",
+          "before_xyz": [
+            -3.8493958223156457,
+            9.310388091638377,
+            -6.26971145349268e-07
+          ],
+          "after_xyz": [
+            -3.855161567615027,
+            9.845534146933545,
+            -6.26971145349268e-07
+          ],
+          "before_yaw_deg": 121.97193145751953,
+          "after_yaw_deg": -148.07007963865698,
+          "trials": 1
+        },
+        {
+          "path": "/World/Stock/item01",
+          "before_xyz": [
+            -2.6439822702834963,
+            9.209131352578154,
+            8.523718784564228e-09
+          ],
+          "after_xyz": [
+            -2.826349214748544,
+            8.53287333566579,
+            8.523718784564228e-09
+          ],
+          "before_yaw_deg": -160.87318420410156,
+          "after_yaw_deg": 53.925453397607924,
+          "trials": 1
+        },
+        {
+          "path": "/World/Stock/item02",
+          "before_xyz": [
+            -4.914134026163367,
+            9.507408908271302,
+            -6.26971145349268e-07
+          ],
+          "after_xyz": [
+            -5.380355304616564,
+            9.220842558586684,
+            -6.26971145349268e-07
+          ],
+          "before_yaw_deg": -52.617252349853516,
+          "after_yaw_deg": 114.71379065331377,
+          "trials": 1
+        },
+        {
+          "path": "/World/Stock/item03",
+          "before_xyz": [
+            -7.330193665051006,
+            6.051591080551168,
+            1.0307741601242866e-07
+          ],
+          "after_xyz": [
+            -7.998267865979664,
+            5.531899464472593,
+            1.0307741601242866e-07
+          ],
+          "before_yaw_deg": -51.890525817871094,
+          "after_yaw_deg": -71.52829019823078,
+          "trials": 1
+        },
+        {
+          "path": "/World/Stock/item04",
+          "before_xyz": [
+            -1.9824708798383948,
+            5.104067548210157,
+            -3.7294600664106723e-07
+          ],
+          "after_xyz": [
+            -1.515095844975179,
+            5.067229930746591,
+            -3.7294600664106723e-07
+          ],
+          "before_yaw_deg": -45.37648010253906,
+          "after_yaw_deg": 45.41489403388445,
+          "trials": 1
+        },
+        {
+          "path": "/World/Stock/item05",
+          "before_xyz": [
+            -4.8614022279335165,
+            5.8290506310171395,
+            7.849607011019592e-09
+          ],
+          "after_xyz": [
+            -4.260030985139807,
+            5.423797937661781,
+            7.849607011019592e-09
+          ],
+          "before_yaw_deg": -123.6771469116211,
+          "after_yaw_deg": -19.49680307848439,
+          "trials": 1
+        },
+        {
+          "path": "/World/Stock/item06",
+          "before_xyz": [
+            -3.147700786318717,
+            5.738679126278688,
+            3.729459111441257e-09
+          ],
+          "after_xyz": [
+            -2.762347499010387,
+            5.512448904141514,
+            3.729459111441257e-09
+          ],
+          "before_yaw_deg": 157.22601318359375,
+          "after_yaw_deg": 26.690596792724506,
+          "trials": 2
+        }
+      ],
+      "attempts": [
+        {
+          "path": "/World/Stock/item00",
+          "trial": 0,
+          "xyz": [
+            -3.855161567615027,
+            9.845534146933545,
+            -6.26971145349268e-07
+          ],
+          "yaw_deg": -148.07007963865698,
+          "conflicts": []
+        },
+        {
+          "path": "/World/Stock/item01",
+          "trial": 0,
+          "xyz": [
+            -2.826349214748544,
+            8.53287333566579,
+            8.523718784564228e-09
+          ],
+          "yaw_deg": 53.925453397607924,
+          "conflicts": []
+        },
+        {
+          "path": "/World/Stock/item02",
+          "trial": 0,
+          "xyz": [
+            -5.380355304616564,
+            9.220842558586684,
+            -6.26971145349268e-07
+          ],
+          "yaw_deg": 114.71379065331377,
+          "conflicts": []
+        },
+        {
+          "path": "/World/Stock/item03",
+          "trial": 0,
+          "xyz": [
+            -7.998267865979664,
+            5.531899464472593,
+            1.0307741601242866e-07
+          ],
+          "yaw_deg": -71.52829019823078,
+          "conflicts": []
+        },
+        {
+          "path": "/World/Stock/item04",
+          "trial": 0,
+          "xyz": [
+            -1.515095844975179,
+            5.067229930746591,
+            -3.7294600664106723e-07
+          ],
+          "yaw_deg": 45.41489403388445,
+          "conflicts": []
+        },
+        {
+          "path": "/World/Stock/item05",
+          "trial": 0,
+          "xyz": [
+            -4.260030985139807,
+            5.423797937661781,
+            7.849607011019592e-09
+          ],
+          "yaw_deg": -19.49680307848439,
+          "conflicts": []
+        },
+        {
+          "path": "/World/Stock/item06",
+          "trial": 0,
+          "xyz": [
+            -3.647560442961446,
+            6.161053699224127,
+            3.729459111441257e-09
+          ],
+          "yaw_deg": -172.8515080490059,
+          "conflicts": [
+            "/World/Stock/item05"
+          ]
+        },
+        {
+          "path": "/World/Stock/item06",
+          "trial": 1,
+          "xyz": [
+            -2.762347499010387,
+            5.512448904141514,
+            3.729459111441257e-09
+          ],
+          "yaw_deg": 26.690596792724506,
+          "conflicts": []
+        }
+      ],
+      "max_trials_per_object": 64,
+      "pair_clearance_m": 0.05,
+      "scope": "sequential stock AABB separation; environment geometry and support require runtime validation"
+    },
+    "stock-initialization.json": {
+      "passed": true,
+      "objects": [
+        {
+          "path": "/World/envs/env_0/office/Stock/item00",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item00/Geometry/SM_Chair"
+          ],
+          "rigid_bodies": [],
+          "physics_kind": "static",
+          "bounds": [
+            [
+              -4.234467690896842,
+              9.453617968554715,
+              0.0
+            ],
+            [
+              -3.408230023011134,
+              10.279592471538823,
+              0.8772270603304672
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item01",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item01/Geometry/SM_BoxPortableA"
+          ],
+          "rigid_bodies": [],
+          "physics_kind": "static",
+          "bounds": [
+            [
+              -3.0621560903772314,
+              8.285986055644088,
+              0.0
+            ],
+            [
+              -2.590542282963953,
+              8.779760692768367,
+              0.30828399821506575
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item02",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item02/Geometry/SM_Chair"
+          ],
+          "rigid_bodies": [],
+          "physics_kind": "static",
+          "bounds": [
+            [
+              -5.761333595647924,
+              8.786813970126822,
+              0.0
+            ],
+            [
+              -4.966063253956316,
+              9.582487782127885,
+              0.8772270603304672
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item03",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item03/Geometry/SM_Armchair"
+          ],
+          "rigid_bodies": [],
+          "physics_kind": "static",
+          "bounds": [
+            [
+              -8.62138067052527,
+              4.97826723780784,
+              0.0
+            ],
+            [
+              -7.375154988761172,
+              6.085531232784875,
+              0.7900000091255964
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item04",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item04/Geometry/SM_BoxPortableC"
+          ],
+          "rigid_bodies": [],
+          "physics_kind": "static",
+          "bounds": [
+            [
+              -1.7552498469352982,
+              4.826563898192912,
+              0.0
+            ],
+            [
+              -1.2749418296260848,
+              5.30789597688457,
+              0.30000000181818887
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item05",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item05/Geometry/SM_BoxPortableB"
+          ],
+          "rigid_bodies": [],
+          "physics_kind": "static",
+          "bounds": [
+            [
+              -4.478436051407051,
+              5.231586627858393,
+              0.0
+            ],
+            [
+              -4.041480387135739,
+              5.615773999270504,
+              0.27600212265215857
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/office/Stock/item06",
+          "enabled_colliders": [
+            "/World/envs/env_0/office/Stock/item06/Geometry/SM_Plant02"
+          ],
+          "rigid_bodies": [],
+          "physics_kind": "static",
+          "bounds": [
+            [
+              -3.3784147638808726,
+              4.9178612460069635,
+              0.0
+            ],
+            [
+              -2.0882042445258606,
+              6.239363804486053,
+              1.554042937743892
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        }
+      ],
+      "scope": "conservative initial AABB and five-ray flat-floor support checks; not contact/settling certification"
+    }
+  },
+  "043": {
+    "stock-randomization.json": {
+      "seed": 83,
+      "translation_radius_m": 0.75,
+      "assets": [
+        {
+          "path": "/World/Stock/item00",
+          "before_xyz": [
+            -8.321041902325465,
+            9.195812456974274,
+            0.0009424900797943003
+          ],
+          "after_xyz": [
+            -8.326807647624847,
+            9.730958512269442,
+            0.0009424900797943003
+          ],
+          "before_yaw_deg": 102.84672546386719,
+          "after_yaw_deg": -148.07007963865698,
+          "trials": 1
+        },
+        {
+          "path": "/World/Stock/item01",
+          "before_xyz": [
+            -9.57484789102459,
+            8.103240769431403,
+            0.00027711986876011174
+          ],
+          "after_xyz": [
+            -9.757214835489638,
+            7.42698275251904,
+            0.00027711986876011174
+          ],
+          "before_yaw_deg": -38.00388717651367,
+          "after_yaw_deg": 53.925453397607924,
+          "trials": 1
+        },
+        {
+          "path": "/World/Stock/item02",
+          "before_xyz": [
+            -8.908313247106317,
+            11.96165463890888,
+            0.002719174860734308
+          ],
+          "after_xyz": [
+            -9.374534525559515,
+            11.675088289224263,
+            0.002719174860734308
+          ],
+          "before_yaw_deg": 121.34866333007812,
+          "after_yaw_deg": 114.71379065331377,
+          "trials": 1
+        },
+        {
+          "path": "/World/Stock/item03",
+          "before_xyz": [
+            -9.011295042291659,
+            9.13580922936745,
+            0.0009424900797943003
+          ],
+          "after_xyz": [
+            -8.543920007428444,
+            9.098971611903885,
+            0.0009424900797943003
+          ],
+          "before_yaw_deg": 129.61236572265625,
+          "after_yaw_deg": 45.41489403388445,
+          "trials": 2
+        },
+        {
+          "path": "/World/Stock/item04",
+          "before_xyz": [
+            -10.142193982561668,
+            15.150645948211448,
+            1.1718380808399429e-17
+          ],
+          "after_xyz": [
+            -9.54082273976796,
+            14.745393254856088,
+            1.1718380808399429e-17
+          ],
+          "before_yaw_deg": 152.50599670410156,
+          "after_yaw_deg": -19.49680307848439,
+          "trials": 1
+        }
+      ],
+      "attempts": [
+        {
+          "path": "/World/Stock/item00",
+          "trial": 0,
+          "xyz": [
+            -8.326807647624847,
+            9.730958512269442,
+            0.0009424900797943003
+          ],
+          "yaw_deg": -148.07007963865698,
+          "conflicts": []
+        },
+        {
+          "path": "/World/Stock/item01",
+          "trial": 0,
+          "xyz": [
+            -9.757214835489638,
+            7.42698275251904,
+            0.00027711986876011174
+          ],
+          "yaw_deg": 53.925453397607924,
+          "conflicts": []
+        },
+        {
+          "path": "/World/Stock/item02",
+          "trial": 0,
+          "xyz": [
+            -9.374534525559515,
+            11.675088289224263,
+            0.002719174860734308
+          ],
+          "yaw_deg": 114.71379065331377,
+          "conflicts": []
+        },
+        {
+          "path": "/World/Stock/item03",
+          "trial": 0,
+          "xyz": [
+            -9.679369243220318,
+            8.616117613288875,
+            0.0009424900797943003
+          ],
+          "yaw_deg": -71.52829019823078,
+          "conflicts": [
+            "/World/Stock/item01"
+          ]
+        },
+        {
+          "path": "/World/Stock/item03",
+          "trial": 1,
+          "xyz": [
+            -8.543920007428444,
+            9.098971611903885,
+            0.0009424900797943003
+          ],
+          "yaw_deg": 45.41489403388445,
+          "conflicts": []
+        },
+        {
+          "path": "/World/Stock/item04",
+          "trial": 0,
+          "xyz": [
+            -9.54082273976796,
+            14.745393254856088,
+            1.1718380808399429e-17
+          ],
+          "yaw_deg": -19.49680307848439,
+          "conflicts": []
+        }
+      ],
+      "max_trials_per_object": 64,
+      "pair_clearance_m": 0.05,
+      "scope": "sequential stock AABB separation; environment geometry and support require runtime validation"
+    },
+    "stock-initialization.json": {
+      "passed": false,
+      "objects": [
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item00",
+          "enabled_colliders": [
+            "/World/envs/env_0/hospital/Stock/item00/Geometry/SM_GasCart_01c"
+          ],
+          "rigid_bodies": [],
+          "physics_kind": "static",
+          "bounds": [
+            [
+              -8.43874534309401,
+              9.595238170445189,
+              0.0
+            ],
+            [
+              -8.196608399014238,
+              9.837375154174763,
+              0.9227987774580986
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item01",
+          "enabled_colliders": [
+            "/World/envs/env_0/hospital/Stock/item01/Geometry/SM_MedicalCabinet_01a/Section0",
+            "/World/envs/env_0/hospital/Stock/item01/Geometry/SM_MedicalCabinet_01a/Section1"
+          ],
+          "rigid_bodies": [],
+          "physics_kind": "static",
+          "bounds": [
+            [
+              -10.27947234725483,
+              7.39642518499469,
+              0.0
+            ],
+            [
+              -9.23636451331229,
+              8.487152578809429,
+              1.9677354193984986
+            ]
+          ],
+          "overlap_paths": [
+            "/World/envs/env_0/hospital/Environment/SM_PillBottleSet_01b_85/SM_PillBottleSet_01b",
+            "/World/envs/env_0/hospital/Environment/SM_ShelfSet_01a25_81/SM_ShelfSet_01a/Section0",
+            "/World/envs/env_0/hospital/Environment/SM_ShelfSet_01a25_81/SM_ShelfSet_01a/Section1"
+          ],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": false
+        },
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item02",
+          "enabled_colliders": [
+            "/World/envs/env_0/hospital/Stock/item02/Geometry/SM_GasCart_01b"
+          ],
+          "rigid_bodies": [],
+          "physics_kind": "static",
+          "bounds": [
+            [
+              -9.60420481564651,
+              11.46013650775104,
+              0.0
+            ],
+            [
+              -9.188885789517157,
+              11.869779547758467,
+              1.0926642188579385
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item03",
+          "enabled_colliders": [
+            "/World/envs/env_0/hospital/Stock/item03/Geometry/SM_GasCart_01c"
+          ],
+          "rigid_bodies": [],
+          "physics_kind": "static",
+          "bounds": [
+            [
+              -8.680500742934248,
+              8.986805303935943,
+              0.0
+            ],
+            [
+              -8.431930715869255,
+              9.235375329731328,
+              0.9227987774580986
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        },
+        {
+          "path": "/World/envs/env_0/hospital/Stock/item04",
+          "enabled_colliders": [
+            "/World/envs/env_0/hospital/Stock/item04/Geometry/SM_SupplyCart_02a"
+          ],
+          "rigid_bodies": [],
+          "physics_kind": "static",
+          "bounds": [
+            [
+              -10.013816458695464,
+              14.390032092817764,
+              -1.5407439555097887e-33
+            ],
+            [
+              -9.06782902084045,
+              15.100754416894414,
+              0.7820838753413284
+            ]
+          ],
+          "overlap_paths": [],
+          "support_samples": [
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "passed": true
+        }
+      ],
+      "scope": "conservative initial AABB and five-ray flat-floor support checks; not contact/settling certification"
+    }
+  }
+}

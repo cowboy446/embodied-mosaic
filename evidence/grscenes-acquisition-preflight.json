@@ -1,0 +1,32 @@
+{
+  "dataset": "InternRobotics/GRScenes",
+  "source": "https://huggingface.co/datasets/InternRobotics/GRScenes",
+  "license": "CC-BY-NC-SA-4.0",
+  "official_counts": {
+    "home": 69,
+    "commercial": 30
+  },
+  "formats": [
+    "start_result_raw.usd",
+    "start_result_navigation.usd",
+    "start_result_interaction.usd"
+  ],
+  "dependency_requirements": [
+    "Materials and MDL_SYSTEM_PATH",
+    "models",
+    "scene metadata.json"
+  ],
+  "server_inventory": "no matching directory found at NAS depth <=3; deeper locations not excluded",
+  "acquisition_status": "not_downloaded",
+  "network_attempts": [
+    {
+      "url": "https://huggingface.co/api/datasets/InternRobotics/GRScenes/tree/main?recursive=true",
+      "result": "connection reset"
+    },
+    {
+      "url": "https://hf-mirror.com/api/datasets/InternRobotics/GRScenes/tree/main?recursive=true",
+      "result": "HTTP 403; no retry on mirror"
+    }
+  ],
+  "source_checked_date": "2026-10-25"
+}

@@ -46,7 +46,7 @@ try:
   (out/'scene-collision-authoring.json').write_text(json.dumps({'mode':'native_static_triangle_meshes','instanceability_overrides':instance_overrides,'source_asset_files_modified':False,'enabled_meshes':authored,'disabled_legacy_proxies':['/World/SceneCollision','/World/PhysicsFloor','/World/Environment/GroundPlane'],'scope':'full environment mesh collision authoring, runtime coverage still needs validation'},indent=2))
  if a.random_stock:
   from random_stock import randomize_stock,PlacementRejected
-  try:stock_recipe=randomize_stock(bg,a.seed)
+  try:stock_recipe=randomize_stock(bg,a.seed,reserved_xy=[a.spawn_xy])
   except PlacementRejected as exc:
    (out/'stock-randomization-rejected.json').write_text(json.dumps(exc.evidence,indent=2));raise
   (out/'stock-randomization.json').write_text(json.dumps(stock_recipe,indent=2))
