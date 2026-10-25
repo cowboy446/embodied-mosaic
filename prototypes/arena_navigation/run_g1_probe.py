@@ -1,7 +1,7 @@
 """Arena task-level G1/SONIC integration probe, not batch/navigation acceptance."""
 import argparse,json,sys,traceback,time,hashlib
 from pathlib import Path
-p=argparse.ArgumentParser();p.add_argument('--stock-spec');p.add_argument('--tour-stops',type=int,default=1);p.add_argument('--scene-source');p.add_argument('--random-stock',action='store_true');p.add_argument('--dynamic-stock',action='store_true');p.add_argument('--scene-name',default='warehouse');p.add_argument('--grid-radius',type=float,default=5.);p.add_argument('--min-path',type=float,default=3.);p.add_argument('--max-path',type=float,default=5.);p.add_argument('--prefer-far',action='store_true');p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
+p=argparse.ArgumentParser();p.add_argument('--export-placement-grid',type=float,nargs=4);p.add_argument('--stock-spec');p.add_argument('--tour-stops',type=int,default=1);p.add_argument('--scene-source');p.add_argument('--random-stock',action='store_true');p.add_argument('--dynamic-stock',action='store_true');p.add_argument('--scene-name',default='warehouse');p.add_argument('--grid-radius',type=float,default=5.);p.add_argument('--min-path',type=float,default=3.);p.add_argument('--max-path',type=float,default=5.);p.add_argument('--prefer-far',action='store_true');p.add_argument('--output',required=True);p.add_argument('--gpu',type=int,default=0);p.add_argument('--route',action='store_true');p.add_argument('--native-scene-collision',action='store_true');p.add_argument('--align-spawn-floor',action='store_true');p.add_argument('--seed',type=int,default=42);p.add_argument('--spawn-xy',type=float,nargs=2,default=[-9.1,29.05]);p.add_argument('--yaw-deg',type=float,default=0.);p.add_argument('--seconds',type=float,default=12.);a=p.parse_args();out=Path(a.output);out.mkdir(exist_ok=False,parents=True)
 started_monotonic=time.monotonic();started_unix=time.time()
 (out/'run-config.json').write_text(json.dumps(vars(a),indent=2))
 import site
@@ -44,16 +44,25 @@ try:
    authored.append(str(prim.GetPath()))
   if not authored:raise RuntimeError('no native environment meshes')
   (out/'scene-collision-authoring.json').write_text(json.dumps({'mode':'native_static_triangle_meshes','instanceability_overrides':instance_overrides,'source_asset_files_modified':False,'enabled_meshes':authored,'disabled_legacy_proxies':['/World/SceneCollision','/World/PhysicsFloor','/World/Environment/GroundPlane'],'scope':'full environment mesh collision authoring, runtime coverage still needs validation'},indent=2))
+ placement_domain=None
  if a.stock_spec:
   if not a.random_stock:raise ValueError('new stock requires placement validation')
   from stock_assets import populate_stock
   spec=json.loads(Path(a.stock_spec).read_text());catalog=json.loads(Path(spec['catalog']).read_text())
+  if spec.get('support_grid'):
+   sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'scripts'))
+   from placement_support_grid import PlacementDomain
+   grid=json.loads(Path(spec['support_grid']).read_text())
+   if grid['source_scene_sha256']!=hashlib.sha256(src.read_bytes()).hexdigest():raise ValueError('support grid belongs to a different scene source')
+   if spec.get('placement_regions'):raise ValueError('choose support grid or regions, not both')
+   placement_domain=PlacementDomain(grid)
+   (out/'placement-support-grid.json').write_text(json.dumps(grid,indent=2))
   selection=populate_stock(bg,catalog,spec['anchors_xy'],a.seed)
   (out/'stock-spec.json').write_text(json.dumps(spec,indent=2))
   (out/'stock-selection.json').write_text(json.dumps(selection,indent=2))
  if a.random_stock:
   from random_stock import randomize_stock,PlacementRejected
-  try:stock_recipe=randomize_stock(bg,a.seed,reserved_xy=[a.spawn_xy],placement_regions=spec.get('placement_regions') if a.stock_spec else None)
+  try:stock_recipe=randomize_stock(bg,a.seed,reserved_xy=[a.spawn_xy],placement_regions=spec.get('placement_regions') if a.stock_spec else None,placement_domain=placement_domain)
   except PlacementRejected as exc:
    (out/'stock-randomization-rejected.json').write_text(json.dumps(exc.evidence,indent=2));raise
   (out/'stock-randomization.json').write_text(json.dumps(stock_recipe,indent=2))
@@ -146,8 +155,19 @@ try:
   qpos=np.r_[start,robot.data.root_quat_w[0].cpu().numpy(),robot.data.joint_pos[0,ids].cpu().numpy()]
   context=collections.deque([qpos.copy() for _ in range(4)],maxlen=4)
   reference_start=0
+ if a.export_placement_grid:
+  if a.route or a.random_stock or a.dynamic_stock:raise ValueError('placement grid export requires an unpopulated scene probe')
+  import omni.physx
+  sys.path.insert(0,str(Path(__file__).resolve().parents[2]/'scripts'))
+  from ground_support import GroundSupport
+  from placement_support_grid import sample_grid
+  query=omni.physx.get_physx_scene_query_interface()
+  support=GroundSupport(query,'/World/envs/env_0/Robot',half_width=.125)
+  grid=sample_grid(a.export_placement_grid,support.supported)
+  grid.update(source_scene=str(src),source_scene_sha256=hashlib.sha256(src.read_bytes()).hexdigest(),run_id=out.name)
+  (out/'placement-support-grid.json').write_text(json.dumps(grid,indent=2))
  report['phase']='rollout'
- for step in range(round(a.seconds*150) if a.route else 300):
+ for step in range(0 if a.export_placement_grid else (round(a.seconds*150) if a.route else 300)):
   if step%3==0:
    d=robot.data;q=d.joint_pos[0,ids].cpu().numpy();dq=d.joint_vel[0,ids].cpu().numpy();quat=d.root_quat_w[0].cpu().numpy();ang=d.root_ang_vel_w[0].cpu().numpy()
    frame=step//3
@@ -188,7 +208,7 @@ try:
  (out/'planner-log.json').write_text(json.dumps(planner_logs,indent=2))
  (out/'capture.json').write_text(json.dumps({'fps':30,'resolution':[640,480],'mount_body':'torso_link','frames':capture},indent=2))
 
- report.update(status=terminal_reason if a.route else 'stepped',physics_dt=cfg.sim.dt,decimation=cfg.decimation,control_hz=50,recording_hz=30,capture_frames=len(capture),action_shape=list(env.action_manager.action.shape),joint_names=robot.joint_names,states=states)
+ report.update(status='placement_grid_exported' if a.export_placement_grid else (terminal_reason if a.route else 'stepped'),physics_dt=cfg.sim.dt,decimation=cfg.decimation,control_hz=50,recording_hz=30,capture_frames=len(capture),action_shape=list(env.action_manager.action.shape),joint_names=robot.joint_names,states=states)
  env.close()
 except BaseException:
  report.update(status='failed',traceback=traceback.format_exc());traceback.print_exc()

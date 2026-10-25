@@ -41,6 +41,12 @@ class StockTests(unittest.TestCase):
   with self.assertRaises(PlacementRejected) as raised:randomize_stock(scene(),5,placement_regions=[[0,0,.2,.2]],max_trials_per_object=3)
   self.assertEqual(len(raised.exception.evidence['attempts']),3)
   self.assertEqual(raised.exception.evidence['attempts'][0]['conflicts'],['no_region_fits_rotated_bounds'])
+ def test_support_grid_rejects_entire_unsupported_footprint(self):
+  class Domain:
+   def sample_center(self,rng):return [10,10]
+   def contains_footprint(self,lo,hi):return False
+  with self.assertRaises(PlacementRejected) as raised:randomize_stock(scene(),2,placement_domain=Domain(),max_trials_per_object=2)
+  self.assertEqual(raised.exception.evidence['attempts'][0]['conflicts'],['unsupported_footprint_grid_cells'])
  def test_overlap_rejected(self):
   self.assertTrue(validate_stock(scene(),Query(),'/World/Stock')['passed'])
   self.assertFalse(validate_stock(scene(),Query(True),'/World/Stock')['passed'])

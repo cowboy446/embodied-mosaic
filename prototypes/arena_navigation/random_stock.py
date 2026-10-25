@@ -10,7 +10,7 @@ class PlacementRejected(ValueError):
     def __init__(self,message,evidence):
         super().__init__(message);self.evidence=evidence
 
-def randomize_stock(stage,seed,translation_radius=.75,max_trials_per_object=64,reserved_xy=(),placement_regions=None):
+def randomize_stock(stage,seed,translation_radius=.75,max_trials_per_object=64,reserved_xy=(),placement_regions=None,placement_domain=None):
     stock=stage.GetPrimAtPath('/World/Stock')
     if not stock:raise ValueError('scene has no reusable stock assets')
     if placement_regions is not None:
@@ -34,7 +34,15 @@ def randomize_stock(stage,seed,translation_radius=.75,max_trials_per_object=64,r
         before=list(translate.Get());yaw=float(rotate.Get());path=str(prim.GetPath())
         for trial in range(max_trials_per_object):
             region_index=None
-            if placement_regions is None:
+            if placement_domain is not None:
+                heading=rng.uniform(-180,180);rotate.Set(heading);translate.Set(Gf.Vec3d(*before))
+                cache.Clear();rotated=cache.ComputeWorldBound(prim).ComputeAlignedRange()
+                if rotated.IsEmpty():raise ValueError(f'empty stock bounds {path}')
+                low,high=rotated.GetMin(),rotated.GetMax();center=[(high[i]+low[i])/2 for i in (0,1)]
+                desired=placement_domain.sample_center(rng)
+                after=[before[i]+desired[i]-center[i] for i in (0,1)]+[before[2]]
+                translate.Set(Gf.Vec3d(*after))
+            elif placement_regions is None:
                 after=[before[0]+rng.uniform(-translation_radius,translation_radius),before[1]+rng.uniform(-translation_radius,translation_radius),before[2]]
                 heading=rng.uniform(-180,180);translate.Set(Gf.Vec3d(*after));rotate.Set(heading)
             else:
@@ -56,6 +64,7 @@ def randomize_stock(stage,seed,translation_radius=.75,max_trials_per_object=64,r
             if bound.IsEmpty():raise ValueError(f'empty stock bounds {path}')
             lo=list(bound.GetMin());hi=list(bound.GetMax())
             conflicts=[other for other,a,b in accepted if all(lo[i]<b[i]+.05 and hi[i]>a[i]-.05 for i in range(3))]
+            if placement_domain is not None and not placement_domain.contains_footprint(lo,hi):conflicts.append('unsupported_footprint_grid_cells')
             clipped_lo=[lo[0],lo[1],max(lo[2]+.04,.04)]
             conflicts.extend(other for other,a,b in obstacles if all(clipped_lo[i]<b[i]+.05 and hi[i]>a[i]-.05 for i in range(3)))
             for x,y in reserved_xy:
@@ -66,7 +75,7 @@ def randomize_stock(stage,seed,translation_radius=.75,max_trials_per_object=64,r
         else:
             raise PlacementRejected(f'bounded stock placement exhausted for {path}',{'seed':seed,'assets':records,'attempts':attempts,'failed_object':path,'max_trials_per_object':max_trials_per_object})
     if not records:raise ValueError('empty stock collection')
-    return {'seed':seed,'translation_radius_m':translation_radius,'assets':records,'attempts':attempts,'max_trials_per_object':max_trials_per_object,'pair_clearance_m':.05,'environment_obstacle_count':len(obstacles),'reserved_xy':list(reserved_xy),'placement_regions':placement_regions,'scope':'sequential stock/environment AABB separation; exact geometry and support require runtime validation'}
+    return {'seed':seed,'translation_radius_m':translation_radius,'assets':records,'attempts':attempts,'max_trials_per_object':max_trials_per_object,'pair_clearance_m':.05,'environment_obstacle_count':len(obstacles),'reserved_xy':list(reserved_xy),'placement_regions':placement_regions,'support_grid_used':placement_domain is not None,'scope':'sequential stock/environment AABB separation; exact geometry and support require runtime validation'}
 
 
 def validate_stock(stage,query,stock_root):
