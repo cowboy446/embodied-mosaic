@@ -9,6 +9,9 @@ app=SimulationApp({'headless':True,'multi_gpu':False,'active_gpu':a.gpu,'physics
 report={'status':'started','scope':'Arena G1 SONIC task integration, not navigation acceptance'}
 try:
  import carb,torch,numpy as np
+ from PIL import Image
+ carb.settings.get_settings().set_bool('/isaaclab/cameras_enabled',True)
+ carb.settings.get_settings().set_bool('/isaaclab/render/offscreen',True)
  from pxr import Usd,Sdf
  carb.settings.get_settings().set('/persistent/isaac/asset_root/cloud','https://omniverse-content-production.s3-us-west-2.amazonaws.com/Assets/Isaac/5.1')
  root=Path('/mnt/nas/zhangrong/isaac-rigidtrack-20261023');sonic_root=root/'sonic-g1-20261024';sys.path.insert(0,str(sonic_root/'scripts'));sys.path.insert(0,'/local_nvme/zhangrong/isaac-rigidtrack-20261023/sonic-site')
@@ -35,12 +38,25 @@ try:
  args=argparse.Namespace(mimic=False,device=f'cuda:{a.gpu}',num_envs=1,disable_fabric=False)
  env,cfg=ArenaEnvBuilder(descriptor,args).make_registered_and_return_cfg();report['arena_environment_constructed']=True
  obs,_=env.reset();robot=env.scene['robot'];ids,_=robot.find_joints(sonic.NAMES,preserve_order=True);ctrl=sonic.Controller();states=[]
- for step in range(100):
-  d=robot.data;q=d.joint_pos[0,ids].cpu().numpy();dq=d.joint_vel[0,ids].cpu().numpy();quat=d.root_quat_w[0].cpu().numpy();ang=d.root_ang_vel_w[0].cpu().numpy()
-  target,_,_=ctrl.step(q,dq,quat,ang,ref[step:step+51]);obs,reward,terminated,truncated,info=env.step(torch.tensor(target,device=env.device)[None])
-  states.append({'time_s':(step+1)/50,'position':robot.data.root_pos_w[0].cpu().tolist(),'joint_position':robot.data.joint_pos[0].cpu().tolist()})
+ camera=env.scene['ego_camera'];capture=[]
+ for _ in range(8):env.sim.render()
+ camera.update(0.,force_recompute=True)
+ for step in range(300):
+  if step%3==0:
+   d=robot.data;q=d.joint_pos[0,ids].cpu().numpy();dq=d.joint_vel[0,ids].cpu().numpy();quat=d.root_quat_w[0].cpu().numpy();ang=d.root_ang_vel_w[0].cpu().numpy()
+   frame=step//3;target,_,_=ctrl.step(q,dq,quat,ang,ref[frame:frame+51])
+  obs,reward,terminated,truncated,info=env.step(torch.tensor(target,device=env.device)[None])
+  if (step+1)%5==0:
+   rgb=camera.data.output['rgb'][0].cpu().numpy()[...,:3]
+   if rgb.shape!=(480,640,3):raise RuntimeError(f'invalid camera output shape {rgb.shape}')
+   image_name=f'{len(capture):06d}.png';Image.fromarray(rgb).save(out/image_name)
+   d=robot.data
+   capture.append({'time_s':(step+1)/150,'image':image_name,'position':d.root_pos_w[0].cpu().tolist(),'quaternion_wxyz':d.root_quat_w[0].cpu().tolist(),'joint_position':d.joint_pos[0].cpu().tolist(),'joint_velocity':d.joint_vel[0].cpu().tolist(),'control_target':target.tolist(),'camera_position':camera.data.pos_w[0].cpu().tolist(),'camera_quaternion_wxyz':camera.data.quat_w_world[0].cpu().tolist()})
+  states.append({'time_s':(step+1)/150,'position':robot.data.root_pos_w[0].cpu().tolist(),'joint_position':robot.data.joint_pos[0].cpu().tolist()})
   if bool(terminated.any()|truncated.any()):raise RuntimeError('unexpected task termination')
- report.update(status='stepped',physics_dt=cfg.sim.dt,decimation=cfg.decimation,action_shape=list(env.action_manager.action.shape),joint_names=robot.joint_names,states=states)
+ (out/'capture.json').write_text(json.dumps({'fps':30,'resolution':[640,480],'mount_body':'torso_link','frames':capture},indent=2))
+
+ report.update(status='stepped',physics_dt=cfg.sim.dt,decimation=cfg.decimation,control_hz=50,recording_hz=30,capture_frames=len(capture),action_shape=list(env.action_manager.action.shape),joint_names=robot.joint_names,states=states)
  env.close()
 except BaseException:
  report.update(status='failed',traceback=traceback.format_exc());traceback.print_exc()

@@ -68,6 +68,11 @@ class G1SonicEmbodiment(EmbodimentBase):
    init_state=ArticulationCfg.InitialStateCfg(pos=tuple(position),rot=tuple(rotation),joint_pos=dict(zip(sonic.NAMES,sonic.DEFAULT.tolist()))),actuators=actuators)
   self.scene_config=config('G1Scene',robot=robot)
   self.action_config=config('G1SonicActions',body=mdp.JointPositionActionCfg(asset_name='robot',joint_names=sonic.NAMES,preserve_order=True,scale=1.,use_default_offset=False))
+  self.camera_config=config('G1EgoCameras',ego_camera=CameraCfg(
+   prim_path='{ENV_REGEX_NS}/Robot/torso_link/MosaicEgoCamera',height=480,width=640,data_types=['rgb'],update_period=1/30,
+   spawn=sim.PinholeCameraCfg(focal_length=18.,horizontal_aperture=36.,vertical_aperture=27.,clipping_range=(.05,100.)),
+   offset=CameraCfg.OffsetCfg(pos=(.15,0.,.30),rot=(.5,.5,-.5,-.5),convention='opengl')))
+
  def modify_env_cfg(self,cfg):
-  cfg.sim.dt=1/300;cfg.sim.render_interval=10;cfg.decimation=6
+  cfg.sim.dt=1/300;cfg.sim.render_interval=10;cfg.decimation=2;cfg.seed=42
   return cfg
