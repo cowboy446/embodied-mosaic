@@ -1,0 +1,48 @@
+[
+  {
+    "scene": "office",
+    "source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/rulegen-diverse40/runs/office-152000-0b1a60c48e/attempt-00/output/scene_initial.usda",
+    "spawn_xy": [
+      -4.722265,
+      7.512265
+    ],
+    "gpu": 6,
+    "attempts": [
+      {
+        "run_id": "arena-g1-034",
+        "seed": 83
+      },
+      {
+        "run_id": "arena-g1-036",
+        "seed": 84
+      },
+      {
+        "run_id": "arena-g1-038",
+        "seed": 85
+      }
+    ]
+  },
+  {
+    "scene": "hospital",
+    "source": "/mnt/nas/zhangrong/isaac-rigidtrack-20261023/rulegen-diverse40/runs/hospital-152001-757e966d26/attempt-00/output/scene_initial.usda",
+    "spawn_xy": [
+      -9.261082,
+      10.508025
+    ],
+    "gpu": 7,
+    "attempts": [
+      {
+        "run_id": "arena-g1-035",
+        "seed": 83
+      },
+      {
+        "run_id": "arena-g1-037",
+        "seed": 84
+      },
+      {
+        "run_id": "arena-g1-039",
+        "seed": 85
+      }
+    ]
+  }
+]
